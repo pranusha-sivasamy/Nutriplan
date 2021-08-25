@@ -1,0 +1,14 @@
+footer {
+  padding: 7px;
+  background-color: darkgrey;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding-left: 75%;
+}
+.stickRight {
+  right: 0;
+  font-family: "cursive";
+  font-weight: bold;
+}

@@ -1,0 +1,57 @@
+<div class="container text-center">
+  <div class="mt-5">
+    <div class="card text-center normal" *ngIf="status == 'normal'">
+      <h5 class="card-title">Your BMI is normal</h5>
+      <button>proceed</button>
+    </div>
+    <div class="card text-center under" *ngIf="status == 'underweight'">
+      <div class="card-body">
+        <h5 class="card-title">You are underweight</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          You have to gain {{ aptWeight - weight }} Kg
+        </h6>
+      </div>
+    </div>
+    <div class="card text-center over" *ngIf="status == 'overweight'">
+      <h5 class="card-title">You are overweight</h5>
+      <h6 class="card-subtitle mb-2 text-muted">
+        You have to lose {{ weight - aptWeight }} Kg
+      </h6>
+    </div>
+    <h4>How fast do you want to reach your goal ?</h4>
+  </div>
+  <div class="card text-center">
+    <div class="card-body">
+      <h4 class="card-title">{{ userGoal.value.goalPerWeek }} Kg</h4>
+      <h4 class="card-subtitle mb-2 text-muted">per week</h4>
+    </div>
+  </div>
+  <div *ngIf="status!='normal'">
+    <form [formGroup]="userGoal" (ngSubmit)="updateGoal()">
+      <div class="range">
+        <input
+          type="range"
+          class="form-range"
+          min="0.25"
+          max="1"
+          step="0.25"
+          formControlName="goalPerWeek"
+          (input)="onChange()"
+        />
+      </div>
+      <div class="mt-4 text-center">
+        <button class="btn btn-primary profile-button" type="submit">
+          Set Goal
+        </button>
+      </div>
+    </form>
+    <div
+      *ngIf="weeks != 0"
+      class="alert alert-success text-center"
+      style="margin-top: 20px"
+      role="alert"
+    >
+      You will reach your goal in about {{ weeks }} weeks
+    </div>
+  </div>
+</div>

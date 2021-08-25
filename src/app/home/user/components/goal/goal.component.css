@@ -1,0 +1,49 @@
+.form-range {
+  width: 500px;
+}
+.card {
+  width: 18rem;
+  align-items: center;
+  margin: 20px;
+  margin-left: 90px;
+}
+.container {
+  align-items: center;
+  width: 40%;
+}
+.card-title {
+  color: #682773;
+}
+.normal {
+  align-items: center;
+  border: 1px solid green;
+  background-color: rgb(200, 238, 200);
+}
+.under {
+  align-items: center;
+  border: 1px solid orange;
+  background-color: rgb(255, 243, 223);
+}
+.over {
+  align-items: center;
+  border: 1px solid red;
+  background-color: rgb(247, 187, 187);
+}
+.profile-button {
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none;
+}
+.profile-button:hover {
+  background: #682773;
+}
+
+/* .profile-button:focus {
+  background: #682773;
+  box-shadow: #bf7dca;
+} */
+
+.profile-button:active {
+  background: #682773;
+  box-shadow: #bf7dca;
+}

@@ -1,0 +1,125 @@
+<div class="container mt-4" style="width: 70%">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-right">Basic Information</h4>
+      </div>
+      <form [formGroup]="userDetails">
+        <div class="row mt-3">
+          <div class="col-md-6">
+            <label class="form-label">Username</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="username"
+              value="{{ getValue.username }}"
+            />
+          </div>
+          <!-- <div *ngFor="let item of userData | keyvalue">{{item.key}} : {{item.value}}</div> -->
+          <div class="col-md-6">
+            <label class="form-label">Email ID</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              value="{{ getValue.email }}"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Age</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="age"
+              value="{{ getValue.age }}"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Gender</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="gender"
+              value="{{ getValue.gender }}"
+            />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Height</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="height"
+              value="{{ getValue.height }}"
+            />
+          </div>
+          <div class="col-md-2 mt-4">
+            <input
+              type="button"
+              #unitFt
+              [class.unit-clicked]="!toggleButton"
+              class="unit"
+              value="ft"
+              (click)="heightUnitChange(unitFt.value)"
+            />
+            <input
+              type="button"
+              #unitCm
+              [class.unit-clicked]="toggleButton"
+              class="unit"
+              value="cm"
+              (click)="heightUnitChange(unitCm.value)"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Weight</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="weight"
+              value="{{ getValue.weight }}"
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">BMI</label
+            ><input
+              type="text"
+              class="form-control"
+              formControlName="BMI"
+              value="{{ getValue.BMI }}"
+              readonly
+            />
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Status</label
+            ><input type="text" class="form-control" value="{{getValue.status}}" readonly />
+          </div>
+          <div class="col-md-5">
+            <label class="form-label">Activity state</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="activityState"
+              value="{{ getValue.activityState }}"
+              readonly
+            />
+          </div>
+          <div class="col-md-1 mt-4">
+            <button class="unit" type="button" (click)="onEditActivity()">
+              edit
+            </button>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Goal</label
+            ><input type="text" class="form-control" value="{{getValue.goalPerWeek}}" readonly/>
+          </div>
+        </div>
+        <div class="mt-4 text-center">
+          <button class="btn btn-primary profile-button" type="button">
+            Save Profile
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- <app-user-activity (activity_state)="changeState($event)"></app-user-activity> -->
