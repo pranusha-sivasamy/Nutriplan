@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CanComponentLeave } from '../../../../auth/guards/unsaved-changes.guard';
+import { TaskService } from '../../services/task.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class BasicDetailsComponent implements CanComponentLeave, OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private taskService: TaskService,
     private router: Router
   ) {
     this.details = this.fb.group({
@@ -40,25 +41,23 @@ export class BasicDetailsComponent implements CanComponentLeave, OnInit {
     return this.details.controls;
   }
 
-  onSubmit() {
+  async onSubmit() {
     console.log(this.details.value);
     if (this.details.value.heightUnit == 'ft') {
       this.details.value.heightInCm =
         this.details.value.heightInft * 30.48 +
         this.details.value.heightInIn * 2.54;
     }
+    const username: any = localStorage.getItem('username');
     const data = {
-      username: localStorage.getItem('username'),
       age: this.details.value.age,
       gender: this.details.value.gender,
       height: this.details.value.heightInCm,
       weight: this.details.value.weight,
       activityState: this.details.value.activity,
     };
-    this.userService.updateUserDetails(data).subscribe((ret: any) => {
-      console.log(ret);
-      this.router.navigate(['/home/user/goal']);
-    });
+    const result = await this.taskService.updateUserDetails(username, data);
+    this.router.navigate(['/home/user/goal']);
     this.displaySuccessRegistration = true;
   }
 

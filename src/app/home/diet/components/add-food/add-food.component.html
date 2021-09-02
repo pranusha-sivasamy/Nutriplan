@@ -1,0 +1,156 @@
+<div class="container row">
+  <div class="col-6 mt-5 mb-5">
+    <img
+      src="https://s30381.pcdn.co/wp-content/uploads/2019/10/p1d410hr7f17klhvi1l7q16gdo4k6.jpg"
+      width="500px"
+      height="500px"
+    />
+  </div>
+  <div class="col-6 mt-5">
+    <h6>Your {{ type }} plan :</h6>
+    <div class="row" *ngFor="let entry of food.allottedFood">
+      <div class="col-4">
+        <p #foodChosen>
+          {{ entry.itemName }}
+        </p>
+      </div>
+      <div class="col-2">
+        <input
+          #foodQuantity
+          type="number"
+          class="form-control"
+          value="{{ entry.quantity }}"
+          style="padding-top: 0px"
+        />
+      </div>
+      <div class="col-4">
+        <p #foodUnit>{{ entry.unit }}</p>
+      </div>
+      <div class="col-2">
+        <button
+          type="button"
+          class="button-icon"
+          (click)="
+            addFood(
+              foodChosen.innerText,
+              foodQuantity.valueAsNumber,
+              foodUnit.innerText
+            )
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            fill="currentColor"
+            class="bi bi-plus-lg add-icon"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <h6>Intake food :</h6>
+    <div class="row" *ngFor="let entry of selectedFood[0].intakeFood">
+      <div class="col-4">
+        <p #foodChosen>
+          {{ entry.itemName }}
+        </p>
+      </div>
+      <div class="col-2">
+        <p #foodQuantity>{{ entry.quantity }}</p>
+      </div>
+      <div class="col-4">
+        <p #foodUnit>{{ entry.unit }}</p>
+      </div>
+      <div class="col-2">
+        <button
+          type="button"
+          class="remove-button-icon"
+          (click)="removeIntake(foodChosen.innerText, foodQuantity.innerText)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            fill="currentColor"
+            class="bi bi-dash-lg remove-icon"
+            viewBox="0 0 16 16"
+          >
+            <path d="M0 8a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addAnotherFood()"
+        >
+          Add Other Foods
+        </button>
+      </div>
+      <div class="col" *ngIf="displaySearchBar">
+        <form>
+          <input
+            #searchFood
+            placeholder="search food"
+            (input)="onSearch(searchFood.value)"
+          />
+        </form>
+      </div>
+    </div>
+
+    <div class="row" *ngFor="let food of searchFoodResult">
+      <div class="col-4">
+        <p #foodChosen>
+          {{ food.itemName }}
+        </p>
+      </div>
+      <div class="col-2">
+        <input
+          #foodQuantity
+          type="number"
+          class="form-control-plaintext"
+          value="{{ food.quantity }}"
+          style="padding-top: 0px"
+        />
+      </div>
+      <div class="col-4">
+        <p #foodUnit>{{ food.unit }}</p>
+      </div>
+      <div class="col-2">
+        <button
+          type="button"
+          class="button-icon"
+          (click)="
+            addFood(
+              foodChosen.innerText,
+              foodQuantity.valueAsNumber,
+              foodUnit.innerText
+            )
+          "
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="12"
+            height="12"
+            fill="currentColor"
+            class="bi bi-plus-lg add-icon"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

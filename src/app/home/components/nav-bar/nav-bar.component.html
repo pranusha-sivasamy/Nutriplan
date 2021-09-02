@@ -28,7 +28,7 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <li>
-                <a class="dropdown-item" routerLink="/">Calorie planner</a>
+                <a class="dropdown-item" routerLink="/diet/calorie-counter">Calorie planner</a>
               </li>
               <li><a class="dropdown-item" href="#">Weight tracking</a></li>
               <li><a class="dropdown-item" href="#">Statistics</a></li>
@@ -45,20 +45,29 @@
               >Dashboard</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/user/about"
-              >About</a
-            >
-          </li>
+          
           <li *ngIf="adminloggedIn()" class="nav-item">
             <a
               class="nav-link"
               routerLinkActive="active"
               routerLink="/admin/food"
               >Food</a
+            >
+          </li>
+          <li *ngIf="adminloggedIn()" class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="/admin/user-list"
+              >User</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              routerLink="/user/profile"
+              >Profile</a
             >
           </li>
           <!-- <li *ngIf="!loggedIn()" class="nav-item">

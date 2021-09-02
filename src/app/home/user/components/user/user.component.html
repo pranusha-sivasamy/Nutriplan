@@ -1,0 +1,147 @@
+<div class="row">
+  <form [formGroup]="userData" (ngSubmit)="addUser()">
+    <div class="card-header">
+      {{ data.title }}
+      <button type="button" class="close-button-icon" (click)="close()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="currentColor"
+          class="bi bi-x-lg close-icon"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6">
+        <div class="row mb-2">
+          <label class="col-4">Username</label>
+          <input
+            readonly
+            formControlName="username"
+            class="form-control col-8"
+          />
+        </div>
+        <div class="mb-2">
+          <label class="col-4">Gender</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="gender"
+            value="male"
+            formControlName="gender"
+          />
+          <label class="form-check-label">Male</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="gender"
+            value="female"
+            formControlName="gender"
+          />
+          <label class="form-check-label">Female</label>
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Height</label>
+          <input class="form-control col-8" formControlName="height" />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Activity State</label>
+          <select class="form-select col-8" formControlName="activity">
+            <option value="No Activity">Little or No Activity</option>
+            <option value="Lightly active">Lightly active</option>
+            <option value="Moderately active">Moderately active</option>
+            <option value="Very Active">Very Active</option>
+          </select>
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">BMR</label>
+          <input readonly class="form-control col-8" formControlName="BMR" />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">AptWeight</label>
+          <input
+            readonly
+            class="form-control col-8"
+            formControlName="aptWeight"
+          />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Goal Per Week</label>
+          <input
+            readonly
+            class="form-control col-8"
+            formControlName="goalPerWeek"
+          />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Daily-Calorie</label>
+          <input
+            readonly
+            class="form-control col-8"
+            formControlName="dailyCalorie"
+          />
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row mb-2">
+          <label class="col-4">Email</label>
+          <input readonly class="form-control col-8" formControlName="email" />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Age</label>
+          <input class="form-control col-8" formControlName="age" />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Weight</label>
+          <input class="form-control col-8" formControlName="weight" />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">BMI</label>
+          <input readonly class="form-control col-8" formControlName="BMI" />
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Status</label>
+          <input readonly class="form-control col-8" formControlName="status" />
+        </div>
+        <div class="mb-2">
+          <label class="col-4">Role</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="role"
+            value="admin"
+            formControlName="role"
+          />
+          <label class="form-check-label">Admin</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="role"
+            value="user"
+            formControlName="role"
+          />
+          <label class="form-check-label">User</label>
+        </div>
+        <div class="row mb-2">
+          <label class="col-4">Current-Calorie</label>
+          <input
+            readonly
+            class="form-control col-8"
+            formControlName="currentCalorie"
+          />
+        </div>
+        <div class="mb-3 mt-3 ml-4">
+          <button class="btn save-button" type="button" (click)="saveChanges()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

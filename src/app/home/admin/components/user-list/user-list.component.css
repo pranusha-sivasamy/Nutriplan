@@ -1,0 +1,53 @@
+.edit-button-icon {
+    border: 1px solid green;
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 0%;
+    margin-right: 10px;
+  }
+  .edit-button-icon:hover {
+    background-color: green;
+  }
+  .edit-button-icon:hover .edit-icon {
+    color: white;
+  }
+  .edit-icon {
+    color: green;
+  }
+  .edit-icon:hover {
+    background-color: green;
+    color: white;
+  }
+  .remove-button-icon {
+    border: 1px solid rgb(180, 5, 5);
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 0%;
+  }
+  .remove-button-icon:hover {
+    background-color: rgb(180, 5, 5);
+  }
+  .remove-button-icon:hover .remove-icon {
+    color: white;
+  }
+  .remove-icon {
+    color: rgb(180, 5, 5);
+  }
+  .remove-icon:hover {
+    background-color: rgb(180, 5, 5);
+    color: white;
+  }
+  h5 {
+    font-size: 19px;
+    color: gray;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding-left: 60px;
+    padding-top: 10px;
+  }
+  .btn-outline-success:active {
+    box-shadow: none;
+  }
+  .btn-outline-success:focus {
+    box-shadow: none;
+  }
+  

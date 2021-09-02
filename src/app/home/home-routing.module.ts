@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./admin/admin.module').then((m) => m.AdminModule),
       },
+      {
+        path: 'diet',
+        loadChildren: () =>
+          import('./diet/diet.module').then((m) => m.DietModule),
+      },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
     ],
   },

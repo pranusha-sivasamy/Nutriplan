@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -8,7 +9,11 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./goal.component.css'],
 })
 export class GoalComponent implements OnInit {
-  constructor(private fb: FormBuilder, private taskService: TaskService) {}
+  constructor(
+    private fb: FormBuilder,
+    private taskService: TaskService,
+    private router: Router
+  ) {}
 
   userGoal = this.fb.group({
     goalPerWeek: new FormControl(0.75),
@@ -41,9 +46,14 @@ export class GoalComponent implements OnInit {
     this.weeks = Math.ceil(diff / this.userGoal.value.goalPerWeek);
   }
 
-  updateGoal(){
+  async updateGoal() {
     const username = localStorage.getItem('username');
-    if (typeof username == 'string') 
-    this.taskService.updateGoal(username,this.userGoal.value.goalPerWeek)
+    if (typeof username == 'string') {
+      const result = await this.taskService.updateGoal(
+        username,
+        this.userGoal.value.goalPerWeek
+      );
+      this.router.navigate(['/dashboard']);
+    }
   }
 }

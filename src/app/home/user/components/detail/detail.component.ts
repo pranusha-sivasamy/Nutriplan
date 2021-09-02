@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { TaskService } from '../../services/task.service';
@@ -9,8 +9,7 @@ import { UserActivityComponent } from '../user-activity/user-activity.component'
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
 })
-export class DetailComponent implements OnInit {
-
+export class DetailComponent {
   public userDetails: FormGroup;
 
   constructor(
@@ -21,6 +20,7 @@ export class DetailComponent implements OnInit {
     this.userDetails = this.fb.group({
       heightUnit: new FormControl('cm'),
     });
+    this.initializeForm();
   }
 
   username: string = '';
@@ -29,28 +29,41 @@ export class DetailComponent implements OnInit {
   values: any[] = [];
   toggleButton = true;
 
-  ngOnInit(): void {
+  async initializeForm() {
     const user = localStorage.getItem('username');
     if (typeof user == 'string') {
       this.username = user;
-      this.getUserDetails(user);
+      await this.getUserDetails(user);
     }
   }
 
-  getUserDetails(username: string) {
-    this.taskService.getUserDetails(username).then((res) => {
-      this.userData = res;
-      this.keys = Object.keys(this.userData);
-      this.values = Object.values(this.userData);
-      for (let i in this.keys) {
-        this.userDetails.addControl(
-          this.keys[i],
-          new FormControl(this.values[i])
-        );
-      }
-      console.log('form : ', this.userDetails.value);
-      console.log('user data : ', this.userData);
-    });
+  async getUserDetails(username: string) {
+    this.userData = await this.taskService.getUserDetails(username);
+    this.keys = Object.keys(this.userData);
+    this.values = Object.values(this.userData);
+    for (let i in this.keys) {
+      console.log(`key : ${this.keys[i]}; value : ${this.values[i]}`);
+
+      this.userDetails.addControl(
+        this.keys[i],
+        new FormControl(this.values[i])
+      );
+    }
+    //  this.taskService.getUserDetails(username).then((res) => {
+    //   this.userData = res;
+    //   this.keys = Object.keys(this.userData);
+    //   this.values = Object.values(this.userData);
+    //   for (let i in this.keys) {
+    //     console.log(`key : ${this.keys[i]}; value : ${this.values[i]}`);
+
+    //     this.userDetails.addControl(
+    //       this.keys[i],
+    //       new FormControl(this.values[i])
+    //     );
+    //   }
+    //   // console.log('form : ', this.userDetails.value);
+    //   // console.log('user data : ', this.userData);
+    // });
   }
 
   heightUnitChange(unit: string) {
@@ -73,6 +86,8 @@ export class DetailComponent implements OnInit {
   }
 
   get getValue() {
-    return this.userDetails.value;
+    const val = this.userDetails.value;
+    // console.log('val : ', val);
+    return val;
   }
 }

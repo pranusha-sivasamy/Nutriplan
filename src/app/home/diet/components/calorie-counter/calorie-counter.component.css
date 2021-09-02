@@ -1,0 +1,22 @@
+h2 {
+  color: #682773;
+}
+a {
+  background: rgb(99, 39, 120);
+  box-shadow: none;
+  border: none;
+}
+
+a:hover {
+  background: #7f2d8d;
+}
+
+a:focus {
+  background: #682773;
+  box-shadow: none;
+}
+
+a:active {
+  background: #682773;
+  box-shadow: none;
+}

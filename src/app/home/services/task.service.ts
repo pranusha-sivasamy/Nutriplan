@@ -7,12 +7,7 @@ import { UserService } from './user.service';
 export class TaskService {
   constructor(private userService: UserService) {}
 
-  // getUserDetails(username: string){
-  //   return new Promise<object>((res, rej) => {
-  //     this.userService.getUserDetails(username).subscribe((ret: object) => {
-  //       console.log(ret);
-  //       res(ret);
-  //     });
-  //   });
-  // }
+  getUserDailyCalorie(username: string) {
+    return this.userService.getUserDailyCalorie(username).toPromise();
+  }
 }

@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+
 
 import { FooterComponent } from './components/footer/footer.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -24,7 +26,9 @@ import { AdminModule } from './admin/admin.module';
     HomeRoutingModule,
     UserModule,
     DietModule,
-    AdminModule
+    AdminModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers:[
     UserService,

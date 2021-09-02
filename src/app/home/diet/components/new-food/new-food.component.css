@@ -1,0 +1,71 @@
+.invalid {
+  color: red;
+}
+label {
+  color: grey;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ba68c8;
+}
+.form-control.ng-touched.ng-invalid {
+  border-color: red;
+}
+.card-header {
+  background-color: #841f96;
+  color: white;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+.form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0%;
+  height: 40px;
+  width: max-content;
+}
+.close-button-icon {
+  border: 1px solid #841f96;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+  float: right;
+}
+.close-button-icon:hover {
+  background-color: #841f96;
+  border: 1px solid white;
+}
+.close-button-icon:hover .close-icon {
+  color: white;
+}
+.close-icon {
+  color: #841f96;
+}
+.close-icon:hover {
+  color: white;
+}
+.save-button {
+  background: #841f96;
+  box-shadow: none;
+  border: none;
+  color: white;
+}
+
+.save-button:hover {
+  background: #ae58bd;
+}
+
+.save-button:focus {
+  background: #841f96;
+  box-shadow: none;
+}
+.save-button:disabled {
+  background: #a44fb3;
+  box-shadow: none;
+}
+.save-button:active {
+  background: #841f96;
+  border: 1px solid white;
+  box-shadow: none;
+}

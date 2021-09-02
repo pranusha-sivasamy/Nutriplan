@@ -9,12 +9,15 @@ export class TaskService {
   constructor(private userService: UserService, private router: Router) {}
 
   getUserDetails(username: string) {
-    return new Promise<object>((res, rej) => {
-      this.userService.getUserDetails(username).subscribe((ret: object) => {
-        console.log(ret);
-        res(ret);
-      });
-    });
+    return this.userService.getUserDetails(username).toPromise();
+  }
+
+  getAllUser() {
+    return this.userService.getAllUser().toPromise();
+  }
+
+  findUser(username: string) {
+    return this.userService.findUser(username).toPromise();
   }
 
   getUserAptWeight(username: string) {
@@ -26,11 +29,21 @@ export class TaskService {
     });
   }
 
+  updateUserDetails(username: string, data: object) {
+    return this.userService.updateUserDetails(username, data).toPromise();
+  }
+
   updateGoal(username: string, goalPerWeek: number) {
     const data = { username: username, goalPerWeek: goalPerWeek };
-    this.userService.updateGoal(data).subscribe((ret: any) => {
-      console.log(`goal update status : `, ret);
-      this.router.navigate(['/dashboard']);
-    });
+    return this.userService.updateGoal(data).toPromise();
+  }
+
+  updateRole(username: string, role: string) {
+    const data = { role: role };
+    return this.userService.updateRole(username, data).toPromise();
+  }
+
+  deleteUser(username: string) {
+    return this.userService.deleteUser(username).toPromise();
   }
 }

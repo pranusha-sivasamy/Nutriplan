@@ -1,0 +1,58 @@
+.action {
+  margin: 10px;
+  /* width: 30px;
+    height: 30px; */
+  border-radius: 15%;
+}
+h6 {
+  color: #841f96;
+}
+.button-icon {
+  border: 2px solid green;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+}
+.button-icon:hover {
+  background-color: green;
+}
+.button-icon:hover .add-icon {
+  color: white;
+}
+.add-icon {
+  color: green;
+}
+.add-icon:hover {
+  background-color: green;
+  color: white;
+}
+.remove-button-icon {
+  border: 2px solid orangered;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+}
+.remove-button-icon:hover {
+  background-color: orangered;
+}
+.remove-button-icon:hover .remove-icon {
+  color: white;
+}
+.remove-icon {
+  color: orangered;
+}
+.remove-icon:hover {
+  background-color: orangered;
+  color: white;
+}
+.form-control {
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-radius: 0%;
+  width: 50px;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: #ba68c8;
+}
