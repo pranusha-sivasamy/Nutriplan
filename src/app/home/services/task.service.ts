@@ -10,4 +10,8 @@ export class TaskService {
   getUserDailyCalorie(username: string) {
     return this.userService.getUserDailyCalorie(username).toPromise();
   }
+
+  getDailyData(username: string, date: string) {
+    return this.userService.getDailyData(username, date).toPromise<any>();
+  }
 }

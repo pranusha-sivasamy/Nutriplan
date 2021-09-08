@@ -1,92 +1,114 @@
-<div class="row" style="margin-top: 20px; width: 100%">
-  <div class="col-6 m-auto">
-    <div class="card-header">Login</div>
-    <div class="card-body">
-      <form [formGroup]="userlogin" (ngSubmit)="onLogin()">
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            formControlName="username"
-          />
-        </div>
-
+<div class="content">
+  <div class="inner-content">
+    <div class="row">
+      <div class="col-7">
+        <img
+          src="https://www.thelastfoodblog.com/wp-content/uploads/2017/09/mushroom-curry-landscape.jpg"
+          width="100%"
+          height="100%"
+          style="filter: saturate(130%)"
+        />
+      </div>
+      <div class="col-5">
         <div
-          *ngIf="
-            getControl.username.invalid &&
-            (getControl.username.touched || getControl.username.dirty)
+          style="
+            margin-left: 45px;
+            margin-right: 45px;
+            margin-top: 20px;
+            margin-bottom: 46px;
+            filter: saturate(120%);
           "
         >
-          <div
-            *ngIf="getControl.username.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            Username is required!
-          </div>
-          <div
-            *ngIf="getControl.username.errors?.minlength"
-            class="alert alert-danger"
-            role="alert"
-          >
-            Username must be atleast 8 characters long
-          </div>
-        </div>
+          <div class="card-header text-center mb-3">NUTRIPLAN</div>
+          <h6>Login with your username and password</h6>
+          <form [formGroup]="userlogin" (ngSubmit)="onLogin()">
+            <div class="row mt-3">
+              <label>Username</label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="username"
+              />
+            </div>
 
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            formControlName="password"
-            (input)="confirmPasswordDirty()"
-          />
-        </div>
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  getControl.username.invalid &&
+                    (getControl.username.touched || getControl.username.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="getControl.username.errors?.required"
+                  >*Username required!</span
+                >
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
 
-        <div
-          *ngIf="
-            getControl.password.invalid &&
-            (getControl.password.touched || getControl.password.dirty)
-          "
-        >
-          <div
-            *ngIf="getControl.password.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            password is required!
-          </div>
-          <div
-            *ngIf="getControl.password.errors?.minlength"
-            class="alert alert-danger"
-            role="alert"
-          >
-            password must be atleast 8 characters long!
-          </div>
+            <div class="row">
+              <label>Password</label>
+              <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+                (input)="confirmPasswordDirty()"
+              />
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                 ( getControl.password.invalid &&
+                    (getControl.password.touched || getControl.password.dirty))||loginResultFailed;
+                  else elseblk
+                "
+              >
+                <span *ngIf="getControl.password.errors?.required"
+                  >*Password required!</span
+                >
+                <span *ngIf="loginResultFailed; else elseblk">
+                  *Invalid username or password
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div class="row" style="margin-top: 20px; margin-left: 2px">
+              <button
+                type="submit"
+                class="btn save-button"
+                [disabled]="!userlogin.valid"
+              >
+                Login
+              </button>
+            </div>
+
+            <!-- <div class="invalid">
+              <span *ngIf="loginResultFailed; else elseblk">
+                *Invalid username or password
+              </span>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div> -->
+
+            <!-- <div *ngIf="loginResultFailed" class="invalid">
+              *Invalid username or password
+            </div> -->
+            <div style="text-align: center">
+              <p>
+                Don't have an account?
+                <a routerLink="/auth/register">Register</a>
+              </p>
+            </div>
+          </form>
         </div>
-        <button
-          type="submit"
-          class="btn btn-primary bStyle"
-          [disabled]="!userlogin.valid"
-        >
-          Login
-        </button>
-        <!-- <button type="button" class="btn btn-secondary bStyle">Register</button> -->
-        <a class="btn btn-secondary" routerLink="/auth/register">Register</a>
-        <div
-          *ngIf="loginResultFailed"
-          class="alert alert-danger"
-          role="alert"
-        >
-          Invalid username or password
-        </div>
-        <!-- <div *ngIf="noUser" class="alert alert-danger" role="alert">
-          User not found
-        </div> -->
-      </form>
+      </div>
     </div>
   </div>
 </div>

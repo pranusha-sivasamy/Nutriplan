@@ -1,6 +1,108 @@
-.example{
-    color: rgb(75, 73, 73);
+.form-control:focus {
+  box-shadow: none;
+  border: 1px solid white;
 }
-/* .myInputStyle{
-    border-radius: 5px;
-} */
+
+.form-control {
+  border: none;
+  border-radius: 0%;
+  height: 40px;
+  width: 300px;
+  background-color: #8fb96580;
+  color: white;
+}
+
+.check-input {
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+}
+
+.card-header {
+  background-color: white;
+  color: green;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+.form-select {
+  border-radius: 0%;
+  border: none;
+  width: 300px;
+  background-color: #8fb96580;
+  color: white;
+}
+
+.form-select:focus {
+  box-shadow: none;
+  border: 1px solid white;
+}
+
+.save-button {
+  background: green;
+  box-shadow: none;
+  border: none;
+  color: white;
+  width: 150px;
+  margin-left: 198px;
+}
+
+.save-button:disabled {
+  background: rgb(67, 153, 67);
+  box-shadow: none;
+  border: none;
+  color: white;
+}
+
+.save-button:hover {
+  background: rgb(44, 136, 44);
+}
+
+.save-button:focus {
+  background: rgb(44, 136, 44);
+  box-shadow: none;
+}
+
+.save-button:active {
+  background: rgb(44, 136, 44);
+  border: 1px solid white;
+  box-shadow: none;
+}
+
+.invalid {
+  color: #ffc800;
+  margin-left: 12px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+label {
+  padding-top: 7px;
+  color: white;
+  padding-bottom: 5px;
+  margin-left: 12px;
+}
+
+.container {
+  width: 45%;
+  padding: 10px;
+  padding-bottom: 20px;
+  background-color: #0c0c0cb5;
+  margin-top: 65px;
+  margin-left: 400px;
+  position: absolute;
+}
+
+p {
+  margin-top: 12px;
+}
+
+.content {
+  height: 553px;
+  width: 100%;
+  background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0");
+  background-attachment: fixed;
+  background-size: cover;
+}

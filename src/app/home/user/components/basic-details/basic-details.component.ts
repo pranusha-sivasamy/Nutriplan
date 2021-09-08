@@ -1,28 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CanComponentLeave } from '../../../../auth/guards/unsaved-changes.guard';
+import { CanComponentLeave } from 'src/app/auth/interfaces/can-component-leave';
+import { CommonService } from 'src/app/services/common.service';
 import { TaskService } from '../../services/task.service';
-import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-basic-details',
   templateUrl: './basic-details.component.html',
   styleUrls: ['./basic-details.component.css'],
 })
-export class BasicDetailsComponent implements CanComponentLeave, OnInit {
+export class BasicDetailsComponent implements CanComponentLeave {
   displaySuccessRegistration = false;
   public details: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private taskService: TaskService,
+    private commonService: CommonService,
     private router: Router
   ) {
     this.details = this.fb.group({
-      heightInCm: ['', [Validators.required]],
-      heightInft: [''],
-      heightInIn: [''],
+      height: ['', [Validators.required]],
       weight: ['', [Validators.required]],
       gender: ['', [Validators.required]],
       age: ['', [Validators.required]],
@@ -31,61 +30,22 @@ export class BasicDetailsComponent implements CanComponentLeave, OnInit {
     });
   }
 
-  ngOnInit() {
-    this.details.get('heightUnit')?.valueChanges.subscribe((currentUnit) => {
-      this.onselectHeight(currentUnit);
-    });
-  }
-
   get getControl() {
     return this.details.controls;
   }
 
   async onSubmit() {
-    console.log(this.details.value);
-    if (this.details.value.heightUnit == 'ft') {
-      this.details.value.heightInCm =
-        this.details.value.heightInft * 30.48 +
-        this.details.value.heightInIn * 2.54;
-    }
-    const username: any = localStorage.getItem('username');
+    const username: any = this.commonService.getUsername();
     const data = {
       age: this.details.value.age,
       gender: this.details.value.gender,
-      height: this.details.value.heightInCm,
+      height: this.details.value.height,
       weight: this.details.value.weight,
       activityState: this.details.value.activity,
     };
     const result = await this.taskService.updateUserDetails(username, data);
     this.router.navigate(['/home/user/goal']);
     this.displaySuccessRegistration = true;
-  }
-
-  private onselectHeight(unit: string) {
-    console.log(unit);
-    if (unit == 'ft') {
-      this.details.controls.heightInft.setValidators([
-        Validators.required,
-        Validators.min(4),
-        Validators.max(7),
-      ]);
-      this.details.controls.heightInIn.setValidators([
-        Validators.required,
-        Validators.min(0),
-        Validators.max(12),
-      ]);
-      this.details.controls.heightInCm.clearValidators();
-      this.details.controls.heightInCm.updateValueAndValidity();
-      this.details.controls.heightInft.updateValueAndValidity();
-      this.details.controls.heightInIn.updateValueAndValidity();
-    } else {
-      this.details.controls.heightInCm.setValidators([Validators.required]);
-      this.details.controls.heightInCm.updateValueAndValidity();
-      this.details.controls.heightInft.clearValidators();
-      this.details.controls.heightInIn.clearValidators();
-      this.details.controls.heightInft.updateValueAndValidity();
-      this.details.controls.heightInIn.updateValueAndValidity();
-    }
   }
 
   canLeave() {

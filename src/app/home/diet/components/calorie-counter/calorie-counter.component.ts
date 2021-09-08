@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -7,7 +8,10 @@ import { TaskService } from '../../services/task.service';
   styleUrls: ['./calorie-counter.component.css'],
 })
 export class CalorieCounterComponent implements OnInit {
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private commonService: CommonService
+  ) {}
 
   breakFastCalorie: number = 0;
   lunchCalorie: number = 0;
@@ -18,8 +22,7 @@ export class CalorieCounterComponent implements OnInit {
   date!: string;
 
   async ngOnInit() {
-    const username = localStorage.getItem('username');
-    console.log('inside calorieCounter');
+    const username = this.commonService.getUsername();
 
     if (typeof username == 'string') {
       const breakfastResult = await this.taskService.generateFoodPlan(

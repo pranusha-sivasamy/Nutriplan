@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,34 +8,46 @@ import { Injectable } from '@angular/core';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  addUser(data: Object) {
-    return this.http.post('http://localhost:8080/user/addUser', data, {
-      responseType: 'text',
-    });
+  addUser(data: any) {
+    return this.http.post(
+      `${environment.baseUrl}/${environment.userPath}/addUser`,
+      data,
+      {
+        responseType: 'text',
+      }
+    );
   }
 
   checkUser(username: string, password: string) {
     return this.http.get(
-      `http://localhost:8080/user/checkUser?username=${username}&password=${password}`,
+      `${environment.baseUrl}/${environment.userPath}/checkUser?username=${username}&password=${password}`,
       { responseType: 'text' }
     );
   }
 
-  searchUsername(data: Object) {
-    return this.http.post(`http://localhost:8080/user/searchUser`, data, {
-      responseType: 'text',
-    });
+  searchUsername(data: any) {
+    return this.http.post(
+      `${environment.baseUrl}/${environment.userPath}/searchUser`,
+      data,
+      {
+        responseType: 'text',
+      }
+    );
   }
 
-  searchEmail(data: Object) {
-    return this.http.post(`http://localhost:8080/user/searchEmail`, data, {
-      responseType: 'text',
-    });
+  searchEmail(data: any) {
+    return this.http.post(
+      `${environment.baseUrl}/${environment.userPath}/searchEmail`,
+      data,
+      {
+        responseType: 'text',
+      }
+    );
   }
 
   getRole(username: string) {
     return this.http.get(
-      `http://localhost:8080/user/getRole?username=${username}`,
+      `${environment.baseUrl}/${environment.userPath}/getRole?username=${username}`,
       { responseType: 'text' }
     );
   }

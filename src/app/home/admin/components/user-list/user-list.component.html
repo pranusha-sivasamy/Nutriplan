@@ -1,25 +1,6 @@
-<div class="container mt-3">
-    <div class="row">
-      <div class="col align-self-start">
-        <button
-          type="button"
-          class="btn btn-outline-success"
-          (click)="createNewUser()"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            class="bi bi-plus"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
-            />
-          </svg>create
-        </button>
-      </div>
+<div class="content">
+  <div class="container">
+    <div class="row mt-3" style="background-color: #0a0a0ab3">
       <div class="col align-self-center"><h5>User List</h5></div>
       <div class="col align-self-end">
         <input
@@ -27,7 +8,7 @@
           #searchUser
           placeholder="search user"
           (input)="onSearch(searchUser.value)"
-          style="float: right"
+          style="float: right;margin-bottom: 5px;"
         />
       </div>
     </div>
@@ -56,7 +37,11 @@
           <td>{{ user.weight }} kg</td>
           <td>{{ user.BMI }}</td>
           <td>
-            <button type="button" (click)="editUser(user.username)" class="edit-button-icon">
+            <button
+              type="button"
+              (click)="editUser(user.username)"
+              class="edit-button-icon"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="12"
@@ -94,4 +79,4 @@
       </tbody>
     </table>
   </div>
-  
+</div>

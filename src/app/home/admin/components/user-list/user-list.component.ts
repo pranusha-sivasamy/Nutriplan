@@ -10,20 +10,11 @@ import { UserComponent } from 'src/app/home/user/components/user/user.component'
 })
 export class UserListComponent implements OnInit {
   users: any;
-  constructor(private taskService: TaskService, private dialog: MatDialog) {}
+  constructor(private taskService: TaskService, private dialog: MatDialog) {
+  }
 
   async ngOnInit() {
     this.users = await this.taskService.getAllUser();
-    // console.log(this.users);
-  }
-
-  createNewUser() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false;
-    dialogConfig.data = { title: 'Add User' };
-    dialogConfig.width = '70%';
-    dialogConfig.height = '80%';
-    this.dialog.open(UserComponent, dialogConfig);
   }
 
   async onSearch(user: string) {
@@ -44,5 +35,6 @@ export class UserListComponent implements OnInit {
 
   async deleteUser(user: string) {
     const data = await this.taskService.deleteUser(user);
+    this.users = await this.taskService.getAllUser();
   }
 }

@@ -35,70 +35,47 @@ export class ValidatorService {
     };
   }
 
-  onLogin(username: string, role: string) {
+  onLogin(username: string, role: string, token: string) {
     localStorage.setItem('LoggedIn', 'true');
     localStorage.setItem('username', username);
     localStorage.setItem('role', role);
+    localStorage.setItem('token', token);
   }
 
   onLogout() {
-    // window.location.reload();
     this.router.navigate(['/']);
     localStorage.removeItem('LoggedIn');
     localStorage.removeItem('username');
     localStorage.removeItem('role');
+    localStorage.removeItem('token');
   }
 
-  onRegister(userProfile: FormGroup) {
+  async onRegister(userProfile: FormGroup) {
     const data = {
       username: userProfile.value.username,
       email: userProfile.value.email,
       password: userProfile.value.password,
     };
-    this.userService.addUser(data).subscribe((ret: any) => {
-      console.log(ret);
-      this.onLogin(userProfile.value.username, 'user');
-      this.router.navigate(['/home/user/details']);
-    });
+    const result = await this.userService.addUser(data).toPromise();
+    this.onLogin(userProfile.value.username, 'user', result);
+    this.router.navigate(['/home/user/details']);
   }
 
   getRole(username: string) {
-    return new Promise<string>((res, rej) => {
-      this.userService.getRole(username).subscribe((ret: string) => {
-        res(ret);
-      });
-    });
+    return this.userService.getRole(username).toPromise();
   }
 
   loginCheck(username: string, password: string) {
-    return new Promise((res, rej) => {
-      this.userService.checkUser(username, password).subscribe((ret: any) => {
-        console.log(ret);
-        if (ret == 'No user found' || ret == 'Incorrect password') rej(false);
-        else res(true);
-      });
-    });
+    return this.userService.checkUser(username, password).toPromise();
   }
 
   usernameAvailability(username: string) {
     const data = { username: username };
-    return new Promise((res, rej) => {
-      this.userService.searchUsername(data).subscribe((ret: any) => {
-        console.log(ret);
-        if (ret == 'username already exists') rej(false);
-        else res(true);
-      });
-    });
+    return this.userService.searchUsername(data).toPromise();
   }
 
   userEmailAvailability(email: string) {
     const data = { email: email };
-    return new Promise((res, rej) => {
-      this.userService.searchEmail(data).subscribe((ret: any) => {
-        console.log(ret);
-        if (ret == 'email already exists') rej(false);
-        else res(true);
-      });
-    });
+    return this.userService.searchEmail(data).toPromise();
   }
 }

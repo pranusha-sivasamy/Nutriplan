@@ -1,170 +1,172 @@
-<div class="row" style="margin-top: 20px;width: 100%;">
-  <div class="col-6 m-auto">
-    <div class="card-header">Register</div>
-    <div class="card-body">
-      <form [formGroup]="userProfile" (ngSubmit)="onRegister()">
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            formControlName="username"
-            (input)="validateUsername()"
-          />
-        </div>
-
+<div class="content">
+  <div class="inner-content">
+    <div class="row">
+      <div class="col-6 side-crop">
+        <img
+        src="https://imagenmore.ae/images/food-photography-coffee-.jpg"
+          width="100%"
+          height="100%"
+          style="filter: contrast(120%);"
+        />
+      </div>
+      <div class="col-6" style="background-color: white">
         <div
-          *ngIf="usernameNotEligible"
-          class="alert alert-danger"
-          role="alert"
-        >
-          The username {{ userProfile.value.username }} is not available!!
-        </div>
-
-        <div
-          *ngIf="
-            getControl.username.invalid &&
-            (getControl.username.touched || getControl.username.dirty)
+          style="
+            margin-left: 45px;
+            margin-right: 45px;
+            margin-top: 25px;
+            margin-bottom: 36px;
           "
         >
-          <div
-            *ngIf="getControl.username.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            Username is required!
-          </div>
-          <div
-            *ngIf="getControl.username.errors?.minlength"
-            class="alert alert-danger"
-            role="alert"
-          >
-            Username must be atleast 8 characters long!
-          </div>
-        </div>
+          <div class="card-header text-center">NUTRIPLAN</div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">email</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            formControlName="email"
-            (input)="validateEmail()"
-          />
-        </div>
+          <form [formGroup]="userProfile" (ngSubmit)="onRegister()">
+            <div style="height: 23px" class="row mt-3">
+              <label class="col-5">Username</label>
+              <input
+                type="text"
+                class="form-control col-7"
+                formControlName="username"
+                (input)="validateUsername()"
+              />
+            </div>
 
-        <div *ngIf="emailNotEligible" class="alert alert-danger" role="alert">
-          email already exists!!
-        </div>
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  (getControl.username.invalid &&
+                    (getControl.username.touched ||
+                      getControl.username.dirty)) ||
+                    usernameNotEligible;
+                  else elseblk
+                "
+              >
+                <span *ngIf="getControl.username.errors?.required"
+                  >*Username required!</span
+                >
+                <span *ngIf="getControl.username.errors?.minlength">
+                  *Username must be atleast 8 characters long! </span
+                ><span *ngIf="usernameNotEligible">
+                  *username {{ userProfile.value.username }} is not available!!
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
 
-        <div
-          *ngIf="
-            getControl.email.invalid &&
-            (getControl.email.touched || getControl.email.dirty)
-          "
-        >
-          <div
-            *ngIf="getControl.email.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            email is required!
-          </div>
-          <div
-            *ngIf="getControl.email.errors?.email"
-            class="alert alert-danger"
-            role="alert"
-          >
-            Please provide a valid email ID
-          </div>
-        </div>
+            <div style="height: 23px" class="row">
+              <label class="col-5">Email</label>
+              <input
+                type="email"
+                class="form-control col-7"
+                formControlName="email"
+                (input)="validateEmail()"
+              />
+            </div>
 
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            formControlName="password"
-          />
-        </div>
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  (getControl.email.invalid &&
+                    (getControl.email.touched || getControl.email.dirty)) ||
+                    emailNotEligible;
+                  else elseblk
+                "
+              >
+                <span *ngIf="getControl.email.errors?.required"
+                  >*email required!</span
+                >
+                <span *ngIf="getControl.email.errors?.email">
+                  *Please provide a valid email ID </span
+                ><span *ngIf="emailNotEligible"> *email already exists!! </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
 
-        <div
-          *ngIf="
-            getControl.password.invalid &&
-            (getControl.password.touched || getControl.password.dirty)
-          "
-        >
-          <div
-            *ngIf="getControl.password.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            password is required!
-          </div>
-          <div
-            *ngIf="getControl.password.errors?.minlength"
-            class="alert alert-danger"
-            role="alert"
-          >
-            password must be atleast 8 characters long!
-          </div>
-        </div>
+            <div style="height: 23px" class="row">
+              <label class="col-5">Password</label>
+              <input
+                type="password"
+                class="form-control col-7"
+                formControlName="password"
+              />
+            </div>
 
-        <div class="mb-3">
-          <label for="confirmPassword" class="form-label"
-            >Confirm Password</label
-          >
-          <input
-            type="password"
-            class="form-control"
-            id="confirmPassword"
-            formControlName="confirmPassword"
-          />
-        </div>
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  getControl.password.invalid &&
+                    (getControl.password.touched || getControl.password.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="getControl.password.errors?.required"
+                  >*password required!</span
+                >
+                <span *ngIf="getControl.password.errors?.minlength">
+                *password must be atleast 8 characters long!
+                   </span
+                >
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
 
-        <div
-          *ngIf="
-            getControl.confirmPassword.invalid &&
-            (getControl.confirmPassword.touched ||
-              getControl.confirmPassword.dirty)
-          "
-        >
-          <div
-            *ngIf="getControl.confirmPassword.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            ConfirmPassword is required!
-          </div>
-          <div
-            *ngIf="getControl.confirmPassword.errors?.passwordMisMatch"
-            class="alert alert-danger"
-            role="alert"
-          >
-            Password doesn't match!
-          </div>
-        </div>
+            <div style="height: 23px" class="row">
+              <label for="confirmPassword" class="col-5"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                class="form-control col-7"
+                formControlName="confirmPassword"
+              />
+            </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary bStyle"
-          [disabled]="(!userProfile.valid)||usernameNotEligible||emailNotEligible"
-        >
-          Register
-        </button>
-        <a class="btn btn-secondary bStyle" routerLink="/auth/login">Go back to login</a>
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  getControl.confirmPassword.invalid &&
+                    (getControl.confirmPassword.touched || getControl.confirmPassword.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="getControl.confirmPassword.errors?.required"
+                  >*Confirm password required!</span
+                >
+                <span *ngIf="getControl.confirmPassword.errors?.passwordMisMatch">
+                *Password doesn't match!
+                   </span
+                >
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
 
-        <div
-          *ngIf="displaySuccessRegistration"
-          class="alert alert-success"
-          role="alert"
-        >
-          Successfully registered
+            <div class="row mt-4">
+              <button
+                type="submit"
+                class="btn save-button"
+                [disabled]="
+                  !userProfile.valid || usernameNotEligible || emailNotEligible
+                "
+              >
+                Register
+              </button>
+            </div>
+            <div style="text-align: center">
+              <p>
+                Already have an account? <a routerLink="/auth/login">Login</a>
+              </p>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>

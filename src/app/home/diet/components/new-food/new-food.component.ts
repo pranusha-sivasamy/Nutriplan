@@ -34,7 +34,6 @@ export class NewFoodComponent implements OnInit {
     this.combo = await this.taskService.getAllCombo();
     if (this.data.title == 'Edit Food') {
       const result = await this.taskService.getFoodDetails(this.data.name);
-      console.log(result);
       this.showDetails(result);
     }
   }
@@ -60,7 +59,6 @@ export class NewFoodComponent implements OnInit {
   }
 
   async addNewFood() {
-    console.log(this.newFood.value);
     let type = [];
     if (this.getValue.breakfast) type.push('breakfast');
     if (this.getValue.lunch) type.push('lunch');
@@ -74,7 +72,8 @@ export class NewFoodComponent implements OnInit {
       this.getValue.calorie,
       this.getValue.combo
     );
-    console.log(result);
+    this.newFood.reset();
+    this.dialogRef.close();
   }
 
   addComboValidation() {
@@ -102,8 +101,6 @@ export class NewFoodComponent implements OnInit {
       kind: this.getValue.kind,
     };
     const result = await this.taskService.updateFood(this.id, data);
-    console.log(data);
-    console.log(result);
     this.newFood.reset();
     this.dialogRef.close();
   }

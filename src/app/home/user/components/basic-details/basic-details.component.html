@@ -1,22 +1,15 @@
-<div class="row" style="margin-top: 20px; width: 100%">
-  <div class="col-8 m-auto">
-    <div class="card-header">Details</div>
-    <div class="card-body">
-      <form
-        [formGroup]="details"
-        (ngSubmit)="onSubmit()"
-        style="margin-top: 20px"
-      >
-        <div class="mb-3 row">
-          <label for="age" class="col-sm-2 col-form-label">Present Age</label>
-          <div class="col-sm-10">
-            <input
-              type="number"
-              class="form-control"
-              placeholder="age"
-              formControlName="age"
-            />
-          </div>
+<div class="content">
+  <div class="container">
+    <div class="col mt-3">
+      <div class="card-header">Details</div>
+      <form [formGroup]="details" (ngSubmit)="onSubmit()">
+        <div class="row mt-2">
+          <label for="age" class="col-5">Present Age</label>
+          <input
+            type="number"
+            class="form-control col-7"
+            formControlName="age"
+          />
         </div>
 
         <div
@@ -25,183 +18,58 @@
             (getControl.age.touched || getControl.age.dirty)
           "
         >
-          <div
-            *ngIf="getControl.age.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            age is required!
+          <div *ngIf="getControl.age.errors?.required" class="invalid">
+            *age is required!
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="inputPassword" class="col-sm-2 col-form-label"
-            >Gender</label
-          >
-          <div class="col-sm-10">
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gender"
-                formControlName="gender"
-                value="male"
-              />
-              <label class="form-check-label"> Male </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="gender"
-                formControlName="gender"
-                value="female"
-              />
-              <label class="form-check-label"> Female </label>
-            </div>
-          </div>
+        <div class="mt-1">
+          <label class="col-5">Gender</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="gender"
+            value="male"
+            formControlName="gender"
+          />
+          <label class="form-check-label">Male</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="gender"
+            value="female"
+            formControlName="gender"
+          />
+          <label class="form-check-label">Female</label>
         </div>
 
-        <div class="mb-3 row">
-          <label for="age" class="col-sm-2 col-form-label"
-            >Current Height</label
-          >
-          <div class="col-sm-10">
-            <input
-              *ngIf="details.value.heightUnit == 'cm'"
-              type="number"
-              class="form-control"
-              placeholder="height in cm"
-              formControlName="heightInCm"
-            />
-            <div class="row">
-              <input
-                *ngIf="details.value.heightUnit == 'ft'"
-                type="number"
-                class="form-control col"
-                placeholder="feet "
-                formControlName="heightInft"
-              />
-              <input
-                *ngIf="details.value.heightUnit == 'ft'"
-                type="number"
-                class="form-control col"
-                placeholder="inches "
-                formControlName="heightInIn"
-              />
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="heightUnit"
-                formControlName="heightUnit"
-                value="ft"
-              />
-              <label class="form-check-label"> ft </label>
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="radio"
-                name="heightUnit"
-                formControlName="heightUnit"
-                value="cm"
-                selected
-              />
-              <label class="form-check-label"> cm </label>
-            </div>
-          </div>
+        <div class="row mt-2">
+          <label for="age" class="col-5">Current Height</label>
+          <input
+            type="number"
+            class="form-control col-7"
+            formControlName="height"
+          />
         </div>
 
         <div
           *ngIf="
-            details.value.heightUnit == 'cm' &&
-            getControl.heightInCm.invalid &&
-            (getControl.heightInCm.touched || getControl.heightInCm.dirty)
+            getControl.height.invalid &&
+            (getControl.height.touched || getControl.height.dirty)
           "
         >
-          <div
-            *ngIf="getControl.heightInCm.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            height is required!
+          <div *ngIf="getControl.height.errors?.required" class="invalid">
+            *height is required!
           </div>
         </div>
 
-        <div
-          *ngIf="
-            details.value.heightUnit == 'ft' &&
-            (getControl.heightInft.invalid || getControl.heightInIn.invalid) &&
-            (getControl.heightInft.touched ||
-              getControl.heightInft.dirty ||
-              getControl.heightInIn.touched ||
-              getControl.heightInIn.dirty)
-          "
-        >
-          <div
-            *ngIf="
-              getControl.heightInft.errors?.required ||
-              getControl.heightInIn.errors?.required
-            "
-            class="alert alert-danger"
-            role="alert"
-          >
-            height is required!
-          </div>
-          <div
-            *ngIf="
-              getControl.heightInft.errors?.min ||
-              getControl.heightInft.errors?.max ||
-              getControl.heightInIn.errors?.min ||
-              getControl.heightInIn.errors?.max
-            "
-            class="alert alert-danger"
-            role="alert"
-          >
-            Please provide a valid height
-          </div>
-        </div>
-
-        <!-- <div
-          *ngIf="
-            details.value.heightUnit == 'ft' &&
-            getControl.heightInIn.invalid &&
-            (getControl.heightInIn.touched || getControl.heightInIn.dirty)
-          "
-        >
-          <div
-            *ngIf="getControl.heightInIn.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            height is required!
-          </div>
-          <div
-            *ngIf="
-              getControl.heightInIn.errors?.min ||
-              getControl.heightInIn.errors?.max
-            "
-            class="alert alert-danger"
-            role="alert"
-          >
-            Please provide a valid height
-          </div>
-        </div> -->
-
-        <div class="mb-3 row">
-          <label for="age" class="col-sm-2 col-form-label"
-            >Current Weight</label
-          >
-          <div class="col-sm-10">
-            <input
-              type="number"
-              class="form-control"
-              placeholder="weight"
-              formControlName="weight"
-            />
-          </div>
+        <div class="row mt-2">
+          <label for="age" class="col-5">Current Weight</label>
+          <input
+            type="number"
+            class="form-control col-7"
+            formControlName="weight"
+          />
         </div>
 
         <div
@@ -210,48 +78,39 @@
             (getControl.weight.touched || getControl.weight.dirty)
           "
         >
-          <div
-            *ngIf="getControl.weight.errors?.required"
-            class="alert alert-danger"
-            role="alert"
-          >
-            weight is required!
+          <div *ngIf="getControl.weight.errors?.required" class="invalid">
+            *weight is required!
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label for="age" class="col-sm-2 col-form-label"
-            >Activity state</label
+        <div class="row mt-2 mb-4">
+          <label for="age" class="col-5">Activity state</label>
+          <select
+            class="form-select"
+            formControlName="activity"
           >
-          <div class="col-sm-10">
-            <select
-              class="form-select"
-              aria-label="Default select example"
-              formControlName="activity"
-            >
-              <option selected disabled>How active are you?</option>
-              <option value="No Activity">
-                Little or No Activity<span class="example"
-                  >(eg. Desktop job, Bank Teller)</span
-                >
-              </option>
-              <option value="Lightly active">
-                Lightly active<span class="example"
-                  >(eg. Teacher, Sales Associate)</span
-                >
-              </option>
-              <option value="Moderately active">
-                Moderately active<span class="example"
-                  >(eg. Weighter, Tour Guide)</span
-                >
-              </option>
-              <option value="Very Active">
-                Very Active<span class="example"
-                  >(eg. Construction Worker, Gym instructor)</span
-                >
-              </option>
-            </select>
-          </div>
+            <option selected disabled>How active are you?</option>
+            <option value="No Activity">
+              Little or No Activity<span class="example"
+                >(eg. Desktop job, Bank Teller)</span
+              >
+            </option>
+            <option value="Lightly active">
+              Lightly active<span class="example"
+                >(eg. Teacher, Sales Associate)</span
+              >
+            </option>
+            <option value="Moderately active">
+              Moderately active<span class="example"
+                >(eg. Weighter, Tour Guide)</span
+              >
+            </option>
+            <option value="Very Active">
+              Very Active<span class="example"
+                >(eg. Construction Worker, Gym instructor)</span
+              >
+            </option>
+          </select>
 
           <div
             *ngIf="
@@ -259,19 +118,15 @@
               (getControl.activity.touched || getControl.activity.dirty)
             "
           >
-            <div
-              *ngIf="getControl.activity.errors?.required"
-              class="alert alert-danger"
-              role="alert"
-            >
-              activity is required!
+            <div *ngIf="getControl.activity.errors?.required" class="invalid">
+              *activity is required!
             </div>
           </div>
         </div>
 
         <button
           type="submit"
-          class="btn btn-primary"
+          class="btn save-button"
           [disabled]="!details.valid"
         >
           Submit
@@ -281,7 +136,7 @@
           class="alert alert-success"
           role="alert"
         >
-          Successfully updates
+          Successfully updated
         </div>
       </form>
     </div>

@@ -2,96 +2,46 @@
   <div class="container-fluid">
     <a class="navbar-brand">NutriPlan</a>
     <div class="navbarRight">
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Features
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li>
-                <a class="dropdown-item" routerLink="/diet/calorie-counter">Calorie planner</a>
-              </li>
-              <li><a class="dropdown-item" href="#">Weight tracking</a></li>
-              <li><a class="dropdown-item" href="#">Statistics</a></li>
-            </ul>
-          </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li> -->
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/dashboard"
-              >Dashboard</a
-            >
-          </li>
-          
-          <li *ngIf="adminloggedIn()" class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/admin/food"
-              >Food</a
-            >
-          </li>
-          <li *ngIf="adminloggedIn()" class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/admin/user-list"
-              >User</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/user/profile"
-              >Profile</a
-            >
-          </li>
-          <!-- <li *ngIf="!loggedIn()" class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/auth/register"
-              >Register</a
-            >
-          </li>
-          <li *ngIf="!loggedIn()" class="nav-item">
-            <a
-              class="nav-link"
-              routerLinkActive="active"
-              routerLink="/auth/login"
-              >Login</a
-            >
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" (click)="onLogout()">Logout</a>
-          </li>
-        </ul>
-      </div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/dashboard"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/diet/calorie-counter"
+            >Planner</a
+          >
+        </li>
+
+        <li *ngIf="adminloggedIn()" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/admin/food"
+            >Food</a
+          >
+        </li>
+        <li *ngIf="adminloggedIn()" class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/admin/user-list"
+            >User</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/user/profile"
+            >Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
-

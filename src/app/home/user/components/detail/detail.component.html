@@ -1,125 +1,203 @@
-<div class="container mt-5" style="width: 70%;margin-bottom: 50px;">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h4 class="text-right">Basic Information</h4>
-      </div>
-      <form [formGroup]="userDetails">
+<div class="content">
+  <div class="container">
+    <div class="row">
+      <form [formGroup]="userData">
+        <div class="card-header">BASIC INFORMATION</div>
         <div class="row mt-3">
-          <div class="col-md-6">
-            <label class="form-label">Username</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="username"
-              value="{{ getValue.username }}"
-            />
+          <div class="col-6">
+            <div class="row mb-2">
+              <label class="col-4">Username</label>
+              <input
+                readonly
+                formControlName="username"
+                class="form-control col-8"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="col-4">Gender</label>
+              <input
+                class="check-input"
+                type="radio"
+                name="gender"
+                value="male"
+                formControlName="gender"
+              />
+              <label class="form-check-label">Male</label>
+              <input
+                class="check-input"
+                type="radio"
+                name="gender"
+                value="female"
+                formControlName="gender"
+              />
+              <label class="form-check-label">Female</label>
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Height</label>
+              <input
+                type="number"
+                class="form-control col-8"
+                formControlName="height"
+              />
+            </div>
+            <div>
+              <div
+                *ngIf="
+                  getControl.height.invalid &&
+                  (getControl.height.touched || getControl.height.dirty)
+                "
+              >
+                <div *ngIf="getControl.height.errors?.required" class="invalid">
+                  *height is required!
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Activity State</label>
+              <select class="form-select col-8" formControlName="activity">
+                <option value="No Activity">Little Activity</option>
+                <option value="Lightly active">Lightly active</option>
+                <option value="Moderately active">Moderately active</option>
+                <option value="Very Active">Very Active</option>
+              </select>
+            </div>
+            <div>
+              <div
+                *ngIf="
+                  getControl.activity.invalid &&
+                  (getControl.activity.touched || getControl.activity.dirty)
+                "
+              >
+                <div
+                  *ngIf="getControl.activity.errors?.required"
+                  class="invalid"
+                >
+                  *activity is required!
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">BMR</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="BMR"
+              />
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">AptWeight</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="aptWeight"
+              />
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Goal Per Week</label>
+
+              <input
+                type="range"
+                class="form-range"
+                min="0.25"
+                max="1"
+                step="0.25"
+                style="width: 205px"
+                formControlName="goalPerWeek"
+                (input)="changeRange()"
+              />
+            </div>
+            <div *ngIf="range" class="range-value">{{ range }} Kg</div>
           </div>
-          <!-- <div *ngFor="let item of userData | keyvalue">{{item.key}} : {{item.value}}</div> -->
-          <div class="col-md-6">
-            <label class="form-label">Email ID</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="email"
-              value="{{ getValue.email }}"
-            />
+          <div class="col-6">
+            <div class="row mb-2">
+              <label class="col-4">Email</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="email"
+              />
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Age</label>
+              <input class="form-control col-8" formControlName="age" />
+            </div>
+            <div>
+              <div
+                *ngIf="
+                  getControl.age.invalid &&
+                  (getControl.age.touched || getControl.age.dirty)
+                "
+              >
+                <div *ngIf="getControl.age.errors?.required" class="invalid">
+                  *age is required!
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Weight</label>
+              <input
+                type="number"
+                class="form-control col-8"
+                formControlName="weight"
+              />
+            </div>
+            <div>
+              <div
+                *ngIf="
+                  getControl.weight.invalid &&
+                  (getControl.weight.touched || getControl.weight.dirty)
+                "
+              >
+                <div *ngIf="getControl.weight.errors?.required" class="invalid">
+                  *weight is required!
+                </div>
+              </div>
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">BMI</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="BMI"
+              />
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Status</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="status"
+              />
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Current-Calorie</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="currentCalorie"
+              />
+            </div>
+            <div class="row mb-2">
+              <label class="col-4">Daily-Calorie</label>
+              <input
+                readonly
+                class="form-control col-8"
+                formControlName="dailyCalorie"
+              />
+            </div>
+            <div class="mb-2 mt-3 ml-4">
+              <button
+                class="btn save-button"
+                [disabled]="!userData.valid"
+                type="button"
+                (click)="saveChanges()"
+              >
+                Save
+              </button>
+            </div>
           </div>
-          <div class="col-md-6">
-            <label class="form-label">Age</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="age"
-              value="{{ getValue.age }}"
-            />
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Gender</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="gender"
-              value="{{ getValue.gender }}"
-            />
-          </div>
-          <div class="col-md-4">
-            <label class="form-label">Height</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="height"
-              value="{{ getValue.height }}"
-            />
-          </div>
-          <div class="col-md-2 mt-4">
-            <input
-              type="button"
-              #unitFt
-              [class.unit-clicked]="!toggleButton"
-              class="unit"
-              value="ft"
-              (click)="heightUnitChange(unitFt.value)"
-            />
-            <input
-              type="button"
-              #unitCm
-              [class.unit-clicked]="toggleButton"
-              class="unit"
-              value="cm"
-              (click)="heightUnitChange(unitCm.value)"
-            />
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Weight</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="weight"
-              value="{{ getValue.weight }}"
-            />
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">BMI</label
-            ><input
-              type="text"
-              class="form-control"
-              formControlName="BMI"
-              value="{{ getValue.BMI }}"
-              readonly
-            />
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Status</label
-            ><input type="text" class="form-control" value="{{getValue.status}}" readonly />
-          </div>
-          <div class="col-md-5">
-            <label class="form-label">Activity state</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="activityState"
-              value="{{ getValue.activityState }}"
-              readonly
-            />
-          </div>
-          <div class="col-md-1 mt-4">
-            <button class="unit" type="button" (click)="onEditActivity()">
-              edit
-            </button>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Goal</label
-            ><input type="text" class="form-control" value="{{getValue.goalPerWeek}}" readonly/>
-          </div>
-        </div>
-        <div class="mt-5 text-center">
-          <button class="btn btn-primary profile-button" type="button">
-            Save Profile
-          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
-<!-- <app-user-activity (activity_state)="changeState($event)"></app-user-activity> -->

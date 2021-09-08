@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CanComponentLeave } from '../guards/unsaved-changes.guard';
-import { UserService } from '../services/user.service';
 import { ValidatorService } from '../services/validator.service';
 
 @Component({
@@ -17,8 +15,7 @@ export class RegistrationComponent implements CanComponentLeave {
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorService,
-    private router: Router
+    private validatorService: ValidatorService
   ) {}
 
   userProfile = this.fb.group(
@@ -42,25 +39,19 @@ export class RegistrationComponent implements CanComponentLeave {
   }
 
   async validateUsername() {
-    try {
-      await this.validatorService.usernameAvailability(
-        this.userProfile.value.username
-      );
-      this.usernameNotEligible = false;
-    } catch (err) {
-      this.usernameNotEligible = true;
-    }
+    const result = await this.validatorService.usernameAvailability(
+      this.userProfile.value.username
+    );
+    if (result == "username doesn't exist") this.usernameNotEligible = false;
+    else this.usernameNotEligible = true;
   }
 
   async validateEmail() {
-    try {
-      await this.validatorService.userEmailAvailability(
-        this.userProfile.value.email
-      );
-      this.emailNotEligible = false;
-    } catch (err) {
-      this.emailNotEligible = true;
-    }
+    const result = await this.validatorService.userEmailAvailability(
+      this.userProfile.value.email
+    );
+    if (result == "email doesn't exist") this.emailNotEligible = false;
+    else this.emailNotEligible = true;
   }
 
   canLeave() {
@@ -72,7 +63,6 @@ export class RegistrationComponent implements CanComponentLeave {
         'You have some unsaved changes.Are you sure you want to leave?'
       );
     }
-    console.log(this.displaySuccessRegistration);
     return true;
   }
 

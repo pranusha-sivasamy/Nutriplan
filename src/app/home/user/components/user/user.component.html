@@ -1,5 +1,5 @@
 <div class="row">
-  <form [formGroup]="userData" (ngSubmit)="addUser()">
+  <form [formGroup]="userData">
     <div class="card-header">
       {{ data.title }}
       <button type="button" class="close-button-icon" (click)="close()">
@@ -19,7 +19,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-6">
-        <div class="row mb-2">
+        <div class="row mb-1">
           <label class="col-4">Username</label>
           <input
             readonly
@@ -46,11 +46,42 @@
           />
           <label class="form-check-label">Female</label>
         </div>
-        <div class="row mb-2">
+        <div class="row" style="height: 25px;">
           <label class="col-4">Height</label>
           <input class="form-control col-8" formControlName="height" />
         </div>
-        <div class="row mb-2">
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.height.invalid &&
+                (getControl.height.touched || getControl.height.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.height.errors?.required"
+              >*Height required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
+        </div>
+
+        <!-- <div>
+          <div
+            *ngIf="
+              getControl.height.invalid &&
+              (getControl.height.touched || getControl.height.dirty)
+            "
+          >
+            <div *ngIf="getControl.height.errors?.required" class="invalid">
+              *height is required!
+            </div>
+          </div>
+        </div> -->
+
+        <div class="row"  style="height: 25px;">
           <label class="col-4">Activity State</label>
           <select class="form-select col-8" formControlName="activity">
             <option value="No Activity">Little or No Activity</option>
@@ -59,6 +90,37 @@
             <option value="Very Active">Very Active</option>
           </select>
         </div>
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.activity.invalid &&
+                (getControl.activity.touched || getControl.activity.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.activity.errors?.required"
+              >*Activity required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
+        </div>
+
+        <!-- <div>
+          <div
+            *ngIf="
+              getControl.activity.invalid &&
+              (getControl.activity.touched || getControl.activity.dirty)
+            "
+          >
+            <div *ngIf="getControl.activity.errors?.required" class="invalid">
+              *activity is required!
+            </div>
+          </div>
+        </div> -->
+
         <div class="row mb-2">
           <label class="col-4">BMR</label>
           <input readonly class="form-control col-8" formControlName="BMR" />
@@ -89,18 +151,82 @@
         </div>
       </div>
       <div class="col-6">
-        <div class="row mb-2">
+        <div class="row">
           <label class="col-4">Email</label>
           <input readonly class="form-control col-8" formControlName="email" />
         </div>
-        <div class="row mb-2">
+        <div class="row"  style="height: 25px;">
           <label class="col-4">Age</label>
           <input class="form-control col-8" formControlName="age" />
         </div>
-        <div class="row mb-2">
+
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.age.invalid &&
+                (getControl.age.touched || getControl.age.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.age.errors?.required"
+              >*Age required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
+        </div>
+
+        <!-- <div>
+          <div
+            *ngIf="
+              getControl.age.invalid &&
+              (getControl.age.touched || getControl.age.dirty)
+            "
+          >
+            <div *ngIf="getControl.age.errors?.required" class="invalid">
+              *age is required!
+            </div>
+          </div>
+        </div> -->
+
+        <div class="row"  style="height: 25px;">
           <label class="col-4">Weight</label>
           <input class="form-control col-8" formControlName="weight" />
         </div>
+
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.weight.invalid &&
+                (getControl.weight.touched || getControl.weight.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.weight.errors?.required"
+              >*Weight required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
+        </div>
+
+        <!-- <div>
+          <div
+            *ngIf="
+              getControl.weight.invalid &&
+              (getControl.weight.touched || getControl.weight.dirty)
+            "
+          >
+            <div *ngIf="getControl.weight.errors?.required" class="invalid">
+              *weight is required!
+            </div>
+          </div>
+        </div> -->
+
         <div class="row mb-2">
           <label class="col-4">BMI</label>
           <input readonly class="form-control col-8" formControlName="BMI" />
@@ -137,7 +263,12 @@
           />
         </div>
         <div class="mb-3 mt-3 ml-4">
-          <button class="btn save-button" type="button" (click)="saveChanges()">
+          <button
+            class="btn save-button"
+            [disabled]="!userData.valid"
+            type="button"
+            (click)="saveChanges()"
+          >
             Save
           </button>
         </div>

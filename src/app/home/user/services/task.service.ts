@@ -21,21 +21,16 @@ export class TaskService {
   }
 
   getUserAptWeight(username: string) {
-    return new Promise<number>((res, rej) => {
-      this.userService.getAptWeight(username).subscribe((ret: any) => {
-        console.log('apt weight in task service : ', ret);
-        res(ret);
-      });
-    });
+    return this.userService.getAptWeight(username).toPromise();
   }
 
-  updateUserDetails(username: string, data: object) {
+  updateUserDetails(username: string, data: any) {
     return this.userService.updateUserDetails(username, data).toPromise();
   }
 
   updateGoal(username: string, goalPerWeek: number) {
-    const data = { username: username, goalPerWeek: goalPerWeek };
-    return this.userService.updateGoal(data).toPromise();
+    const data = { goalPerWeek: goalPerWeek };
+    return this.userService.updateGoal(username, data).toPromise();
   }
 
   updateRole(username: string, role: string) {

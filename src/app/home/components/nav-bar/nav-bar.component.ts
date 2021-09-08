@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ValidatorService } from 'src/app/auth/services/validator.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css'],
 })
-export class NavBarComponent implements OnInit {
-  constructor(private checkLogout: ValidatorService) {}
-
-  ngOnInit(): void {}
+export class NavBarComponent {
+  constructor(
+    private checkLogout: ValidatorService,
+    private commonService: CommonService
+  ) {}
 
   adminloggedIn() {
-    if (localStorage.getItem('role') == 'admin') return true;
+    if (this.commonService.getRole() == 'admin') return true;
     else return false;
   }
 

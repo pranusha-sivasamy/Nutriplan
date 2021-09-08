@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate
-} from '@angular/router';
+import { CanActivate } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HasRoleGuard implements CanActivate {
+  constructor(private commonService: CommonService) {}
   canActivate() {
-    if (localStorage.getItem('role') == 'admin') return true;
+    if (this.commonService.getRole() == 'admin') return true;
     else return false;
   }
 }

@@ -14,7 +14,6 @@ export class FoodComponent implements OnInit {
 
   async ngOnInit() {
     this.food = await this.taskService.getAllFood();
-    console.log(this.food);
   }
 
   onCreateNewFood() {
@@ -40,12 +39,10 @@ export class FoodComponent implements OnInit {
 
   async deleteFood(food: string) {
     const result = await this.taskService.deleteFood(food);
-    console.log(result);
     this.food = await this.taskService.getAllFood();
   }
 
   async onSearch(food: string) {
     this.food = await this.taskService.searchFood(food);
-    console.log(this.food);
   }
 }

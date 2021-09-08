@@ -1,11 +1,15 @@
 .action {
   margin: 10px;
-  /* width: 30px;
-    height: 30px; */
   border-radius: 15%;
 }
 h6 {
-  color: #841f96;
+  color: rgb(5, 102, 5);
+}
+.outer {
+  background-color: white;
+  border-radius: 2%;
+  padding: 20px;
+  box-shadow: 2px 2px 2px 2px rgb(96, 165, 96);
 }
 .button-icon {
   border: 2px solid green;
@@ -54,5 +58,31 @@ h6 {
 }
 .form-control:focus {
   box-shadow: none;
-  border-color: #ba68c8;
+  border-color: green;
+}
+.search-style {
+  margin-left: 50px;
+  padding: 3px;
+}
+.save-button {
+  background: green;
+  box-shadow: none;
+  border: none;
+  color: white;
+  margin-right: 20px;
+}
+
+.save-button:hover {
+  background: rgb(54, 145, 54);
+}
+
+.save-button:focus {
+  background: green;
+  box-shadow: none;
+}
+
+.save-button:active {
+  background: green;
+  border: 1px solid white;
+  box-shadow: none;
 }

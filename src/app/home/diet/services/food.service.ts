@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,36 +9,40 @@ export class FoodService {
   constructor(private http: HttpClient) {}
 
   getAllFood() {
-    return this.http.get(`http://localhost:8080/food/getAllFood`);
+    return this.http.get(
+      `${environment.baseUrl}/${environment.foodPath}/getAllFood`
+    );
   }
 
   getFood(username: string, date: string, type: string) {
     return this.http.get(
-      `http://localhost:8080/dailyUpdate/getFood?username=${username}&date=${date}&type=${type}`
+      `${environment.baseUrl}/${environment.dailyDataPath}/getFood?username=${username}&date=${date}&type=${type}`
     );
   }
 
   getFoodDetails(name: string) {
-    return this.http.get(`http://localhost:8080/food/getFood?itemName=${name}`);
+    return this.http.get(
+      `${environment.baseUrl}/${environment.foodPath}/getFood?itemName=${name}`
+    );
   }
 
   searchFood(food: string) {
     return this.http.get(
-      `http://localhost:8080/food/searchFood?itemName=${food}`
+      `${environment.baseUrl}/${environment.foodPath}/searchFood?itemName=${food}`
     );
   }
 
-  addIntakeCalories(username: string, data: object) {
+  addIntakeCalories(username: string, data: any) {
     return this.http.put(
-      `http://localhost:8080/dailyUpdate/updateIntake?username=${username}`,
+      `${environment.baseUrl}/${environment.dailyDataPath}/updateIntake?username=${username}`,
       data,
       { responseType: 'text' }
     );
   }
 
-  generateFoodPlan(data: object) {
+  generateFoodPlan(data: any) {
     return this.http.post(
-      `http://localhost:8080/dailyUpdate/addFoodPlan`,
+      `${environment.baseUrl}/${environment.dailyDataPath}/addFoodPlan`,
       data,
       { responseType: 'text' }
     );
@@ -45,29 +50,35 @@ export class FoodService {
 
   getAllottedCalorie(username: string, date: string, type: string) {
     return this.http.get(
-      `http://localhost:8080/dailyUpdate/getFood?username=${username}&date=${date}&type=${type}`
+      `${environment.baseUrl}/${environment.dailyDataPath}/getFood?username=${username}&date=${date}&type=${type}`
     );
   }
 
   getIntakeCalorie(username: string, date: string, type: string) {
     return this.http.get(
-      `http://localhost:8080/dailyUpdate/currentIntake?username=${username}&date=${date}&type=${type}`
+      `${environment.baseUrl}/${environment.dailyDataPath}/currentIntake?username=${username}&date=${date}&type=${type}`
     );
   }
 
-  addNewFood(data: object) {
-    return this.http.post(`http://localhost:8080/food/addFood`, data, {
-      responseType: 'text',
-    });
+  addNewFood(data: any) {
+    return this.http.post(
+      `${environment.baseUrl}/${environment.foodPath}/addFood`,
+      data,
+      {
+        responseType: 'text',
+      }
+    );
   }
 
   getAllCombo() {
-    return this.http.get(`http://localhost:8080/food/getAllCombo`);
+    return this.http.get(
+      `${environment.baseUrl}/${environment.foodPath}/getAllCombo`
+    );
   }
 
-  updateFood(id: string, data: object) {
+  updateFood(id: string, data: any) {
     return this.http.put(
-      `http://localhost:8080/food/updateFood?id=${id}`,
+      `${environment.baseUrl}/${environment.foodPath}/updateFood?id=${id}`,
       data,
       { responseType: 'text' }
     );
@@ -75,20 +86,20 @@ export class FoodService {
 
   deleteFood(food: string) {
     return this.http.delete(
-      `http://localhost:8080/food/deleteFood?itemName=${food}`,
+      `${environment.baseUrl}/${environment.foodPath}/deleteFood?itemName=${food}`,
       { responseType: 'text' }
     );
   }
 
   getIntakeFood(username: string, type: string, date: string) {
     return this.http.get(
-      `http://localhost:8080/dailyUpdate/getIntakeFood?username=${username}&type=${type}&date=${date}`
+      `${environment.baseUrl}/${environment.dailyDataPath}/getIntakeFood?username=${username}&type=${type}&date=${date}`
     );
   }
 
-  removeIntakeFood(username: string, data: object) {
+  removeIntakeFood(username: string, data: any) {
     return this.http.put(
-      `http://localhost:8080/dailyUpdate/removeIntake?username=${username}`,
+      `${environment.baseUrl}/${environment.dailyDataPath}/removeIntake?username=${username}`,
       data,
       { responseType: 'text' }
     );

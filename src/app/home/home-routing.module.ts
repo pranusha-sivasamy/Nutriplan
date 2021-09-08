@@ -32,7 +32,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./diet/diet.module').then((m) => m.DietModule),
       },
-      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+      { path: '', pathMatch: 'full', redirectTo: 'diet' },
     ],
   },
   // { path: '', pathMatch: 'full', redirectTo: 'home' },

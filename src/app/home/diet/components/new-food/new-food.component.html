@@ -20,21 +20,29 @@
         [formGroup]="newFood"
         (ngSubmit)="addNewFood()"
       >
-        <div class="row mb-2">
+        <div class="row">
           <label class="col-4">Item-name</label>
           <input class="form-control col-8" formControlName="itemName" value="{{getValue.itemName}}" />
         </div>
-        <div
-          *ngIf="
-            getControl.itemName.invalid &&
-            (getControl.itemName.touched || getControl.itemName.dirty)
-          "
-        >
-          <div *ngIf="getControl.itemName.errors?.required" class="invalid">
-            <p>*Item-name is required!</p>
-          </div>
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.itemName.invalid &&
+                (getControl.itemName.touched || getControl.itemName.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.itemName.errors?.required"
+              >*Item-name required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
         </div>
-        <div class="row mb-2">
+
+        <div class="row">
           <label class="col-4">Quantity</label>
           <input
             type="number"
@@ -43,46 +51,72 @@
             value="{{getValue.quantity}}"
           />
         </div>
-        <div
-          *ngIf="
-            getControl.quantity.invalid &&
-            (getControl.quantity.touched || getControl.quantity.dirty)
-          "
-        >
-          <div *ngIf="getControl.quantity.errors?.required" class="invalid">
-            <p>*Quantity is required!</p>
-          </div>
+
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.quantity.invalid &&
+                (getControl.quantity.touched || getControl.quantity.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.quantity.errors?.required"
+              >*Quantity required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
         </div>
-        <div class="row mb-2">
+
+        <div class="row">
           <label class="col-4">Unit</label>
           <input class="form-control col-8" formControlName="unit" value="{{getValue.unit}}"/>
         </div>
-        <div
-          *ngIf="
-            getControl.unit.invalid &&
-            (getControl.unit.touched || getControl.unit.dirty)
-          "
-        >
-          <div *ngIf="getControl.unit.errors?.required" class="invalid">
-            <p>*Unit is required!</p>
-          </div>
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.unit.invalid &&
+                (getControl.unit.touched || getControl.unit.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.unit.errors?.required"
+              >*Unit required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
         </div>
-        <div class="row mb-2">
+
+        <div class="row">
           <label class="col-4">Calorie</label>
           <input type="number" class="form-control col-8" formControlName="calorie" value="{{getValue.calorie}}"/>
         </div>
-        <div
-          *ngIf="
-            getControl.calorie.invalid &&
-            (getControl.calorie.touched || getControl.calorie.dirty)
-          "
-        >
-          <div *ngIf="getControl.calorie.errors?.required" class="invalid">
-            <p>*Calorie is required!</p>
-          </div>
+
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
+              getControl.calorie.invalid &&
+                (getControl.calorie.touched || getControl.calorie.dirty);
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.calorie.errors?.required"
+              >*Calorie required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
         </div>
-        <div class="col-12 mb-2">
-          <label style="margin-right: 150px">Type</label>
+
+        <div class="col-12" style="height: 23px;">
+          <label style="margin-right: 129px;">Type</label>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"
@@ -111,24 +145,34 @@
             <label class="form-check-label">Dinner</label>
           </div>
         </div>
-        <div
-          class="invalid"
-          *ngIf="
+
+
+        <div class="invalid">
+          <ng-container
+            *ngIf="
             (getControl.breakfast.touched ||
-              getControl.breakfast.dirty ||
-              getControl.lunch.touched ||
-              getControl.lunch.dirty ||
-              getControl.dinner.touched ||
-              getControl.dinner.dirty) &&
-            !newFood.value.breakfast &&
-            !newFood.value.lunch &&
-            !newFood.value.dinner
-          "
-        >
-          <p>*Food Type is required!</p>
+            getControl.breakfast.dirty ||
+            getControl.lunch.touched ||
+            getControl.lunch.dirty ||
+            getControl.dinner.touched ||
+            getControl.dinner.dirty) &&
+          !newFood.value.breakfast &&
+          !newFood.value.lunch &&
+          !newFood.value.dinner;
+              else elseblk
+            "
+          >
+            <span *ngIf="getControl.calorie.errors?.required"
+              >*Food Type required!</span
+            >
+          </ng-container>
+          <ng-template #elseblk>
+            <span>&nbsp;</span>
+          </ng-template>
         </div>
+
         <div class="col-12 mb-2">
-          <label style="margin-right: 150px">Kind</label>
+          <label style="margin-right: 129px;">Kind</label>
           <div class="form-check form-check-inline">
             <input
               class="form-check-input"

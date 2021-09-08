@@ -1,5 +1,3 @@
-export interface UserActivity {}
-
 export enum ActivityState {
   NO_ACTIVITY = 'No Activity',
   LIGHTLY_ACTIVE = 'Lightly active',

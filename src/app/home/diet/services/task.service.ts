@@ -27,7 +27,7 @@ export class TaskService {
     return this.foodService.searchFood(food).toPromise();
   }
 
-  addIntakeCalories(username: string, data: object) {
+  addIntakeCalories(username: string, data: any) {
     return this.foodService.addIntakeCalories(username, data).toPromise();
   }
 
@@ -60,12 +60,10 @@ export class TaskService {
       calorie: calorie,
       combo: combo,
     };
-    console.log('inside task ');
-
     return this.foodService.addNewFood(data).toPromise();
   }
 
-  updateFood(id: string, data: object) {
+  updateFood(id: string, data: any) {
     return this.foodService.updateFood(id, data).toPromise();
   }
 
@@ -77,7 +75,7 @@ export class TaskService {
     return this.foodService.getIntakeFood(username, type, date).toPromise();
   }
 
-  removeIntakeFood(username: string, data: object) {
+  removeIntakeFood(username: string, data: any) {
     return this.foodService.removeIntakeFood(username, data).toPromise();
   }
 }

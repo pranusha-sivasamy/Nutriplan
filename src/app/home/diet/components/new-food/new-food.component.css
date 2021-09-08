@@ -1,18 +1,27 @@
 .invalid {
   color: red;
+  font-size: 14px;
+  padding: 0px;
 }
 label {
   color: grey;
+  padding-top: 10px;
 }
 .form-control:focus {
   box-shadow: none;
-  border-color: #ba68c8;
+  border-color: rgb(42, 151, 42);
 }
 .form-control.ng-touched.ng-invalid {
   border-color: red;
 }
+.form-check-input[type=checkbox] {
+  margin-top: 14px;
+}
+.form-check-input[type=radio] {
+  margin-top: 14px;
+}
 .card-header {
-  background-color: #841f96;
+  background-color: green;
   color: white;
   font-weight: bold;
   font-family: sans-serif;
@@ -22,50 +31,53 @@ label {
   border-left: none;
   border-right: none;
   border-radius: 0%;
-  height: 40px;
+  height: 30px;
   width: max-content;
 }
 .close-button-icon {
-  border: 1px solid #841f96;
+  border: 1px solid green;
   background-color: white;
   border-radius: 5px;
   padding-top: 0%;
   float: right;
 }
 .close-button-icon:hover {
-  background-color: #841f96;
+  background-color: green;
   border: 1px solid white;
 }
 .close-button-icon:hover .close-icon {
   color: white;
 }
 .close-icon {
-  color: #841f96;
+  color: green;
 }
 .close-icon:hover {
   color: white;
 }
 .save-button {
-  background: #841f96;
+  background: green;
   box-shadow: none;
   border: none;
   color: white;
 }
 
 .save-button:hover {
-  background: #ae58bd;
+  background: rgb(42, 148, 42);
 }
 
 .save-button:focus {
-  background: #841f96;
+  background: green;
   box-shadow: none;
 }
 .save-button:disabled {
-  background: #a44fb3;
+  background: rgb(33, 134, 33);
   box-shadow: none;
 }
 .save-button:active {
-  background: #841f96;
+  background: green;
   border: 1px solid white;
   box-shadow: none;
+}
+.row{
+  height: 25px;
 }

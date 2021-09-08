@@ -1,3 +1,135 @@
-.bStyle{
-    margin: 10px;
+.form-control:focus {
+  box-shadow: none;
+  border-color: rgb(26, 136, 26);
+}
+.form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0%;
+  height: 30px;
+  width: max-content;
+}
+.side-crop {
+  overflow: hidden;
+}
+.side-crop img {
+  margin: 0 -6.885%;
+  width: 137.777%;
+}
+.row {
+  --bs-gutter-x: 0;
+  background-color: white;
+}
+.check-input {
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+}
+input:read-only {
+  background-color: white;
+}
+.card-header {
+  background-color: white;
+  color: green;
+  font-weight: bold;
+  font-family: sans-serif;
+  height: 50px;
+  padding-top: 15px;
+  filter: saturate(120%);
+}
+.save-button {
+  background: rgb(10, 138, 10);
+  box-shadow: none;
+  border: none;
+  color: white;
+  filter: saturate(120%);
+  width: 358px;
+  margin-left: 12px;
+}
+
+.save-button:disabled {
+  background: rgb(58, 170, 58);
+  box-shadow: none;
+  border: none;
+  color: white;
+  filter: saturate(120%);
+}
+
+.save-button:hover {
+  background: rgb(26, 136, 26);
+}
+
+.save-button:focus {
+  background: rgb(26, 136, 26);
+  box-shadow: none;
+}
+
+.save-button:active {
+  background: rgb(26, 136, 26);
+  border: 1px solid white;
+  box-shadow: none;
+}
+.invalid {
+  color: red;
+  margin-left: 12px;
+  font-size: 13px;
+  margin-top: 9px;
+}
+label {
+  padding-top: 10px;
+  color: grey;
+  margin-left: 12px;
+  background-color: white;
+}
+.container {
+  width: 37%;
+  padding: 10px;
+  margin-top: 100px;
+  background-color: white;
+  border-radius: 15px;
+}
+p {
+  margin-top: 18px;
+  font-size: 14px;
+  color: rgb(131, 130, 130);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+a {
+  text-decoration: none;
+  color: green;
+  filter: saturate(120%);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.content {
+  background-color: moccasin;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: rgba(15, 13, 13, 0.6);
+  background-blend-mode: darken;
+  background-image: url("https://c0.wallpaperflare.com/preview/906/427/616/meal-healthy-eating-health-minimal.jpg");
+}
+.inner-content {
+  padding-top: 75px;
+  padding-bottom: 59px;
+  padding-left: 160px;
+  padding-right: 160px;
+}
+input {
+  font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+h6 {
+  color: darkgray;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 15px;
 }

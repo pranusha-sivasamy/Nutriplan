@@ -1,93 +1,99 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
 import { TaskService } from '../../services/task.service';
-import { UserActivityComponent } from '../user-activity/user-activity.component';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
 })
-export class DetailComponent {
-  public userDetails: FormGroup;
-
+export class DetailComponent implements OnInit {
   constructor(
     private taskService: TaskService,
-    private fb: FormBuilder,
-    private dialog: MatDialog
-  ) {
-    this.userDetails = this.fb.group({
-      heightUnit: new FormControl('cm'),
-    });
-    this.initializeForm();
-  }
+    private commonService: CommonService,
+    private fb: FormBuilder
+  ) {}
 
   username: string = '';
-  userData: object = {};
-  keys: any[] = [];
-  values: any[] = [];
-  toggleButton = true;
+  user: any;
+  range: any;
 
-  async initializeForm() {
-    const user = localStorage.getItem('username');
-    if (typeof user == 'string') {
-      this.username = user;
-      await this.getUserDetails(user);
+  async ngOnInit() {
+    const username = this.commonService.getUsername();
+    if (typeof username == 'string') {
+      this.username = username;
+      this.user = await this.taskService.getUserDetails(username);
+      this.showDetails();
     }
   }
 
-  async getUserDetails(username: string) {
-    this.userData = await this.taskService.getUserDetails(username);
-    this.keys = Object.keys(this.userData);
-    this.values = Object.values(this.userData);
-    for (let i in this.keys) {
-      console.log(`key : ${this.keys[i]}; value : ${this.values[i]}`);
+  userData = this.fb.group({
+    username: [''],
+    email: [''],
+    gender: ['', [Validators.required]],
+    age: ['', [Validators.required]],
+    height: ['', [Validators.required]],
+    weight: ['', [Validators.required]],
+    activity: ['', [Validators.required]],
+    BMI: [''],
+    BMR: [''],
+    status: [''],
+    aptWeight: [''],
+    currentCalorie: [''],
+    goalPerWeek: [''],
+    dailyCalorie: [''],
+  });
 
-      this.userDetails.addControl(
-        this.keys[i],
-        new FormControl(this.values[i])
-      );
-    }
-    //  this.taskService.getUserDetails(username).then((res) => {
-    //   this.userData = res;
-    //   this.keys = Object.keys(this.userData);
-    //   this.values = Object.values(this.userData);
-    //   for (let i in this.keys) {
-    //     console.log(`key : ${this.keys[i]}; value : ${this.values[i]}`);
-
-    //     this.userDetails.addControl(
-    //       this.keys[i],
-    //       new FormControl(this.values[i])
-    //     );
-    //   }
-    //   // console.log('form : ', this.userDetails.value);
-    //   // console.log('user data : ', this.userData);
-    // });
+  changeRange() {
+    this.range = this.userData.value.goalPerWeek;
   }
 
-  heightUnitChange(unit: string) {
-    this.toggleButton = !this.toggleButton;
-    this.userDetails.value.heightUnit = unit;
+  showDetails() {
+    this.userData.setValue({
+      username: this.user.username,
+      email: this.user.email,
+      gender: this.user.gender,
+      age: this.user.age,
+      height: this.user.height,
+      weight: this.user.weight,
+      activity: this.user.activityState,
+      BMI: this.user.BMI,
+      BMR: this.user.BMR,
+      status: this.user.status,
+      aptWeight: this.user.aptWeight,
+      currentCalorie: this.user.currentCalorie,
+      goalPerWeek: this.user.goalPerWeek,
+      dailyCalorie: this.user.dailyCalorie,
+    });
   }
 
-  onEditActivity() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = '30%';
-    dialogConfig.height = '75%';
-    this.dialog
-      .open(UserActivityComponent, dialogConfig)
-      .afterClosed()
-      .subscribe((res) => {
-        console.log(`result from dialog : ${res}`);
-        this.userDetails.value.activityState = res;
-      });
+  async saveChanges() {
+    const data = {
+      age: this.userData.value.age,
+      gender: this.userData.value.gender,
+      height: this.userData.value.height,
+      weight: this.userData.value.weight,
+      activityState: this.userData.value.activity,
+    };
+    const firstUpdateResult = await this.taskService.updateUserDetails(
+      this.username,
+      data
+    );
+    const secondUpdateResult = await this.taskService.updateGoal(
+      this.username,
+      this.userData.value.goalPerWeek
+    );
+
+    this.user = await this.taskService.getUserDetails(this.username);
+    this.showDetails();
   }
 
   get getValue() {
-    const val = this.userDetails.value;
-    // console.log('val : ', val);
-    return val;
+    return this.userData.value;
+  }
+
+  get getControl() {
+    return this.userData.controls;
   }
 }

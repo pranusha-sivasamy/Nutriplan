@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -7,9 +8,9 @@ import { Injectable } from '@angular/core';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  updateUserDetails(username: string, data: Object) {
+  updateUserDetails(username: string, data: any) {
     return this.http.put(
-      `http://localhost:8080/user/updateUserDetails?username=${username}`,
+      `${environment.baseUrl}/${environment.userPath}/updateUserDetails?username=${username}`,
       data,
       {
         responseType: 'text',
@@ -19,35 +20,39 @@ export class UserService {
 
   getUserDetails(username: string) {
     return this.http.get(
-      `http://localhost:8080/user/getUserDetails?username=${username}`
+      `${environment.baseUrl}/${environment.userPath}/getUserDetails?username=${username}`
     );
   }
 
   getAptWeight(username: string) {
     return this.http.get(
-      `http://localhost:8080/user/getAptWeight?username=${username}`
+      `${environment.baseUrl}/${environment.userPath}/getAptWeight?username=${username}`
     );
   }
 
-  updateGoal(data: object) {
-    return this.http.put(`http://localhost:8080/user/updateGoal`, data, {
-      responseType: 'text',
-    });
+  updateGoal(username: string, data: any) {
+    return this.http.put(
+      `${environment.baseUrl}/${environment.userPath}/updateGoal?username=${username}`,
+      data,
+      {
+        responseType: 'text',
+      }
+    );
   }
 
   getAllUser() {
-    return this.http.get(`http://localhost:8080/user/getAllUser`);
+    return this.http.get(`${environment.baseUrl}/${environment.userPath}/getAllUser`);
   }
 
   findUser(username: string) {
     return this.http.get(
-      `http://localhost:8080/user/findUser?username=${username}`
+      `${environment.baseUrl}/${environment.userPath}/findUser?username=${username}`
     );
   }
 
-  updateRole(username: string, data: object) {
+  updateRole(username: string, data: any) {
     return this.http.put(
-      `http://localhost:8080/user/updateRole?username=${username}`,
+      `${environment.baseUrl}/${environment.userPath}/updateRole?username=${username}`,
       data,
       { responseType: 'text' }
     );
@@ -55,7 +60,7 @@ export class UserService {
 
   deleteUser(username: string) {
     return this.http.delete(
-      `http://localhost:8080/user/deleteUser?username=${username}`,
+      `${environment.baseUrl}/${environment.userPath}/deleteUser?username=${username}`,
       { responseType: 'text' }
     );
   }

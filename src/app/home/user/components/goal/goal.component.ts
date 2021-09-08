@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class GoalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private taskService: TaskService,
+    private commonService: CommonService,
     private router: Router
   ) {}
 
@@ -26,7 +28,7 @@ export class GoalComponent implements OnInit {
   weeks: number = 0;
 
   async ngOnInit(): Promise<void> {
-    const username = localStorage.getItem('username');
+    const username = this.commonService.getUsername();
     if (typeof username == 'string') {
       const weight = await this.taskService.getUserAptWeight(username);
       const value = Object.values(weight);
@@ -34,7 +36,7 @@ export class GoalComponent implements OnInit {
       this.weight = value[1];
       this.BMI = value[2];
       this.status = value[3];
-      // console.log(this.aptWeight);
+      this.onChange();
     }
   }
 
@@ -47,13 +49,13 @@ export class GoalComponent implements OnInit {
   }
 
   async updateGoal() {
-    const username = localStorage.getItem('username');
+    const username = this.commonService.getUsername();
     if (typeof username == 'string') {
       const result = await this.taskService.updateGoal(
         username,
         this.userGoal.value.goalPerWeek
       );
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/diet/calorie-counter']);
     }
   }
 }

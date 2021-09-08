@@ -1,22 +1,32 @@
 h2 {
-  color: #682773;
+  color: green;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 a {
-  background: rgb(99, 39, 120);
+  background: green;
   box-shadow: none;
   border: none;
+  color: white;
 }
 
 a:hover {
-  background: #7f2d8d;
+  background: rgb(60, 163, 60);
+  color: white;
 }
 
 a:focus {
-  background: #682773;
+  background: green;
   box-shadow: none;
+  color: white;
 }
 
 a:active {
-  background: #682773;
+  background: green;
   box-shadow: none;
+  color: white;
+}
+
+.card {
+  border: none;
+  box-shadow: 2px 2px 2px 2px rgb(235, 183, 116);
 }

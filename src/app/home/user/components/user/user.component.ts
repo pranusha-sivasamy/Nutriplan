@@ -20,8 +20,8 @@ export class UserComponent implements OnInit {
   username: any;
 
   userData = this.fb.group({
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required]],
+    username: [''],
+    email: [''],
     gender: ['', [Validators.required]],
     age: ['', [Validators.required]],
     height: ['', [Validators.required]],
@@ -66,8 +66,6 @@ export class UserComponent implements OnInit {
   }
 
   async saveChanges() {
-    console.log('clicked save');
-
     const data = {
       age: this.userData.value.age,
       gender: this.userData.value.gender,
@@ -96,5 +94,11 @@ export class UserComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  addUser() {}
+  get getControl() {
+    return this.userData.controls;
+  }
+
+  get getValue() {
+    return this.userData.value;
+  }
 }

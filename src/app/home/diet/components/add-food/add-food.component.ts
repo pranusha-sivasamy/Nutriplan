@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 import { TaskService } from '../../services/task.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { TaskService } from '../../services/task.service';
 export class AddFoodComponent implements OnInit {
   constructor(
     private taskService: TaskService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private commonService: CommonService
   ) {}
 
   food: any;
@@ -20,17 +22,19 @@ export class AddFoodComponent implements OnInit {
   searchFoodResult: any;
   selectedFood: any;
   username!: string;
+  searchedFood: any;
+  foodExist = false;
+  selectedFoodExist = false;
 
   ngOnInit() {
     this.router.queryParams.subscribe((params) => {
       this.type = params['type'];
-      console.log(this.type);
     });
     this.getFood();
   }
 
   async getFood() {
-    const username = localStorage.getItem('username');
+    const username = this.commonService.getUsername();
     const date = Date.now();
     const today = new Date(date).toUTCString().split(' ');
     const finalDate = today[1] + ' ' + today[2] + ' ' + today[3];
@@ -42,12 +46,15 @@ export class AddFoodComponent implements OnInit {
         finalDate,
         this.type
       );
+      this.foodExist = true;
       this.selectedFood = await this.taskService.getIntakeFood(
         username,
         this.type,
         finalDate
       );
-      console.log(this.food);
+      if (this.selectedFood[0].intakeFood.length != 0) {
+        this.selectedFoodExist = true;
+      }
     }
   }
 
@@ -56,6 +63,7 @@ export class AddFoodComponent implements OnInit {
   }
 
   async onSearch(food: string) {
+    this.searchedFood = food;
     this.searchFoodResult = await this.taskService.searchFood(food);
   }
 
@@ -76,7 +84,7 @@ export class AddFoodComponent implements OnInit {
       this.type,
       this.date
     );
-    console.log(this.selectedFood);
+    this.getFood();
   }
 
   async removeIntake(food: string, quantity: string) {

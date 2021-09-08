@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'calorie-counter', component: CalorieCounterComponent },
       { path: 'addFood', component: AddFoodComponent },
       { path: 'newFood', component: NewFoodComponent },
+      { path: '', pathMatch: 'full', redirectTo: 'calorie-counter' },
     ],
   },
 ];
