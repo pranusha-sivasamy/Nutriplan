@@ -23,8 +23,8 @@ export class DashboardComponent implements OnInit {
   date: any;
   chart: any;
   today: any;
-  style = {};
   valueExist = true;
+  myStyles: any;
 
   inputDate = this.fb.group({
     date: [''],
@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
 
   setDate() {
     this.chart.destroy();
+    this.myStyles = { display: 'block' };
     this.breakfast = [];
     this.lunch = [];
     this.dinner = [];
@@ -57,7 +58,7 @@ export class DashboardComponent implements OnInit {
       const data = await this.taskService.getDailyData(username, this.date);
       if (data.length != 0) {
         this.valueExist = true;
-        this.style = {};
+        this.myStyles = { display: 'block' };
         this.breakfast.push(data[0].allottedCalorie);
         this.breakfast.push(data[0].calorieIntake);
         this.lunch.push(data[1].allottedCalorie);
@@ -67,7 +68,7 @@ export class DashboardComponent implements OnInit {
         this.buildChart();
       } else {
         this.valueExist = false;
-        this.style = { display: 'none' };
+        this.myStyles = { display: 'none' };
       }
     }
   }

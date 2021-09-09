@@ -33,7 +33,7 @@ input[type="date"] {
 }
 .message {
   margin-top: 337px;
-  margin-left: 300px;
+  margin-left: 280px;
   color: #ff8100;
 }
 
@@ -44,4 +44,8 @@ input[type="date"] {
 
 p {
   font-size: 20px;
+}
+
+.hide {
+  display: none;
 }
