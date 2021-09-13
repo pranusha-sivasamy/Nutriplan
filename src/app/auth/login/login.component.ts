@@ -28,7 +28,7 @@ export class LoginComponent {
   }
 
   async onLogin() {
-    const result = await this.validatorService.loginCheck(
+    const result: any = await this.validatorService.loginCheck(
       this.userlogin.value.username,
       this.userlogin.value.password
     );
@@ -40,8 +40,18 @@ export class LoginComponent {
         this.userlogin.value.username
       );
       this.role = res;
-      this.validatorService.onLogin(this.userlogin.value.username, this.role,result);
-      this.router.navigate(['/home']);
+      this.validatorService.onLogin(
+        this.userlogin.value.username,
+        this.role,
+        result.result
+      );
+      if (result.hasDetail) {
+        if (!result.hasGoal) {
+          this.router.navigate(['/home/user/goal']);
+        } else this.router.navigate(['/home']);
+      } else {
+        this.router.navigate(['/home/user/details']);
+      }
     }
   }
 

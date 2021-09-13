@@ -11,9 +11,15 @@ import { NewFoodComponent } from 'src/app/home/diet/components/new-food/new-food
 export class FoodComponent implements OnInit {
   constructor(private taskService: TaskService, private dialog: MatDialog) {}
   food: any;
+  myStyle: any;
 
   async ngOnInit() {
     this.food = await this.taskService.getAllFood();
+    let height = (this.food.length * 46 + 100).toString() + 'px';
+    if (this.food.length * 50 + 100 < 553) {
+      height = '553px';
+    }
+    this.myStyle = { height: height };
   }
 
   onCreateNewFood() {

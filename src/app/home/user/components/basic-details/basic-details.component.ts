@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CanComponentLeave } from 'src/app/auth/interfaces/can-component-leave';
+import { CanComponentLeave } from 'src/app/auth/guards/unsaved-changes.guard';
 import { CommonService } from 'src/app/services/common.service';
 import { TaskService } from '../../services/task.service';
 
@@ -49,11 +49,11 @@ export class BasicDetailsComponent implements CanComponentLeave {
   }
 
   canLeave() {
-    if (this.getControl.username.dirty || this.getControl.password.dirty) {
-      return window.confirm(
-        'You have some unsaved changes.Are you sure you want to leave?'
-      );
+    if (this.details.valid) {
+      return true;
+    } else {
+      window.confirm('Your basic details is required!');
+      return false;
     }
-    return true;
   }
 }

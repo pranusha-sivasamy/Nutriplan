@@ -20,8 +20,7 @@ export class UserService {
 
   checkUser(username: string, password: string) {
     return this.http.get(
-      `${environment.baseUrl}/${environment.userPath}/checkUser?username=${username}&password=${password}`,
-      { responseType: 'text' }
+      `${environment.baseUrl}/${environment.userPath}/checkUser?username=${username}&password=${password}`
     );
   }
 

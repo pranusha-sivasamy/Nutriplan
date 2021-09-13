@@ -60,9 +60,16 @@ export class NewFoodComponent implements OnInit {
 
   async addNewFood() {
     let type = [];
+    let combo = [];
     if (this.getValue.breakfast) type.push('breakfast');
+
     if (this.getValue.lunch) type.push('lunch');
+
     if (this.getValue.dinner) type.push('dinner');
+
+    if (this.getValue.kind == 'side' || this.getValue.kind == 'part') {
+      combo.push(this.getValue.combo);
+    }
     const result = await this.taskService.addNewFood(
       this.getValue.itemName,
       this.getValue.quantity,
@@ -70,8 +77,10 @@ export class NewFoodComponent implements OnInit {
       type,
       this.getValue.kind,
       this.getValue.calorie,
-      this.getValue.combo
+      combo
     );
+    console.log(result);
+
     this.newFood.reset();
     this.dialogRef.close();
   }

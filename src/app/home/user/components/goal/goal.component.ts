@@ -26,6 +26,7 @@ export class GoalComponent implements OnInit {
   BMI: number = 0;
   status: string = '';
   weeks: number = 0;
+  submitted: any;
 
   async ngOnInit(): Promise<void> {
     const username = this.commonService.getUsername();
@@ -49,6 +50,7 @@ export class GoalComponent implements OnInit {
   }
 
   async updateGoal() {
+    this.submitted = true;
     const username = this.commonService.getUsername();
     if (typeof username == 'string') {
       const result = await this.taskService.updateGoal(
@@ -56,6 +58,15 @@ export class GoalComponent implements OnInit {
         this.userGoal.value.goalPerWeek
       );
       this.router.navigate(['/diet/calorie-counter']);
+    }
+  }
+
+  canLeave() {
+    if (this.submitted) {
+      return true;
+    } else {
+      window.confirm('Your goal should be choosed!!');
+      return false;
     }
   }
 }

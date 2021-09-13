@@ -35,7 +35,6 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'diet' },
     ],
   },
-  // { path: '', pathMatch: 'full', redirectTo: 'home' },
 ];
 
 @NgModule({

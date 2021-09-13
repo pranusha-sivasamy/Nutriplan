@@ -24,24 +24,16 @@ export class CalorieCounterComponent implements OnInit {
   async ngOnInit() {
     const username = this.commonService.getUsername();
 
+    const date = Date.now();
+    const today = new Date(date).toUTCString().split(' ');
+    const finalDate = today[1] + ' ' + today[2] + ' ' + today[3];
+    this.date = finalDate;
+
     if (typeof username == 'string') {
       const breakfastResult = await this.taskService.generateFoodPlan(
         username,
         'breakfast'
       );
-      const lunchResult = await this.taskService.generateFoodPlan(
-        username,
-        'lunch'
-      );
-      const dinnerResult = await this.taskService.generateFoodPlan(
-        username,
-        'dinner'
-      );
-
-      const date = Date.now();
-      const today = new Date(date).toUTCString().split(' ');
-      const finalDate = today[1] + ' ' + today[2] + ' ' + today[3];
-      this.date = finalDate;
 
       const breakfast = await this.taskService.getAllottedCalorie(
         username,
@@ -52,6 +44,11 @@ export class CalorieCounterComponent implements OnInit {
       this.breakFastCalorie = value[2];
       this.breakfastIntake = value[1];
 
+      const lunchResult = await this.taskService.generateFoodPlan(
+        username,
+        'lunch'
+      );
+
       const lunch = await this.taskService.getAllottedCalorie(
         username,
         this.date,
@@ -60,6 +57,11 @@ export class CalorieCounterComponent implements OnInit {
       value = Object.values(lunch);
       this.lunchCalorie = value[2];
       this.lunchIntake = value[1];
+
+      const dinnerResult = await this.taskService.generateFoodPlan(
+        username,
+        'dinner'
+      );
 
       const dinner = await this.taskService.getAllottedCalorie(
         username,

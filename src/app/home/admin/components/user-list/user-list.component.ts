@@ -10,11 +10,16 @@ import { UserComponent } from 'src/app/home/user/components/user/user.component'
 })
 export class UserListComponent implements OnInit {
   users: any;
-  constructor(private taskService: TaskService, private dialog: MatDialog) {
-  }
+  myStyle: any;
+  constructor(private taskService: TaskService, private dialog: MatDialog) {}
 
   async ngOnInit() {
     this.users = await this.taskService.getAllUser();
+    let height = (this.users.length * 50 + 100).toString() + 'px';
+    if (this.users.length * 50 + 100 < 553) {
+      height = '553px';
+    }
+    this.myStyle = { height: height };
   }
 
   async onSearch(user: string) {
