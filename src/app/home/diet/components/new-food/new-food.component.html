@@ -1,244 +1,259 @@
 <div class="row">
-    <div class="card-header">{{ data.title }}
-      <button type="button" class="close-button-icon" (click)="onClose()">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="12"
-          height="12"
-          fill="currentColor"
-          class="bi bi-x-lg close-icon"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"
-          />
-        </svg>
-      </button>
-    </div>
-    <div class="card-body">
-      <form
-        [formGroup]="newFood"
-        (ngSubmit)="addNewFood()"
+  <div class="card-header">
+    {{ data.title }}
+    <button type="button" class="close-button-icon" (click)="onClose()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        fill="currentColor"
+        class="bi bi-x-lg close-icon"
+        viewBox="0 0 16 16"
       >
-        <div class="row">
-          <label class="col-4">Item-name</label>
-          <input class="form-control col-8" formControlName="itemName" value="{{getValue.itemName}}" />
-        </div>
+        <path
+          d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"
+        />
+      </svg>
+    </button>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="newFood" (ngSubmit)="addNewFood()">
+      <div class="row">
+        <label class="col-4">Item-name</label>
+        <input
+          class="form-control col-8"
+          formControlName="itemName"
+          value="{{ getValue.itemName }}"
+        />
+      </div>
 
-        <div class="invalid">
-          <ng-container
-            *ngIf="
-              getControl.itemName.invalid &&
-                (getControl.itemName.touched || getControl.itemName.dirty);
-              else elseblk
-            "
+      <div class="invalid">
+        <ng-container
+          *ngIf="
+            getControl.itemName.invalid &&
+              (getControl.itemName.touched || getControl.itemName.dirty);
+            else elseblk
+          "
+        >
+          <span *ngIf="getControl.itemName.errors?.required"
+            >*Item-name required!</span
           >
-            <span *ngIf="getControl.itemName.errors?.required"
-              >*Item-name required!</span
-            >
-          </ng-container>
-          <ng-template #elseblk>
-            <span>&nbsp;</span>
-          </ng-template>
-        </div>
+        </ng-container>
+        <ng-template #elseblk>
+          <span>&nbsp;</span>
+        </ng-template>
+      </div>
 
-        <div class="row">
-          <label class="col-4">Quantity</label>
+      <div class="row">
+        <label class="col-4">Quantity</label>
+        <input
+          type="number"
+          class="form-control col-8"
+          formControlName="quantity"
+          value="{{ getValue.quantity }}"
+        />
+      </div>
+
+      <div class="invalid">
+        <ng-container
+          *ngIf="
+            getControl.quantity.invalid &&
+              (getControl.quantity.touched || getControl.quantity.dirty);
+            else elseblk
+          "
+        >
+          <span *ngIf="getControl.quantity.errors?.required"
+            >*Quantity required!</span
+          >
+        </ng-container>
+        <ng-template #elseblk>
+          <span>&nbsp;</span>
+        </ng-template>
+      </div>
+
+      <div class="row">
+        <label class="col-4">Unit</label>
+        <input
+          class="form-control col-8"
+          formControlName="unit"
+          value="{{ getValue.unit }}"
+        />
+      </div>
+
+      <div class="invalid">
+        <ng-container
+          *ngIf="
+            getControl.unit.invalid &&
+              (getControl.unit.touched || getControl.unit.dirty);
+            else elseblk
+          "
+        >
+          <span *ngIf="getControl.unit.errors?.required">*Unit required!</span>
+        </ng-container>
+        <ng-template #elseblk>
+          <span>&nbsp;</span>
+        </ng-template>
+      </div>
+
+      <div class="row">
+        <label class="col-4">Calorie</label>
+        <input
+          type="number"
+          class="form-control col-8"
+          formControlName="calorie"
+          value="{{ getValue.calorie }}"
+        />
+      </div>
+
+      <div class="invalid">
+        <ng-container
+          *ngIf="
+            getControl.calorie.invalid &&
+              (getControl.calorie.touched || getControl.calorie.dirty);
+            else elseblk
+          "
+        >
+          <span *ngIf="getControl.calorie.errors?.required"
+            >*Calorie required!</span
+          >
+        </ng-container>
+        <ng-template #elseblk>
+          <span>&nbsp;</span>
+        </ng-template>
+      </div>
+
+      <div class="col-12" style="height: 23px">
+        <label style="margin-right: 129px">Type</label>
+        <div class="form-check form-check-inline">
           <input
-            type="number"
-            class="form-control col-8"
-            formControlName="quantity"
-            value="{{getValue.quantity}}"
+            class="form-check-input"
+            type="checkbox"
+            value="true"
+            formControlName="breakfast"
           />
+          <label class="form-check-label">Breakfast</label>
         </div>
-
-
-        <div class="invalid">
-          <ng-container
-            *ngIf="
-              getControl.quantity.invalid &&
-                (getControl.quantity.touched || getControl.quantity.dirty);
-              else elseblk
-            "
-          >
-            <span *ngIf="getControl.quantity.errors?.required"
-              >*Quantity required!</span
-            >
-          </ng-container>
-          <ng-template #elseblk>
-            <span>&nbsp;</span>
-          </ng-template>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="true"
+            formControlName="lunch"
+          />
+          <label class="form-check-label">Lunch</label>
         </div>
-
-        <div class="row">
-          <label class="col-4">Unit</label>
-          <input class="form-control col-8" formControlName="unit" value="{{getValue.unit}}"/>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="true"
+            formControlName="dinner"
+          />
+          <label class="form-check-label">Dinner</label>
         </div>
+      </div>
 
-        <div class="invalid">
-          <ng-container
-            *ngIf="
-              getControl.unit.invalid &&
-                (getControl.unit.touched || getControl.unit.dirty);
-              else elseblk
-            "
-          >
-            <span *ngIf="getControl.unit.errors?.required"
-              >*Unit required!</span
-            >
-          </ng-container>
-          <ng-template #elseblk>
-            <span>&nbsp;</span>
-          </ng-template>
-        </div>
-
-        <div class="row">
-          <label class="col-4">Calorie</label>
-          <input type="number" class="form-control col-8" formControlName="calorie" value="{{getValue.calorie}}"/>
-        </div>
-
-
-        <div class="invalid">
-          <ng-container
-            *ngIf="
-              getControl.calorie.invalid &&
-                (getControl.calorie.touched || getControl.calorie.dirty);
-              else elseblk
-            "
-          >
-            <span *ngIf="getControl.calorie.errors?.required"
-              >*Calorie required!</span
-            >
-          </ng-container>
-          <ng-template #elseblk>
-            <span>&nbsp;</span>
-          </ng-template>
-        </div>
-
-        <div class="col-12" style="height: 23px;">
-          <label style="margin-right: 129px;">Type</label>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="true"
-              formControlName="breakfast"
-            />
-            <label class="form-check-label">Breakfast</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="true"
-              formControlName="lunch"
-            />
-            <label class="form-check-label">Lunch</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value="true"
-              formControlName="dinner"
-            />
-            <label class="form-check-label">Dinner</label>
-          </div>
-        </div>
-
-
-        <div class="invalid">
-          <ng-container
-            *ngIf="
+      <div class="invalid">
+        <ng-container
+          *ngIf="
             (getControl.breakfast.touched ||
-            getControl.breakfast.dirty ||
-            getControl.lunch.touched ||
-            getControl.lunch.dirty ||
-            getControl.dinner.touched ||
-            getControl.dinner.dirty) &&
-          !newFood.value.breakfast &&
-          !newFood.value.lunch &&
-          !newFood.value.dinner;
-              else elseblk
-            "
-          >
-            <span *ngIf="getControl.calorie.errors?.required"
-              >*Food Type required!</span
-            >
-          </ng-container>
-          <ng-template #elseblk>
-            <span>&nbsp;</span>
-          </ng-template>
-        </div>
+              getControl.breakfast.dirty ||
+              getControl.lunch.touched ||
+              getControl.lunch.dirty ||
+              getControl.dinner.touched ||
+              getControl.dinner.dirty) &&
+              !newFood.value.breakfast &&
+              !newFood.value.lunch &&
+              !newFood.value.dinner;
+            else elseblk
+          "
+        >
+          <span>*Food Type required!</span>
+        </ng-container>
+        <ng-template #elseblk>
+          <span>&nbsp;</span>
+        </ng-template>
+      </div>
 
-        <div class="col-12 mb-2">
-          <label style="margin-right: 129px;">Kind</label>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              formControlName="kind"
-              value="main"
-              (input)="addComboValidation()"
-            />
-            <label class="form-check-label">Main</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              formControlName="kind"
-              value="side"
-            />
-            <label class="form-check-label">Side</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="radio"
-              formControlName="kind"
-              value="part"
-            />
-            <label class="form-check-label">Part</label>
-          </div>
+      <div class="col-12 mb-2">
+        <label style="margin-right: 129px">Kind</label>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="kind"
+            value="main"
+            (input)="addComboValidation()"
+          />
+          <label class="form-check-label">Main</label>
         </div>
-
-        <div *ngIf="getValue.kind == 'main'" class="col-12 mb-2">
-          <label style="margin-right: 20px">Combo</label>
-          <select formControlName="combo" class="form-select" multiple size="2">
-            <option *ngFor="let food of combo" value="{{ food.itemName }}">
-              {{ food.itemName }}
-            </option>
-          </select>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="kind"
+            value="side"
+          />
+          <label class="form-check-label">Side</label>
         </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="kind"
+            value="part"
+          />
+          <label class="form-check-label">Part</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="radio"
+            formControlName="kind"
+            value="super"
+          />
+          <label class="form-check-label">Super</label>
+        </div>
+      </div>
 
-        <div class="form-group col-12 mt-3">
-          <button *ngIf="data.title=='Add Food'"
-            [disabled]="
-              !newFood.valid ||
-              (!newFood.value.breakfast &&
-                !newFood.value.lunch &&
-                !newFood.value.dinner)
-            "
-            type="submit"
-            class="btn save-button"
-          >
-            Add
-          </button>
-          <button *ngIf="data.title=='Edit Food'"
+      <div *ngIf="getValue.kind == 'main'" class="col-12 mb-2">
+        <label style="margin-right: 20px">Combo</label>
+        <select formControlName="combo" class="form-select" multiple size="2">
+          <option *ngFor="let food of combo" value="{{ food.itemName }}">
+            {{ food.itemName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-12 mt-3">
+        <button
+          *ngIf="data.title == 'Add Food'"
+          [disabled]="
+            !newFood.valid ||
+            (!newFood.value.breakfast &&
+              !newFood.value.lunch &&
+              !newFood.value.dinner)
+          "
+          type="submit"
           class="btn save-button"
-            [disabled]="
-              !newFood.valid ||
-              (!newFood.value.breakfast &&
-                !newFood.value.lunch &&
-                !newFood.value.dinner)
-            "
-            type="button"
-            (click)="saveChanges()"
-          >
-            Save
-          </button>
-        </div>
-      </form>
-    </div>
+        >
+          Add
+        </button>
+        <button
+          *ngIf="data.title == 'Edit Food'"
+          class="btn save-button"
+          [disabled]="
+            !newFood.valid ||
+            (!newFood.value.breakfast &&
+              !newFood.value.lunch &&
+              !newFood.value.dinner)
+          "
+          type="button"
+          (click)="saveChanges()"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

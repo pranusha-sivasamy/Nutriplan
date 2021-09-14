@@ -3,10 +3,10 @@
     <div class="row">
       <div class="col-6 side-crop">
         <img
-        src="https://imagenmore.ae/images/food-photography-coffee-.jpg"
+          src="https://imagenmore.ae/images/food-photography-coffee-.jpg"
           width="100%"
           height="100%"
-          style="filter: contrast(120%);"
+          style="filter: contrast(120%)"
         />
       </div>
       <div class="col-6" style="background-color: white">
@@ -18,7 +18,14 @@
             margin-bottom: 36px;
           "
         >
-          <div class="card-header text-center">NUTRIPLAN</div>
+          <div class="card-header text-center">
+            <img
+              src="https://cdn4.iconfinder.com/data/icons/fruits-79/48/08-orange-256.png"
+              height="25px"
+              width="25px"
+              style="margin-right: 5px; filter: saturate(140%)"
+            />NUTRIPLAN
+          </div>
 
           <form [formGroup]="userProfile" (ngSubmit)="onRegister()">
             <div style="height: 23px" class="row mt-3">
@@ -107,9 +114,8 @@
                   >*password required!</span
                 >
                 <span *ngIf="getControl.password.errors?.minlength">
-                *password must be atleast 8 characters long!
-                   </span
-                >
+                  *password must be atleast 8 characters long!
+                </span>
               </ng-container>
               <ng-template #elseblk>
                 <span>&nbsp;</span>
@@ -131,17 +137,19 @@
               <ng-container
                 *ngIf="
                   getControl.confirmPassword.invalid &&
-                    (getControl.confirmPassword.touched || getControl.confirmPassword.dirty);
+                    (getControl.confirmPassword.touched ||
+                      getControl.confirmPassword.dirty);
                   else elseblk
                 "
               >
                 <span *ngIf="getControl.confirmPassword.errors?.required"
                   >*Confirm password required!</span
                 >
-                <span *ngIf="getControl.confirmPassword.errors?.passwordMisMatch">
-                *Password doesn't match!
-                   </span
+                <span
+                  *ngIf="getControl.confirmPassword.errors?.passwordMisMatch"
                 >
+                  *Password doesn't match!
+                </span>
               </ng-container>
               <ng-template #elseblk>
                 <span>&nbsp;</span>

@@ -1,4 +1,4 @@
-<div class="content" [ngStyle]="myStyle">
+<div class="content">
   <div class="container">
     <div class="row mt-3" style="background-color: #0a0a0ab3">
       <div class="col align-self-center"><h5>User List</h5></div>
@@ -8,7 +8,7 @@
           #searchUser
           placeholder="search user"
           (input)="onSearch(searchUser.value)"
-          style="float: right;margin-bottom: 5px;"
+          style="float: right; margin-bottom: 5px"
         />
       </div>
     </div>
@@ -17,8 +17,8 @@
     >
       <thead>
         <tr>
-          <th>UserName</th>
-          <th>Email</th>
+          <th style="width: 220px">UserName</th>
+          <th style="width: 400px">Email</th>
           <th>Gender</th>
           <th>Age</th>
           <th>Height</th>
@@ -28,7 +28,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr
+          *ngFor="
+            let user of users
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  }
+          "
+        >
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.gender }}</td>
@@ -78,5 +88,18 @@
         </tr>
       </tbody>
     </table>
+  </div>
+  <div class="d-flex justify-content-center">
+    <pagination-controls
+      style="text-decoration: none"
+      class="mystyle"
+      [maxSize]="5"
+      [autoHide]="true"
+      [responsive]="true"
+      previousLabel="Prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
   </div>
 </div>

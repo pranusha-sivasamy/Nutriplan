@@ -11,15 +11,12 @@ import { NewFoodComponent } from 'src/app/home/diet/components/new-food/new-food
 export class FoodComponent implements OnInit {
   constructor(private taskService: TaskService, private dialog: MatDialog) {}
   food: any;
-  myStyle: any;
+  page = 1;
+  count = 0;
+  tableSize = 8;
 
   async ngOnInit() {
-    this.food = await this.taskService.getAllFood();
-    let height = (this.food.length * 46 + 100).toString() + 'px';
-    if (this.food.length * 50 + 100 < 553) {
-      height = '553px';
-    }
-    this.myStyle = { height: height };
+    this.fetchFood();
   }
 
   onCreateNewFood() {
@@ -29,6 +26,9 @@ export class FoodComponent implements OnInit {
     dialogConfig.width = '45%';
     dialogConfig.height = '85%';
     this.dialog.open(NewFoodComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(async () => {
+      this.food = await this.taskService.getAllFood();
+    });
   }
 
   async editFood(food: string) {
@@ -50,5 +50,14 @@ export class FoodComponent implements OnInit {
 
   async onSearch(food: string) {
     this.food = await this.taskService.searchFood(food);
+  }
+
+  async onTableDataChange(event: any) {
+    this.page = event;
+    this.fetchFood();
+  }
+
+  async fetchFood() {
+    this.food = await this.taskService.getAllFood();
   }
 }

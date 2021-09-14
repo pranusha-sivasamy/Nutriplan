@@ -10,16 +10,13 @@ import { UserComponent } from 'src/app/home/user/components/user/user.component'
 })
 export class UserListComponent implements OnInit {
   users: any;
-  myStyle: any;
+  page = 1;
+  count = 0;
+  tableSize = 8;
   constructor(private taskService: TaskService, private dialog: MatDialog) {}
 
   async ngOnInit() {
-    this.users = await this.taskService.getAllUser();
-    let height = (this.users.length * 50 + 100).toString() + 'px';
-    if (this.users.length * 50 + 100 < 553) {
-      height = '553px';
-    }
-    this.myStyle = { height: height };
+    this.fetchUser();
   }
 
   async onSearch(user: string) {
@@ -34,12 +31,21 @@ export class UserListComponent implements OnInit {
     dialogConfig.height = '80%';
     this.dialog.open(UserComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(async () => {
-      this.users = await this.taskService.getAllUser();
+    this.fetchUser();
     });
   }
 
   async deleteUser(user: string) {
     const data = await this.taskService.deleteUser(user);
+    this.fetchUser();
+  }
+
+  async onTableDataChange(event: any) {
+    this.page = event;
+    this.fetchUser();
+  }
+
+  async fetchUser(){
     this.users = await this.taskService.getAllUser();
   }
 }

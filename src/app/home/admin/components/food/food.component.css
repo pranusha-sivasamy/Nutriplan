@@ -60,6 +60,7 @@ h5 {
   box-shadow: none;
 }
 .content {
+  height: 553px;
   width: 100%;
   background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0");
   background-attachment: fixed;
@@ -88,4 +89,20 @@ thead {
   --bs-table-active-bg: rgba(0, 0, 0, 0.1);
   --bs-table-hover-color: #212529;
   --bs-table-hover-bg: #f8f9faba;
+}
+.mystyle {
+  color: white;
+  background-color: #0a0a0ab3;
+  height: 40px;
+  padding-top: 5px;
+  padding-right: 20px;
+  margin-top: 495px;
+}
+.mystyle /deep/ .ngx-pagination a {
+  color: white;
+  text-decoration: none;
+}
+.mystyle /deep/ .ngx-pagination a:hover {
+  color: black;
+  text-decoration: none;
 }

@@ -32,7 +32,8 @@ export class LoginComponent {
       this.userlogin.value.username,
       this.userlogin.value.password
     );
-    if (result == 'No user found' || result == 'Incorrect password') {
+    
+    if (result.result == 'No user found' || result.result == 'Incorrect password') {
       this.loginResultFailed = true;
     } else {
       this.loginResultFailed = false;
