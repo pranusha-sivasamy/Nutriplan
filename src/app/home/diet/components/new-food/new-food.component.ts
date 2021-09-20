@@ -61,22 +61,22 @@ export class NewFoodComponent implements OnInit {
   async addNewFood() {
     let type = [];
     let combo = [];
-    if (this.getValue.breakfast) type.push('breakfast');
+    if (this.value.breakfast) type.push('breakfast');
 
-    if (this.getValue.lunch) type.push('lunch');
+    if (this.value.lunch) type.push('lunch');
 
-    if (this.getValue.dinner) type.push('dinner');
+    if (this.value.dinner) type.push('dinner');
 
-    if (this.getValue.kind == 'side' || this.getValue.kind == 'part') {
-      combo.push(this.getValue.combo);
+    if (this.value.kind == 'side' || this.value.kind == 'part') {
+      combo.push(this.value.combo);
     }
     const result = await this.taskService.addNewFood(
-      this.getValue.itemName,
-      this.getValue.quantity,
-      this.getValue.unit,
+      this.value.itemName,
+      this.value.quantity,
+      this.value.unit,
       type,
-      this.getValue.kind,
-      this.getValue.calorie,
+      this.value.kind,
+      this.value.calorie,
       combo
     );
     console.log(result);
@@ -97,28 +97,28 @@ export class NewFoodComponent implements OnInit {
 
   async saveChanges() {
     let type = [];
-    if (this.getValue.breakfast) type.push('breakfast');
-    if (this.getValue.lunch) type.push('lunch');
-    if (this.getValue.dinner) type.push('dinner');
+    if (this.value.breakfast) type.push('breakfast');
+    if (this.value.lunch) type.push('lunch');
+    if (this.value.dinner) type.push('dinner');
     const data = {
-      itemName: this.getValue.itemName,
-      quantity: this.getValue.quantity,
-      unit: this.getValue.unit,
+      itemName: this.value.itemName,
+      quantity: this.value.quantity,
+      unit: this.value.unit,
       type: type,
-      calorie: this.getValue.calorie,
-      combo: this.getValue.combo,
-      kind: this.getValue.kind,
+      calorie: this.value.calorie,
+      combo: this.value.combo,
+      kind: this.value.kind,
     };
     const result = await this.taskService.updateFood(this.id, data);
     this.newFood.reset();
     this.dialogRef.close();
   }
 
-  get getControl() {
+  get control() {
     return this.newFood.controls;
   }
 
-  get getValue() {
+  get value() {
     return this.newFood.value;
   }
 }

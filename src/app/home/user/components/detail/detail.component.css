@@ -10,7 +10,7 @@
   height: 40px;
   width: max-content;
 }
-.form-range{
+.form-range {
   height: 40px;
 }
 label {
@@ -122,4 +122,13 @@ input[type="range"]::-webkit-slider-thumb {
   margin-top: 10px;
   width: fit-content;
   padding: 3px;
+}
+option{
+  background-color: white;
+  color: #000;
+}
+.form-select > .dropdown-toggle.bs-placeholder:active {
+  background: #fff;
+  color: #000;
+  border-color: #999;
 }

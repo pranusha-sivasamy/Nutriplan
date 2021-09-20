@@ -47,11 +47,7 @@ export class AddFoodComponent implements OnInit {
         this.type
       );
       this.foodExist = true;
-      this.selectedFood = await this.taskService.getIntakeFood(
-        username,
-        this.type,
-        finalDate
-      );
+      await this.fetchSelectedFood();
       if (this.selectedFood[0].intakeFood.length != 0) {
         this.selectedFoodExist = true;
       }
@@ -79,11 +75,7 @@ export class AddFoodComponent implements OnInit {
       this.username,
       data
     );
-    this.selectedFood = await this.taskService.getIntakeFood(
-      this.username,
-      this.type,
-      this.date
-    );
+    await this.fetchSelectedFood();
     this.getFood();
   }
 
@@ -96,6 +88,10 @@ export class AddFoodComponent implements OnInit {
       quantity: quantityConverted,
     };
     const result = await this.taskService.removeIntakeFood(this.username, data);
+    await this.fetchSelectedFood();
+  }
+
+  async fetchSelectedFood() {
     this.selectedFood = await this.taskService.getIntakeFood(
       this.username,
       this.type,

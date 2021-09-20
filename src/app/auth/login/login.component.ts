@@ -10,7 +10,6 @@ import { ValidatorService } from '../services/validator.service';
 })
 export class LoginComponent {
   loginResultFailed = false;
-  role: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +22,7 @@ export class LoginComponent {
     password: ['', [Validators.required]],
   });
 
-  get getControl() {
+  get control() {
     return this.userlogin.controls;
   }
 
@@ -32,20 +31,15 @@ export class LoginComponent {
       this.userlogin.value.username,
       this.userlogin.value.password
     );
-    
-    if (result.result == 'No user found' || result.result == 'Incorrect password') {
+
+    if (
+      result.result == 'No user found' ||
+      result.result == 'Incorrect password'
+    ) {
       this.loginResultFailed = true;
     } else {
       this.loginResultFailed = false;
-      const res = await this.validatorService.getRole(
-        this.userlogin.value.username
-      );
-      this.role = res;
-      this.validatorService.onLogin(
-        this.userlogin.value.username,
-        this.role,
-        result.result
-      );
+      this.validatorService.onLogin(result.result);
       if (result.hasDetail) {
         if (!result.hasGoal) {
           this.router.navigate(['/home/user/goal']);

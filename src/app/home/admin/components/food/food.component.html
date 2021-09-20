@@ -52,8 +52,7 @@
               | paginate
                 : {
                     itemsPerPage: tableSize,
-                    currentPage: page,
-                    totalItems: count
+                    currentPage: page
                   }
           "
         >
@@ -107,7 +106,6 @@
 
   <div class="d-flex justify-content-center">
     <pagination-controls
-      style="text-decoration: none"
       class="mystyle"
       [maxSize]="5"
       [autoHide]="true"

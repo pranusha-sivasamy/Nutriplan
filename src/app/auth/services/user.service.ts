@@ -11,43 +11,30 @@ export class UserService {
   addUser(data: any) {
     return this.http.post(
       `${environment.baseUrl}/${environment.userPath}/addUser`,
-      data,
-      {
-        responseType: 'text',
-      }
+      data
     );
   }
 
   checkUser(username: string, password: string) {
-    return this.http.get(
-      `${environment.baseUrl}/${environment.userPath}/checkUser?username=${username}&password=${password}`
+    const data = { username: username, password: password };
+    return this.http.post(
+      `${environment.baseUrl}/${environment.userPath}/checkUser`,
+      data
     );
   }
 
   searchUsername(data: any) {
     return this.http.post(
       `${environment.baseUrl}/${environment.userPath}/searchUser`,
-      data,
-      {
-        responseType: 'text',
-      }
+      data
     );
   }
 
   searchEmail(data: any) {
     return this.http.post(
       `${environment.baseUrl}/${environment.userPath}/searchEmail`,
-      data,
-      {
-        responseType: 'text',
-      }
+      data
     );
   }
 
-  getRole(username: string) {
-    return this.http.get(
-      `${environment.baseUrl}/${environment.userPath}/getRole?username=${username}`,
-      { responseType: 'text' }
-    );
-  }
 }

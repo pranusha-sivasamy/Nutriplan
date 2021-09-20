@@ -43,11 +43,11 @@
             <div>
               <div
                 *ngIf="
-                  getControl.height.invalid &&
-                  (getControl.height.touched || getControl.height.dirty)
+                  control.height.invalid &&
+                  (control.height.touched || control.height.dirty)
                 "
               >
-                <div *ngIf="getControl.height.errors?.required" class="invalid">
+                <div *ngIf="control.height.errors?.required" class="invalid">
                   *height is required!
                 </div>
               </div>
@@ -64,12 +64,12 @@
             <div>
               <div
                 *ngIf="
-                  getControl.activity.invalid &&
-                  (getControl.activity.touched || getControl.activity.dirty)
+                  control.activity.invalid &&
+                  (control.activity.touched || control.activity.dirty)
                 "
               >
                 <div
-                  *ngIf="getControl.activity.errors?.required"
+                  *ngIf="control.activity.errors?.required"
                   class="invalid"
                 >
                   *activity is required!
@@ -124,11 +124,11 @@
             <div>
               <div
                 *ngIf="
-                  getControl.age.invalid &&
-                  (getControl.age.touched || getControl.age.dirty)
+                  control.age.invalid &&
+                  (control.age.touched || control.age.dirty)
                 "
               >
-                <div *ngIf="getControl.age.errors?.required" class="invalid">
+                <div *ngIf="control.age.errors?.required" class="invalid">
                   *age is required!
                 </div>
               </div>
@@ -144,11 +144,11 @@
             <div>
               <div
                 *ngIf="
-                  getControl.weight.invalid &&
-                  (getControl.weight.touched || getControl.weight.dirty)
+                  control.weight.invalid &&
+                  (control.weight.touched || control.weight.dirty)
                 "
               >
-                <div *ngIf="getControl.weight.errors?.required" class="invalid">
+                <div *ngIf="control.weight.errors?.required" class="invalid">
                   *weight is required!
                 </div>
               </div>

@@ -23,19 +23,19 @@
         <input
           class="form-control col-8"
           formControlName="itemName"
-          value="{{ getValue.itemName }}"
+          value="{{ value.itemName }}"
         />
       </div>
 
       <div class="invalid">
         <ng-container
           *ngIf="
-            getControl.itemName.invalid &&
-              (getControl.itemName.touched || getControl.itemName.dirty);
+            control.itemName.invalid &&
+              (control.itemName.touched || control.itemName.dirty);
             else elseblk
           "
         >
-          <span *ngIf="getControl.itemName.errors?.required"
+          <span *ngIf="control.itemName.errors?.required"
             >*Item-name required!</span
           >
         </ng-container>
@@ -50,19 +50,19 @@
           type="number"
           class="form-control col-8"
           formControlName="quantity"
-          value="{{ getValue.quantity }}"
+          value="{{ value.quantity }}"
         />
       </div>
 
       <div class="invalid">
         <ng-container
           *ngIf="
-            getControl.quantity.invalid &&
-              (getControl.quantity.touched || getControl.quantity.dirty);
+            control.quantity.invalid &&
+              (control.quantity.touched || control.quantity.dirty);
             else elseblk
           "
         >
-          <span *ngIf="getControl.quantity.errors?.required"
+          <span *ngIf="control.quantity.errors?.required"
             >*Quantity required!</span
           >
         </ng-container>
@@ -76,19 +76,19 @@
         <input
           class="form-control col-8"
           formControlName="unit"
-          value="{{ getValue.unit }}"
+          value="{{ value.unit }}"
         />
       </div>
 
       <div class="invalid">
         <ng-container
           *ngIf="
-            getControl.unit.invalid &&
-              (getControl.unit.touched || getControl.unit.dirty);
+            control.unit.invalid &&
+              (control.unit.touched || control.unit.dirty);
             else elseblk
           "
         >
-          <span *ngIf="getControl.unit.errors?.required">*Unit required!</span>
+          <span *ngIf="control.unit.errors?.required">*Unit required!</span>
         </ng-container>
         <ng-template #elseblk>
           <span>&nbsp;</span>
@@ -101,19 +101,19 @@
           type="number"
           class="form-control col-8"
           formControlName="calorie"
-          value="{{ getValue.calorie }}"
+          value="{{ value.calorie }}"
         />
       </div>
 
       <div class="invalid">
         <ng-container
           *ngIf="
-            getControl.calorie.invalid &&
-              (getControl.calorie.touched || getControl.calorie.dirty);
+            control.calorie.invalid &&
+              (control.calorie.touched || control.calorie.dirty);
             else elseblk
           "
         >
-          <span *ngIf="getControl.calorie.errors?.required"
+          <span *ngIf="control.calorie.errors?.required"
             >*Calorie required!</span
           >
         </ng-container>
@@ -156,12 +156,12 @@
       <div class="invalid">
         <ng-container
           *ngIf="
-            (getControl.breakfast.touched ||
-              getControl.breakfast.dirty ||
-              getControl.lunch.touched ||
-              getControl.lunch.dirty ||
-              getControl.dinner.touched ||
-              getControl.dinner.dirty) &&
+            (control.breakfast.touched ||
+              control.breakfast.dirty ||
+              control.lunch.touched ||
+              control.lunch.dirty ||
+              control.dinner.touched ||
+              control.dinner.dirty) &&
               !newFood.value.breakfast &&
               !newFood.value.lunch &&
               !newFood.value.dinner;
@@ -216,7 +216,7 @@
         </div>
       </div>
 
-      <div *ngIf="getValue.kind == 'main'" class="col-12 mb-2">
+      <div *ngIf="value.kind == 'main'" class="col-12 mb-2">
         <label style="margin-right: 20px">Combo</label>
         <select formControlName="combo" class="form-select" multiple size="2">
           <option *ngFor="let food of combo" value="{{ food.itemName }}">

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CanComponentLeave } from '../guards/unsaved-changes.guard';
+import { UserService } from '../services/user.service';
 import { ValidatorService } from '../services/validator.service';
 
 @Component({
@@ -9,9 +10,9 @@ import { ValidatorService } from '../services/validator.service';
   styleUrls: ['./registration.component.css'],
 })
 export class RegistrationComponent implements CanComponentLeave {
-  displaySuccessRegistration = false;
   usernameNotEligible = false;
   emailNotEligible = false;
+  canNavigate = false;
 
   constructor(
     private fb: FormBuilder,
@@ -34,7 +35,7 @@ export class RegistrationComponent implements CanComponentLeave {
   );
 
   onRegister() {
-    this.displaySuccessRegistration = true;
+    this.canNavigate = true;
     this.validatorService.onRegister(this.userProfile);
   }
 
@@ -42,23 +43,23 @@ export class RegistrationComponent implements CanComponentLeave {
     const result = await this.validatorService.usernameAvailability(
       this.userProfile.value.username
     );
-    if (result == "username doesn't exist") this.usernameNotEligible = false;
-    else this.usernameNotEligible = true;
+    this.usernameNotEligible =
+      result === "username doesn't exist" ? false : true;
   }
 
   async validateEmail() {
     const result = await this.validatorService.userEmailAvailability(
       this.userProfile.value.email
     );
-    if (result == "email doesn't exist") this.emailNotEligible = false;
-    else this.emailNotEligible = true;
+    this.emailNotEligible = result === "email doesn't exist" ? false : true;
+  }
+
+  hideError() {
+    this.usernameNotEligible = false;
   }
 
   canLeave() {
-    if (
-      (this.getControl.username.dirty || this.getControl.password.dirty) &&
-      this.displaySuccessRegistration == false
-    ) {
+    if (this.userProfile.dirty && !this.canNavigate) {
       return window.confirm(
         'You have some unsaved changes.Are you sure you want to leave?'
       );
@@ -66,7 +67,7 @@ export class RegistrationComponent implements CanComponentLeave {
     return true;
   }
 
-  get getControl() {
+  get control() {
     return this.userProfile.controls;
   }
 }

@@ -11,10 +11,7 @@ export class UserService {
   updateUserDetails(username: string, data: any) {
     return this.http.put(
       `${environment.baseUrl}/${environment.userPath}/updateUserDetails?username=${username}`,
-      data,
-      {
-        responseType: 'text',
-      }
+      data
     );
   }
 
@@ -33,15 +30,14 @@ export class UserService {
   updateGoal(username: string, data: any) {
     return this.http.put(
       `${environment.baseUrl}/${environment.userPath}/updateGoal?username=${username}`,
-      data,
-      {
-        responseType: 'text',
-      }
+      data
     );
   }
 
   getAllUser() {
-    return this.http.get(`${environment.baseUrl}/${environment.userPath}/getAllUser`);
+    return this.http.get(
+      `${environment.baseUrl}/${environment.userPath}/getAllUser`
+    );
   }
 
   findUser(username: string) {
@@ -53,15 +49,13 @@ export class UserService {
   updateRole(username: string, data: any) {
     return this.http.put(
       `${environment.baseUrl}/${environment.userPath}/updateRole?username=${username}`,
-      data,
-      { responseType: 'text' }
+      data
     );
   }
 
   deleteUser(username: string) {
     return this.http.delete(
-      `${environment.baseUrl}/${environment.userPath}/deleteUser?username=${username}`,
-      { responseType: 'text' }
+      `${environment.baseUrl}/${environment.userPath}/deleteUser?username=${username}`
     );
   }
 }

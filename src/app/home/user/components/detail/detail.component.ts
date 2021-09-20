@@ -70,11 +70,11 @@ export class DetailComponent implements OnInit {
 
   async saveChanges() {
     const data = {
-      age: this.userData.value.age,
-      gender: this.userData.value.gender,
-      height: this.userData.value.height,
-      weight: this.userData.value.weight,
-      activityState: this.userData.value.activity,
+      age: this.value.age,
+      gender: this.value.gender,
+      height: this.value.height,
+      weight: this.value.weight,
+      activityState: this.value.activity,
     };
     const firstUpdateResult = await this.taskService.updateUserDetails(
       this.username,
@@ -84,16 +84,25 @@ export class DetailComponent implements OnInit {
       this.username,
       this.userData.value.goalPerWeek
     );
-
+    this.userData.reset();
     this.user = await this.taskService.getUserDetails(this.username);
     this.showDetails();
   }
 
-  get getValue() {
+  canLeave() {
+    if (this.userData.dirty) {
+      return window.confirm(
+        'You have some unsaved changes.Are you sure you want to leave?'
+      );
+    }
+    return true;
+  }
+
+  get value() {
     return this.userData.value;
   }
 
-  get getControl() {
+  get control() {
     return this.userData.controls;
   }
 }

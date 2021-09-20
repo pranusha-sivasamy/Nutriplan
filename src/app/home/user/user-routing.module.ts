@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UnsavedChangesGuard } from 'src/app/auth/guards/unsaved-changes.guard';
 import { UserAuthGuard } from 'src/app/auth/guards/user-auth.guard';
 import { ShouldBeFilledGuard } from '../guards/should-be-filled.guard';
 import { BasicDetailsComponent } from './components/basic-details/basic-details.component';
@@ -25,6 +26,8 @@ const routes: Routes = [
       {
         path: 'profile',
         component: DetailComponent,
+        canActivate: [UserAuthGuard],
+        canDeactivate: [UnsavedChangesGuard],
       },
     ],
   },

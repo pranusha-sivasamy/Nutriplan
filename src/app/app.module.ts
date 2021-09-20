@@ -8,33 +8,29 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthModule } from './auth/auth.module';
 import { HttpErrorInterceptor } from './auth/services/httperrorinterceptor.service';
-import { HomeModule } from './home/home.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule,
-    HomeModule,
     MatDialogModule,
     BrowserAnimationsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem('token');
+          return sessionStorage.getItem('token');
         },
         disallowedRoutes: [
           'http://localhost:8080/user/checkUser',
           'http://localhost:8080/user/searchUser',
           'http://localhost:8080/user/searchEmail',
           'http://localhost:8080/user/addUser',
-          'http://localhost:8080/user/getRole',
         ],
         allowedDomains: ['localhost:8080'],
         authScheme: 'Bearer ',

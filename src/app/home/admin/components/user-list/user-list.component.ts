@@ -11,7 +11,6 @@ import { UserComponent } from 'src/app/home/user/components/user/user.component'
 export class UserListComponent implements OnInit {
   users: any;
   page = 1;
-  count = 0;
   tableSize = 8;
   constructor(private taskService: TaskService, private dialog: MatDialog) {}
 

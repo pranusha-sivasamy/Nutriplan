@@ -34,24 +34,25 @@
                 type="text"
                 class="form-control col-7"
                 formControlName="username"
-                (input)="validateUsername()"
+                (change)="validateUsername()"
+                (input)="hideError()"
               />
             </div>
 
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  (getControl.username.invalid &&
-                    (getControl.username.touched ||
-                      getControl.username.dirty)) ||
+                  (control.username.invalid &&
+                    (control.username.touched ||
+                      control.username.dirty)) ||
                     usernameNotEligible;
                   else elseblk
                 "
               >
-                <span *ngIf="getControl.username.errors?.required"
+                <span *ngIf="control.username.errors?.required"
                   >*Username required!</span
                 >
-                <span *ngIf="getControl.username.errors?.minlength">
+                <span *ngIf="control.username.errors?.minlength">
                   *Username must be atleast 8 characters long! </span
                 ><span *ngIf="usernameNotEligible">
                   *username {{ userProfile.value.username }} is not available!!
@@ -68,23 +69,23 @@
                 type="email"
                 class="form-control col-7"
                 formControlName="email"
-                (input)="validateEmail()"
+                (change)="validateEmail()"
               />
             </div>
 
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  (getControl.email.invalid &&
-                    (getControl.email.touched || getControl.email.dirty)) ||
+                  (control.email.invalid &&
+                    (control.email.touched || control.email.dirty)) ||
                     emailNotEligible;
                   else elseblk
                 "
               >
-                <span *ngIf="getControl.email.errors?.required"
+                <span *ngIf="control.email.errors?.required"
                   >*email required!</span
                 >
-                <span *ngIf="getControl.email.errors?.email">
+                <span *ngIf="control.email.errors?.email">
                   *Please provide a valid email ID </span
                 ><span *ngIf="emailNotEligible"> *email already exists!! </span>
               </ng-container>
@@ -105,15 +106,15 @@
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  getControl.password.invalid &&
-                    (getControl.password.touched || getControl.password.dirty);
+                  control.password.invalid &&
+                    (control.password.touched || control.password.dirty);
                   else elseblk
                 "
               >
-                <span *ngIf="getControl.password.errors?.required"
+                <span *ngIf="control.password.errors?.required"
                   >*password required!</span
                 >
-                <span *ngIf="getControl.password.errors?.minlength">
+                <span *ngIf="control.password.errors?.minlength">
                   *password must be atleast 8 characters long!
                 </span>
               </ng-container>
@@ -136,17 +137,17 @@
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  getControl.confirmPassword.invalid &&
-                    (getControl.confirmPassword.touched ||
-                      getControl.confirmPassword.dirty);
+                  control.confirmPassword.invalid &&
+                    (control.confirmPassword.touched ||
+                      control.confirmPassword.dirty);
                   else elseblk
                 "
               >
-                <span *ngIf="getControl.confirmPassword.errors?.required"
+                <span *ngIf="control.confirmPassword.errors?.required"
                   >*Confirm password required!</span
                 >
                 <span
-                  *ngIf="getControl.confirmPassword.errors?.passwordMisMatch"
+                  *ngIf="control.confirmPassword.errors?.passwordMisMatch"
                 >
                   *Password doesn't match!
                 </span>

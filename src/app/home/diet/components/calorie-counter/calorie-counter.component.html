@@ -15,7 +15,7 @@
         <p class="card-text">{{breakfastIntake}} of {{ breakFastCalorie }} calories</p>
         <a
           routerLinkActive="active"
-          [routerLink]="['/diet/addFood']"
+          [routerLink]="['/home/diet/addFood']"
           [queryParams]="{ type: 'breakfast' }"
           class="btn"
           >Update</a
@@ -36,7 +36,7 @@
         <p class="card-text">{{lunchIntake}} of {{ lunchCalorie }} calories</p>
         <a
           routerLinkActive="active"
-          [routerLink]="['/diet/addFood']"
+          [routerLink]="['/home/diet/addFood']"
           [queryParams]="{ type: 'lunch' }"
           class="btn"
           >Update</a
@@ -57,7 +57,7 @@
         <p class="card-text">{{dinnerIntake}} of {{ dinnerCalorie }} calories</p>
         <a
           routerLinkActive="active"
-          [routerLink]="['/diet/addFood']"
+          [routerLink]="['/home/diet/addFood']"
           [queryParams]="{ type: 'dinner' }"
           class="btn"
           >Update</a

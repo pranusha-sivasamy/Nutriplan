@@ -1,5 +1,9 @@
 import {
-  HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -22,8 +26,12 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMsg = `Error: ${error.error.message}`;
         } else {
           if (error.status >= 400 && error.status < 500) {
-            const redirectUrl = '/auth/login';
-            this.router.navigate([redirectUrl]);
+            if (error.status == 404) {
+              this.router.navigate(['**']);
+            } else {
+              const redirectUrl = '/auth/login';
+              this.router.navigate([redirectUrl]);
+            }
           } else if (error.status >= 500) {
             alert(error.error);
           }

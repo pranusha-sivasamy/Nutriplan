@@ -12,7 +12,6 @@ export class FoodComponent implements OnInit {
   constructor(private taskService: TaskService, private dialog: MatDialog) {}
   food: any;
   page = 1;
-  count = 0;
   tableSize = 8;
 
   async ngOnInit() {
@@ -27,7 +26,7 @@ export class FoodComponent implements OnInit {
     dialogConfig.height = '85%';
     this.dialog.open(NewFoodComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(async () => {
-      this.food = await this.taskService.getAllFood();
+      this.fetchFood();
     });
   }
 
@@ -39,13 +38,13 @@ export class FoodComponent implements OnInit {
     dialogConfig.height = '85%';
     this.dialog.open(NewFoodComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(async () => {
-      this.food = await this.taskService.getAllFood();
+      this.fetchFood();
     });
   }
 
   async deleteFood(food: string) {
     const result = await this.taskService.deleteFood(food);
-    this.food = await this.taskService.getAllFood();
+    this.fetchFood();
   }
 
   async onSearch(food: string) {

@@ -35,16 +35,14 @@ export class FoodService {
   addIntakeCalories(username: string, data: any) {
     return this.http.put(
       `${environment.baseUrl}/${environment.dailyDataPath}/updateIntake?username=${username}`,
-      data,
-      { responseType: 'text' }
+      data
     );
   }
 
   generateFoodPlan(data: any) {
     return this.http.post(
       `${environment.baseUrl}/${environment.dailyDataPath}/addFoodPlan`,
-      data,
-      { responseType: 'text' }
+      data
     );
   }
 
@@ -63,10 +61,7 @@ export class FoodService {
   addNewFood(data: any) {
     return this.http.post(
       `${environment.baseUrl}/${environment.foodPath}/addFood`,
-      data,
-      {
-        responseType: 'text',
-      }
+      data
     );
   }
 
@@ -79,15 +74,13 @@ export class FoodService {
   updateFood(id: string, data: any) {
     return this.http.put(
       `${environment.baseUrl}/${environment.foodPath}/updateFood?id=${id}`,
-      data,
-      { responseType: 'text' }
+      data
     );
   }
 
   deleteFood(food: string) {
     return this.http.delete(
-      `${environment.baseUrl}/${environment.foodPath}/deleteFood?itemName=${food}`,
-      { responseType: 'text' }
+      `${environment.baseUrl}/${environment.foodPath}/deleteFood?itemName=${food}`
     );
   }
 
@@ -100,8 +93,7 @@ export class FoodService {
   removeIntakeFood(username: string, data: any) {
     return this.http.put(
       `${environment.baseUrl}/${environment.dailyDataPath}/removeIntake?username=${username}`,
-      data,
-      { responseType: 'text' }
+      data
     );
   }
 }

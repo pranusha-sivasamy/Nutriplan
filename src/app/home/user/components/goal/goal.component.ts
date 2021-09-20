@@ -50,6 +50,9 @@ export class GoalComponent implements OnInit {
   }
 
   async updateGoal() {
+    if (this.status == 'normal') {
+      this.userGoal.setValue({ goalPerWeek: 0 });
+    }
     this.submitted = true;
     const username = this.commonService.getUsername();
     if (typeof username == 'string') {
@@ -57,7 +60,7 @@ export class GoalComponent implements OnInit {
         username,
         this.userGoal.value.goalPerWeek
       );
-      this.router.navigate(['/diet/calorie-counter']);
+      this.router.navigate(['/home/diet/calorie-counter']);
     }
   }
 

@@ -39,12 +39,12 @@
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  getControl.username.invalid &&
-                    (getControl.username.touched || getControl.username.dirty);
+                  control.username.invalid &&
+                    (control.username.touched || control.username.dirty);
                   else elseblk
                 "
               >
-                <span *ngIf="getControl.username.errors?.required"
+                <span *ngIf="control.username.errors?.required"
                   >*Username required!</span
                 >
               </ng-container>
@@ -66,12 +66,12 @@
             <div class="invalid">
               <ng-container
                 *ngIf="
-                 ( getControl.password.invalid &&
-                    (getControl.password.touched || getControl.password.dirty))||loginResultFailed;
+                 ( control.password.invalid &&
+                    (control.password.touched || control.password.dirty))||loginResultFailed;
                   else elseblk
                 "
               >
-                <span *ngIf="getControl.password.errors?.required"
+                <span *ngIf="control.password.errors?.required"
                   >*Password required!</span
                 >
                 <span *ngIf="loginResultFailed; else elseblk">

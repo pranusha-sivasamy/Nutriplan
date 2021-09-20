@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from './user.service';
 
@@ -17,14 +17,6 @@ export class ValidatorService {
       if (!passwordcontrol || !confirmPasswordControl) {
         return null;
       }
-
-      if (
-        confirmPasswordControl.errors &&
-        confirmPasswordControl.errors.passwordMismatch
-      ) {
-        return null;
-      }
-
       if (passwordcontrol.value != confirmPasswordControl.value) {
         confirmPasswordControl.setErrors({ passwordMisMatch: true });
       } else {
@@ -35,19 +27,28 @@ export class ValidatorService {
     };
   }
 
-  onLogin(username: string, role: string, token: string) {
-    localStorage.setItem('LoggedIn', 'true');
-    localStorage.setItem('username', username);
-    localStorage.setItem('role', role);
-    localStorage.setItem('token', token);
+  // usernameCheck(control: AbstractControl):ValidatorFn {
+  //   console.log(control.value);
+  //   if (!!control.value) {
+  //     (async()=>{
+  //     const result = await this.usernameAvailability(control.value);
+  //     if (result === "username doesn't exist") {
+  //       control.setErrors({ exist: true });
+  //     } else {
+  //       control.setErrors(null);
+  //     }
+  //   })();
+  // }
+  // return null
+  // }
+
+  onLogin(token: any) {
+    sessionStorage.setItem('token', token);
   }
 
   onLogout() {
     this.router.navigate(['/']);
-    localStorage.removeItem('LoggedIn');
-    localStorage.removeItem('username');
-    localStorage.removeItem('role');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   async onRegister(userProfile: FormGroup) {
@@ -57,24 +58,20 @@ export class ValidatorService {
       password: userProfile.value.password,
     };
     const result = await this.userService.addUser(data).toPromise();
-    this.onLogin(userProfile.value.username, 'user', result);
+    this.onLogin(result);
     this.router.navigate(['/home/user/details']);
-  }
-
-  getRole(username: string) {
-    return this.userService.getRole(username).toPromise();
   }
 
   loginCheck(username: string, password: string) {
     return this.userService.checkUser(username, password).toPromise();
   }
 
-  usernameAvailability(username: string) {
+   usernameAvailability(username: string) {
     const data = { username: username };
     return this.userService.searchUsername(data).toPromise();
   }
 
-  userEmailAvailability(email: string) {
+   userEmailAvailability(email: string) {
     const data = { email: email };
     return this.userService.searchEmail(data).toPromise();
   }

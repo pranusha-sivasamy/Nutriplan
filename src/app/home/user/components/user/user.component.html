@@ -54,12 +54,12 @@
         <div class="invalid">
           <ng-container
             *ngIf="
-              getControl.height.invalid &&
-                (getControl.height.touched || getControl.height.dirty);
+              control.height.invalid &&
+                (control.height.touched || control.height.dirty);
               else elseblk
             "
           >
-            <span *ngIf="getControl.height.errors?.required"
+            <span *ngIf="control.height.errors?.required"
               >*Height required!</span
             >
           </ng-container>
@@ -81,12 +81,12 @@
         <div class="invalid">
           <ng-container
             *ngIf="
-              getControl.activity.invalid &&
-                (getControl.activity.touched || getControl.activity.dirty);
+              control.activity.invalid &&
+                (control.activity.touched || control.activity.dirty);
               else elseblk
             "
           >
-            <span *ngIf="getControl.activity.errors?.required"
+            <span *ngIf="control.activity.errors?.required"
               >*Activity required!</span
             >
           </ng-container>
@@ -138,12 +138,12 @@
         <div class="invalid">
           <ng-container
             *ngIf="
-              getControl.age.invalid &&
-                (getControl.age.touched || getControl.age.dirty);
+              control.age.invalid &&
+                (control.age.touched || control.age.dirty);
               else elseblk
             "
           >
-            <span *ngIf="getControl.age.errors?.required"
+            <span *ngIf="control.age.errors?.required"
               >*Age required!</span
             >
           </ng-container>
@@ -161,12 +161,12 @@
         <div class="invalid">
           <ng-container
             *ngIf="
-              getControl.weight.invalid &&
-                (getControl.weight.touched || getControl.weight.dirty);
+              control.weight.invalid &&
+                (control.weight.touched || control.weight.dirty);
               else elseblk
             "
           >
-            <span *ngIf="getControl.weight.errors?.required"
+            <span *ngIf="control.weight.errors?.required"
               >*Weight required!</span
             >
           </ng-container>

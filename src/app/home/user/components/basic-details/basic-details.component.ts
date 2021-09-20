@@ -12,6 +12,7 @@ import { TaskService } from '../../services/task.service';
 })
 export class BasicDetailsComponent implements CanComponentLeave {
   displaySuccessRegistration = false;
+  canNavigate=false;
   public details: FormGroup;
 
   constructor(
@@ -26,15 +27,15 @@ export class BasicDetailsComponent implements CanComponentLeave {
       gender: ['', [Validators.required]],
       age: ['', [Validators.required]],
       activity: ['', [Validators.required]],
-      heightUnit: ['cm', [Validators.required]],
     });
   }
 
-  get getControl() {
+  get control() {
     return this.details.controls;
   }
 
   async onSubmit() {
+    this.canNavigate=true;
     const username: any = this.commonService.getUsername();
     const data = {
       age: this.details.value.age,
@@ -49,10 +50,10 @@ export class BasicDetailsComponent implements CanComponentLeave {
   }
 
   canLeave() {
-    if (this.details.valid) {
+    if (this.canNavigate) {
       return true;
     } else {
-      window.confirm('Your basic details is required!');
+      window.confirm('Your basic details are required!');
       return false;
     }
   }
