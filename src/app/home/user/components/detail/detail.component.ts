@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CommonService } from 'src/app/services/common.service';
-import { TaskService } from '../../services/task.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ConfirmBoxComponent } from 'src/app/home/components/confirm-box/confirm-box.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-detail',
@@ -10,9 +11,9 @@ import { TaskService } from '../../services/task.service';
 })
 export class DetailComponent implements OnInit {
   constructor(
-    private taskService: TaskService,
-    private commonService: CommonService,
-    private fb: FormBuilder
+    private userService: UserService,
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {}
 
   username: string = '';
@@ -20,12 +21,10 @@ export class DetailComponent implements OnInit {
   range: any;
 
   async ngOnInit() {
-    const username = this.commonService.getUsername();
-    if (typeof username == 'string') {
-      this.username = username;
-      this.user = await this.taskService.getUserDetails(username);
+    this.userService.getUserDetails().subscribe((data) => {
+      this.user = data;
       this.showDetails();
-    }
+    });
   }
 
   userData = this.fb.group({
@@ -76,24 +75,33 @@ export class DetailComponent implements OnInit {
       weight: this.value.weight,
       activityState: this.value.activity,
     };
-    const firstUpdateResult = await this.taskService.updateUserDetails(
-      this.username,
-      data
-    );
-    const secondUpdateResult = await this.taskService.updateGoal(
-      this.username,
-      this.userData.value.goalPerWeek
-    );
-    this.userData.reset();
-    this.user = await this.taskService.getUserDetails(this.username);
-    this.showDetails();
+    const firstUpdateResult = await this.userService.updateUserDetails(data);
+    this.userService
+      .updateGoal({
+        goalPerWeek: this.userData.value.goalPerWeek,
+      })
+      .subscribe((result) => {
+        this.userData.reset();
+        this.userService.getUserDetails().subscribe((data) => {
+          this.user = data;
+          this.showDetails();
+        });
+      });
   }
 
-  canLeave() {
+  async canLeave() {
     if (this.userData.dirty) {
-      return window.confirm(
-        'You have some unsaved changes.Are you sure you want to leave?'
-      );
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = false;
+      dialogConfig.data = {
+        guard: 'unsavedChange',
+        info: 'You have some unsaved changes. Are you sure you want to leave?',
+      };
+      dialogConfig.width = '30%';
+      dialogConfig.height = '45%';
+      dialogConfig.disableClose = true;
+      const dialogRef = this.dialog.open(ConfirmBoxComponent, dialogConfig);
+      return await dialogRef.afterClosed().toPromise();
     }
     return true;
   }

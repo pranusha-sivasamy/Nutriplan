@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
-import { CommonService } from 'src/app/services/common.service';
-import { TaskService } from '../services/task.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +9,7 @@ import { TaskService } from '../services/task.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  constructor(
-    private taskService: TaskService,
-    private fb: FormBuilder,
-    private commonService: CommonService
-  ) {
+  constructor(private userService: UserService, private fb: FormBuilder) {
     Chart.register(...registerables);
   }
   breakfast: any = [];
@@ -52,10 +47,8 @@ export class DashboardComponent implements OnInit {
     this.getValues();
   }
 
-  async getValues() {
-    const username = this.commonService.getUsername();
-    if (typeof username == 'string') {
-      const data = await this.taskService.getDailyData(username, this.date);
+  getValues() {
+    this.userService.getDailyData(this.date).subscribe((data) => {
       if (data.length != 0) {
         this.valueExist = true;
         this.myStyles = { display: 'block' };
@@ -70,7 +63,7 @@ export class DashboardComponent implements OnInit {
         this.valueExist = false;
         this.myStyles = { display: 'none' };
       }
-    }
+    });
   }
 
   buildChart() {

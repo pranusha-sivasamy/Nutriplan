@@ -8,54 +8,38 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  updateUserDetails(username: string, data: any) {
-    return this.http.put(
-      `${environment.baseUrl}/${environment.userPath}/updateUserDetails?username=${username}`,
-      data
-    );
+  updateUserDetails(data: any) {
+    return this.http
+      .put(
+        `${environment.baseUrl}/${environment.userPath}/updateUserDetails`,
+        data
+      )
+      .toPromise();
   }
 
-  getUserDetails(username: string) {
+  getUserDetails() {
     return this.http.get(
-      `${environment.baseUrl}/${environment.userPath}/getUserDetails?username=${username}`
+      `${environment.baseUrl}/${environment.userPath}/getUserDetails`
     );
   }
 
-  getAptWeight(username: string) {
+  getAptWeight() {
     return this.http.get(
-      `${environment.baseUrl}/${environment.userPath}/getAptWeight?username=${username}`
+      `${environment.baseUrl}/${environment.userPath}/getAptWeight`
     );
   }
 
-  updateGoal(username: string, data: any) {
-    return this.http.put(
-      `${environment.baseUrl}/${environment.userPath}/updateGoal?username=${username}`,
-      data
-    );
+  updateGoal(data: any) {
+    return this.http
+      .put(
+        `${environment.baseUrl}/${environment.userPath}/updateGoal`,
+        data
+      );
   }
 
   getAllUser() {
     return this.http.get(
       `${environment.baseUrl}/${environment.userPath}/getAllUser`
-    );
-  }
-
-  findUser(username: string) {
-    return this.http.get(
-      `${environment.baseUrl}/${environment.userPath}/findUser?username=${username}`
-    );
-  }
-
-  updateRole(username: string, data: any) {
-    return this.http.put(
-      `${environment.baseUrl}/${environment.userPath}/updateRole?username=${username}`,
-      data
-    );
-  }
-
-  deleteUser(username: string) {
-    return this.http.delete(
-      `${environment.baseUrl}/${environment.userPath}/deleteUser?username=${username}`
     );
   }
 }

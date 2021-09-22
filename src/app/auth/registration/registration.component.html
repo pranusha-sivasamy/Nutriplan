@@ -34,18 +34,15 @@
                 type="text"
                 class="form-control col-7"
                 formControlName="username"
-                (change)="validateUsername()"
-                (input)="hideError()"
+                name="username"
               />
             </div>
 
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  (control.username.invalid &&
-                    (control.username.touched ||
-                      control.username.dirty)) ||
-                    usernameNotEligible;
+                  control.username.invalid &&
+                    (control.username.touched || control.username.dirty);
                   else elseblk
                 "
               >
@@ -54,8 +51,8 @@
                 >
                 <span *ngIf="control.username.errors?.minlength">
                   *Username must be atleast 8 characters long! </span
-                ><span *ngIf="usernameNotEligible">
-                  *username {{ userProfile.value.username }} is not available!!
+                ><span *ngIf="control.username.errors?.usernameTaken">
+                  *username {{ userProfile.value.username }} is already taken!!
                 </span>
               </ng-container>
               <ng-template #elseblk>
@@ -69,16 +66,15 @@
                 type="email"
                 class="form-control col-7"
                 formControlName="email"
-                (change)="validateEmail()"
+                name="email"
               />
             </div>
 
             <div class="invalid">
               <ng-container
                 *ngIf="
-                  (control.email.invalid &&
-                    (control.email.touched || control.email.dirty)) ||
-                    emailNotEligible;
+                  control.email.invalid &&
+                    (control.email.touched || control.email.dirty);
                   else elseblk
                 "
               >
@@ -87,7 +83,9 @@
                 >
                 <span *ngIf="control.email.errors?.email">
                   *Please provide a valid email ID </span
-                ><span *ngIf="emailNotEligible"> *email already exists!! </span>
+                ><span *ngIf="control.email.errors?.emailTaken">
+                  *email already exists!!
+                </span>
               </ng-container>
               <ng-template #elseblk>
                 <span>&nbsp;</span>
@@ -146,9 +144,7 @@
                 <span *ngIf="control.confirmPassword.errors?.required"
                   >*Confirm password required!</span
                 >
-                <span
-                  *ngIf="control.confirmPassword.errors?.passwordMisMatch"
-                >
+                <span *ngIf="control.confirmPassword.errors?.passwordMisMatch">
                   *Password doesn't match!
                 </span>
               </ng-container>
@@ -161,9 +157,7 @@
               <button
                 type="submit"
                 class="btn save-button"
-                [disabled]="
-                  !userProfile.valid || usernameNotEligible || emailNotEligible
-                "
+                [disabled]="!userProfile.valid"
               >
                 Register
               </button>

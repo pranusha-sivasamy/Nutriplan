@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ValidatorService } from 'src/app/auth/services/validator.service';
 import { CommonService } from 'src/app/services/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,10 +8,7 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent {
-  constructor(
-    private checkLogout: ValidatorService,
-    private commonService: CommonService
-  ) {}
+  constructor(private router: Router, private commonService: CommonService) {}
 
   adminloggedIn() {
     if (this.commonService.getRole() == 'admin') return true;
@@ -19,6 +16,6 @@ export class NavBarComponent {
   }
 
   onLogout() {
-    this.checkLogout.onLogout();
+    this.router.navigate(['/auth/login']);
   }
 }

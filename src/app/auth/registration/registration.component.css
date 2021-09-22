@@ -133,3 +133,9 @@ h6 {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 15px;
 }
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset;
+}
+input:-webkit-autofill:focus {
+  box-shadow: 0 0 0px 1000px white inset;
+}

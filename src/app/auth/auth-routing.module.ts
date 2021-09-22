@@ -13,7 +13,6 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegistrationComponent,
-        canDeactivate: [UnsavedChangesGuard],
       },
       {
         path: 'login',

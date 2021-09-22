@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { CanComponentLeave } from '../guards/unsaved-changes.guard';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { ValidatorService } from '../services/validator.service';
 
@@ -9,20 +9,34 @@ import { ValidatorService } from '../services/validator.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css'],
 })
-export class RegistrationComponent implements CanComponentLeave {
-  usernameNotEligible = false;
-  emailNotEligible = false;
+export class RegistrationComponent {
   canNavigate = false;
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorService
+    private validatorService: ValidatorService,
+    private userService: UserService,
+    private router: Router
   ) {}
 
   userProfile = this.fb.group(
     {
-      username: ['', [Validators.required, Validators.minLength(8)]],
-      email: ['', [Validators.email, Validators.required]],
+      username: [
+        '',
+        {
+          validators: [Validators.required, Validators.minLength(8)],
+          asyncValidators: [this.validatorService.usernameValidator()],
+          updateOn: 'blur',
+        },
+      ],
+      email: [
+        '',
+        {
+          validators: [Validators.email, Validators.required],
+          asyncValidators: [this.validatorService.emailValidator()],
+          updateOn: 'blur',
+        },
+      ],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
     },
@@ -36,35 +50,15 @@ export class RegistrationComponent implements CanComponentLeave {
 
   onRegister() {
     this.canNavigate = true;
-    this.validatorService.onRegister(this.userProfile);
-  }
-
-  async validateUsername() {
-    const result = await this.validatorService.usernameAvailability(
-      this.userProfile.value.username
-    );
-    this.usernameNotEligible =
-      result === "username doesn't exist" ? false : true;
-  }
-
-  async validateEmail() {
-    const result = await this.validatorService.userEmailAvailability(
-      this.userProfile.value.email
-    );
-    this.emailNotEligible = result === "email doesn't exist" ? false : true;
-  }
-
-  hideError() {
-    this.usernameNotEligible = false;
-  }
-
-  canLeave() {
-    if (this.userProfile.dirty && !this.canNavigate) {
-      return window.confirm(
-        'You have some unsaved changes.Are you sure you want to leave?'
-      );
-    }
-    return true;
+    const data = {
+      username: this.userProfile.value.username,
+      email: this.userProfile.value.email,
+      password: this.userProfile.value.password,
+    };
+    this.userService.register(data).subscribe((result: any) => {
+      this.validatorService.onLogin(result.result);
+      this.router.navigate(['/home/user/details']);
+    });
   }
 
   get control() {

@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 import { CanComponentLeave } from 'src/app/auth/guards/unsaved-changes.guard';
-import { CommonService } from 'src/app/services/common.service';
-import { TaskService } from '../../services/task.service';
+import { ConfirmBoxComponent } from 'src/app/home/components/confirm-box/confirm-box.component';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-basic-details',
@@ -12,13 +14,13 @@ import { TaskService } from '../../services/task.service';
 })
 export class BasicDetailsComponent implements CanComponentLeave {
   displaySuccessRegistration = false;
-  canNavigate=false;
+  canNavigate = false;
   public details: FormGroup;
 
   constructor(
+    private dialog: MatDialog,
     private fb: FormBuilder,
-    private taskService: TaskService,
-    private commonService: CommonService,
+    private userService: UserService,
     private router: Router
   ) {
     this.details = this.fb.group({
@@ -35,8 +37,7 @@ export class BasicDetailsComponent implements CanComponentLeave {
   }
 
   async onSubmit() {
-    this.canNavigate=true;
-    const username: any = this.commonService.getUsername();
+    this.canNavigate = true;
     const data = {
       age: this.details.value.age,
       gender: this.details.value.gender,
@@ -44,17 +45,26 @@ export class BasicDetailsComponent implements CanComponentLeave {
       weight: this.details.value.weight,
       activityState: this.details.value.activity,
     };
-    const result = await this.taskService.updateUserDetails(username, data);
+    const result = await this.userService.updateUserDetails(data);
     this.router.navigate(['/home/user/goal']);
     this.displaySuccessRegistration = true;
   }
 
-  canLeave() {
+  async canLeave() {
     if (this.canNavigate) {
       return true;
     } else {
-      window.confirm('Your basic details are required!');
-      return false;
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = false;
+      dialogConfig.data = {
+        guard: 'shouldBeFilled',
+        info: 'Your basic details are essential for BMI calculation. Please provide the required details.',
+      };
+      dialogConfig.width = '30%';
+      dialogConfig.height = '46%';
+      dialogConfig.disableClose = true;
+      const dialogRef = this.dialog.open(ConfirmBoxComponent, dialogConfig);
+      return await dialogRef.afterClosed().toPromise();
     }
   }
 }

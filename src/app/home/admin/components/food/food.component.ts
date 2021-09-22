@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from 'src/app/home/diet/services/task.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NewFoodComponent } from 'src/app/home/diet/components/new-food/new-food.component';
+import { FoodService } from 'src/app/home/diet/services/food.service';
 
 @Component({
   selector: 'app-food',
@@ -9,7 +9,10 @@ import { NewFoodComponent } from 'src/app/home/diet/components/new-food/new-food
   styleUrls: ['./food.component.css'],
 })
 export class FoodComponent implements OnInit {
-  constructor(private taskService: TaskService, private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private foodService: FoodService
+  ) {}
   food: any;
   page = 1;
   tableSize = 8;
@@ -36,6 +39,7 @@ export class FoodComponent implements OnInit {
     dialogConfig.data = { title: 'Edit Food', name: food };
     dialogConfig.width = '45%';
     dialogConfig.height = '85%';
+    dialogConfig.disableClose = true;
     this.dialog.open(NewFoodComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(async () => {
       this.fetchFood();
@@ -43,12 +47,15 @@ export class FoodComponent implements OnInit {
   }
 
   async deleteFood(food: string) {
-    const result = await this.taskService.deleteFood(food);
-    this.fetchFood();
+    this.foodService.deleteFood(food).subscribe((result) => {
+      this.fetchFood();
+    });
   }
 
   async onSearch(food: string) {
-    this.food = await this.taskService.searchFood(food);
+    this.foodService.searchFood(food).subscribe((data) => {
+      this.food = data;
+    });
   }
 
   async onTableDataChange(event: any) {
@@ -57,6 +64,8 @@ export class FoodComponent implements OnInit {
   }
 
   async fetchFood() {
-    this.food = await this.taskService.getAllFood();
+    this.foodService.getAllFood().subscribe((data) => {
+      this.food = data;
+    });
   }
 }

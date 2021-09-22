@@ -8,14 +8,9 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  getUserDailyCalorie(username: string) {
-    return this.http.get(
-      `${environment.baseUrl}/${environment.foodPath}/userDailyCalorie?username=${username}`
-    );
-  }
-  getDailyData(username: string, date: string) {
-    return this.http.get(
-      `${environment.baseUrl}/${environment.dailyDataPath}/dailyData?username=${username}&date=${date}`
+  getDailyData(date: string) {
+    return this.http.get<any[]>(
+      `${environment.baseUrl}/${environment.dailyDataPath}/dailyData?date=${date}`
     );
   }
 }

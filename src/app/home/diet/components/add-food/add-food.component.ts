@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonService } from 'src/app/services/common.service';
-import { TaskService } from '../../services/task.service';
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-add-food',
@@ -10,9 +9,8 @@ import { TaskService } from '../../services/task.service';
 })
 export class AddFoodComponent implements OnInit {
   constructor(
-    private taskService: TaskService,
     private router: ActivatedRoute,
-    private commonService: CommonService
+    private foodService: FoodService
   ) {}
 
   food: any;
@@ -34,24 +32,18 @@ export class AddFoodComponent implements OnInit {
   }
 
   async getFood() {
-    const username = this.commonService.getUsername();
     const date = Date.now();
     const today = new Date(date).toUTCString().split(' ');
     const finalDate = today[1] + ' ' + today[2] + ' ' + today[3];
     this.date = finalDate;
-    if (typeof username == 'string') {
-      this.username = username;
-      this.food = await this.taskService.getFood(
-        username,
-        finalDate,
-        this.type
-      );
+    this.foodService.getFood(finalDate, this.type).subscribe(async (data) => {
+      this.food = data;
       this.foodExist = true;
       await this.fetchSelectedFood();
       if (this.selectedFood[0].intakeFood.length != 0) {
         this.selectedFoodExist = true;
       }
-    }
+    });
   }
 
   addAnotherFood() {
@@ -60,7 +52,9 @@ export class AddFoodComponent implements OnInit {
 
   async onSearch(food: string) {
     this.searchedFood = food;
-    this.searchFoodResult = await this.taskService.searchFood(food);
+    this.foodService.searchFood(food).subscribe((data) => {
+      this.searchFoodResult = data;
+    });
   }
 
   async addFood(food: string, quantity: number, unit: string) {
@@ -71,12 +65,9 @@ export class AddFoodComponent implements OnInit {
       type: this.type,
       unit: unit,
     };
-    const result = await this.taskService.addIntakeCalories(
-      this.username,
-      data
-    );
-    await this.fetchSelectedFood();
-    this.getFood();
+    this.foodService.addIntake(data).subscribe((result) => {
+      this.getFood();
+    });
   }
 
   async removeIntake(food: string, quantity: string) {
@@ -87,13 +78,13 @@ export class AddFoodComponent implements OnInit {
       date: this.date,
       quantity: quantityConverted,
     };
-    const result = await this.taskService.removeIntakeFood(this.username, data);
-    await this.fetchSelectedFood();
+    this.foodService.removeIntakeFood(data).subscribe(async (result) => {
+      this.fetchSelectedFood();
+    });
   }
 
   async fetchSelectedFood() {
-    this.selectedFood = await this.taskService.getIntakeFood(
-      this.username,
+    this.selectedFood = await this.foodService.getIntakeFood(
       this.type,
       this.date
     );

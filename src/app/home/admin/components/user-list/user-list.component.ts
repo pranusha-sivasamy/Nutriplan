@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskService } from 'src/app/home/user/services/task.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserComponent } from 'src/app/home/user/components/user/user.component';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-user-list',
@@ -12,14 +12,19 @@ export class UserListComponent implements OnInit {
   users: any;
   page = 1;
   tableSize = 8;
-  constructor(private taskService: TaskService, private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private adminService: AdminService
+  ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.fetchUser();
   }
 
-  async onSearch(user: string) {
-    this.users = await this.taskService.findUser(user);
+  onSearch(user: string) {
+    this.adminService.findUser(user).subscribe((data) => {
+      this.users = data;
+    });
   }
 
   editUser(user: string) {
@@ -28,15 +33,17 @@ export class UserListComponent implements OnInit {
     dialogConfig.data = { title: 'Edit User', name: user };
     dialogConfig.width = '70%';
     dialogConfig.height = '80%';
+    dialogConfig.disableClose = true;
     this.dialog.open(UserComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(async () => {
-    this.fetchUser();
+      this.fetchUser();
     });
   }
 
   async deleteUser(user: string) {
-    const data = await this.taskService.deleteUser(user);
-    this.fetchUser();
+    this.adminService.deleteUser(user).subscribe((data) => {
+      this.fetchUser();
+    });
   }
 
   async onTableDataChange(event: any) {
@@ -44,7 +51,9 @@ export class UserListComponent implements OnInit {
     this.fetchUser();
   }
 
-  async fetchUser(){
-    this.users = await this.taskService.getAllUser();
+  async fetchUser() {
+    this.adminService.getAllUser().subscribe((data) => {
+      this.users = data;
+    });
   }
 }

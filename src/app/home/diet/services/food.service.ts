@@ -14,9 +14,9 @@ export class FoodService {
     );
   }
 
-  getFood(username: string, date: string, type: string) {
+  getFood(date: string, type: string) {
     return this.http.get(
-      `${environment.baseUrl}/${environment.dailyDataPath}/getFood?username=${username}&date=${date}&type=${type}`
+      `${environment.baseUrl}/${environment.dailyDataPath}/getFood?date=${date}&type=${type}`
     );
   }
 
@@ -32,9 +32,9 @@ export class FoodService {
     );
   }
 
-  addIntakeCalories(username: string, data: any) {
+  addIntake(data: any) {
     return this.http.put(
-      `${environment.baseUrl}/${environment.dailyDataPath}/updateIntake?username=${username}`,
+      `${environment.baseUrl}/${environment.dailyDataPath}/updateIntake`,
       data
     );
   }
@@ -43,18 +43,12 @@ export class FoodService {
     return this.http.post(
       `${environment.baseUrl}/${environment.dailyDataPath}/addFoodPlan`,
       data
-    );
+    ).toPromise();
   }
 
-  getAllottedCalorie(username: string, date: string, type: string) {
+  getAllottedCalorie(date: string, type: string) {
     return this.http.get(
-      `${environment.baseUrl}/${environment.dailyDataPath}/getFood?username=${username}&date=${date}&type=${type}`
-    );
-  }
-
-  getIntakeCalorie(username: string, date: string, type: string) {
-    return this.http.get(
-      `${environment.baseUrl}/${environment.dailyDataPath}/currentIntake?username=${username}&date=${date}&type=${type}`
+      `${environment.baseUrl}/${environment.dailyDataPath}/getFood?date=${date}&type=${type}`
     );
   }
 
@@ -84,15 +78,15 @@ export class FoodService {
     );
   }
 
-  getIntakeFood(username: string, type: string, date: string) {
+  getIntakeFood(type: string, date: string) {
     return this.http.get(
-      `${environment.baseUrl}/${environment.dailyDataPath}/getIntakeFood?username=${username}&type=${type}&date=${date}`
-    );
+      `${environment.baseUrl}/${environment.dailyDataPath}/getIntakeFood?type=${type}&date=${date}`
+    ).toPromise();
   }
 
-  removeIntakeFood(username: string, data: any) {
+  removeIntakeFood(data: any) {
     return this.http.put(
-      `${environment.baseUrl}/${environment.dailyDataPath}/removeIntake?username=${username}`,
+      `${environment.baseUrl}/${environment.dailyDataPath}/removeIntake`,
       data
     );
   }

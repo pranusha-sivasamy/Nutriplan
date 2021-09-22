@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CommonService } from 'src/app/services/common.service';
-import { TaskService } from '../../services/task.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
+import { UserService } from '../../services/user.service';
+import { ConfirmBoxComponent } from 'src/app/home/components/confirm-box/confirm-box.component';
 
 @Component({
   selector: 'app-goal',
@@ -11,9 +13,9 @@ import { TaskService } from '../../services/task.service';
 })
 export class GoalComponent implements OnInit {
   constructor(
+    private dialog: MatDialog,
     private fb: FormBuilder,
-    private taskService: TaskService,
-    private commonService: CommonService,
+    private userService: UserService,
     private router: Router
   ) {}
 
@@ -29,16 +31,14 @@ export class GoalComponent implements OnInit {
   submitted: any;
 
   async ngOnInit(): Promise<void> {
-    const username = this.commonService.getUsername();
-    if (typeof username == 'string') {
-      const weight = await this.taskService.getUserAptWeight(username);
-      const value = Object.values(weight);
+    this.userService.getAptWeight().subscribe((data) => {
+      const value = Object.values(data);
       this.aptWeight = value[0];
       this.weight = value[1];
       this.BMI = value[2];
       this.status = value[3];
       this.onChange();
-    }
+    });
   }
 
   onChange() {
@@ -54,22 +54,28 @@ export class GoalComponent implements OnInit {
       this.userGoal.setValue({ goalPerWeek: 0 });
     }
     this.submitted = true;
-    const username = this.commonService.getUsername();
-    if (typeof username == 'string') {
-      const result = await this.taskService.updateGoal(
-        username,
-        this.userGoal.value.goalPerWeek
-      );
-      this.router.navigate(['/home/diet/calorie-counter']);
-    }
+    this.userService
+      .updateGoal({ goalPerWeek: this.userGoal.value.goalPerWeek })
+      .subscribe((result) => {
+        this.router.navigate(['/home/diet/calorie-counter']);
+      });
   }
 
-  canLeave() {
+  async canLeave() {
     if (this.submitted) {
       return true;
     } else {
-      window.confirm('Your goal should be choosed!!');
-      return false;
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = false;
+      dialogConfig.data = {
+        guard: 'shouldBeFilled',
+        info: 'Our suggestions will vary depending on your goal. Please set your goal to proceed.',
+      };
+      dialogConfig.width = '30%';
+      dialogConfig.height = '46%';
+      dialogConfig.disableClose = true;
+      const dialogRef = this.dialog.open(ConfirmBoxComponent, dialogConfig);
+      return await dialogRef.afterClosed().toPromise();
     }
   }
 }

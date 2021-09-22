@@ -8,14 +8,14 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  addUser(data: any) {
+  register(data: any) {
     return this.http.post(
       `${environment.baseUrl}/${environment.userPath}/addUser`,
       data
     );
   }
 
-  checkUser(username: string, password: string) {
+  login(username: string, password: string) {
     const data = { username: username, password: password };
     return this.http.post(
       `${environment.baseUrl}/${environment.userPath}/checkUser`,
@@ -24,14 +24,14 @@ export class UserService {
   }
 
   searchUsername(data: any) {
-    return this.http.post(
+    return this.http.post<any>(
       `${environment.baseUrl}/${environment.userPath}/searchUser`,
       data
     );
   }
 
   searchEmail(data: any) {
-    return this.http.post(
+    return this.http.post<any>(
       `${environment.baseUrl}/${environment.userPath}/searchEmail`,
       data
     );

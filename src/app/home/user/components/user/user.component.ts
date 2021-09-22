@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TaskService } from '../../services/task.service';
+import { AdminService } from 'src/app/home/admin/services/admin.service';
 
 @Component({
   selector: 'app-user',
@@ -10,9 +10,9 @@ import { TaskService } from '../../services/task.service';
 })
 export class UserComponent implements OnInit {
   constructor(
-    private taskService: TaskService,
     private dialogRef: MatDialogRef<UserComponent>,
     private fb: FormBuilder,
+    private adminService: AdminService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -40,8 +40,10 @@ export class UserComponent implements OnInit {
   async ngOnInit() {
     this.username = await this.data.name;
     if (this.data.title == 'Edit User') {
-      this.user = await this.taskService.getUserDetails(this.data.name);
-      this.showDetails();
+      this.adminService.getUserDetails(this.data.name).subscribe((data) => {
+        this.user = data;
+        this.showDetails();
+      });
     }
   }
 
@@ -67,23 +69,21 @@ export class UserComponent implements OnInit {
 
   async saveChanges() {
     const data = {
+      username:this.username,
       age: this.value.age,
       gender: this.value.gender,
       height: this.value.height,
       weight: this.value.weight,
       activityState: this.value.activity,
     };
-    const firstUpdateResult = await this.taskService.updateUserDetails(
-      this.username,
+    const firstUpdateResult = await this.adminService.updateUserDetails(
       data
     );
-    const secondUpdateResult = await this.taskService.updateGoal(
-      this.username,
-      this.userData.value.goalPerWeek
+    const secondUpdateResult = await this.adminService.updateGoal(
+      {username:this.username,goalPerWeek:this.userData.value.goalPerWeek}
     );
-    const thirdUpdateResult = await this.taskService.updateRole(
-      this.username,
-      this.userData.value.role
+    const thirdUpdateResult = await this.adminService.updateRole(
+      {username:this.username,role:this.userData.value.role}
     );
     this.userData.reset();
     this.dialogRef.close();

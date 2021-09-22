@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ValidatorService {
-  constructor(private router: Router, private userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   passwordValidator(password: string, confirmPassword: string) {
     return (formGroup: FormGroup) => {
@@ -17,62 +18,45 @@ export class ValidatorService {
       if (!passwordcontrol || !confirmPasswordControl) {
         return null;
       }
+      if (confirmPasswordControl.invalid || passwordcontrol.invalid) {
+        return null;
+      }
       if (passwordcontrol.value != confirmPasswordControl.value) {
         confirmPasswordControl.setErrors({ passwordMisMatch: true });
       } else {
         confirmPasswordControl.setErrors(null);
       }
-
       return null;
     };
   }
 
-  // usernameCheck(control: AbstractControl):ValidatorFn {
-  //   console.log(control.value);
-  //   if (!!control.value) {
-  //     (async()=>{
-  //     const result = await this.usernameAvailability(control.value);
-  //     if (result === "username doesn't exist") {
-  //       control.setErrors({ exist: true });
-  //     } else {
-  //       control.setErrors(null);
-  //     }
-  //   })();
-  // }
-  // return null
-  // }
+  usernameValidator() {
+    return (control: AbstractControl) => {
+      return this.userService.searchUsername({ username: control.value }).pipe(
+        map((res) => {
+          return res.usernameTaken ? { usernameTaken: true } : null;
+        })
+      );
+    };
+  }
+
+  emailValidator() {
+    return (control: AbstractControl) => {
+      return this.userService.searchEmail({ email: control.value }).pipe(
+        map((res) => {
+          return res.emailTaken ? { emailTaken: true } : null;
+        })
+      );
+    };
+  }
 
   onLogin(token: any) {
     sessionStorage.setItem('token', token);
   }
 
-  onLogout() {
-    this.router.navigate(['/']);
-    sessionStorage.removeItem('token');
-  }
+  // onLogout() {
+  //   this.router.navigate(['/auth/login']);
+    // sessionStorage.removeItem('token');
+  // }
 
-  async onRegister(userProfile: FormGroup) {
-    const data = {
-      username: userProfile.value.username,
-      email: userProfile.value.email,
-      password: userProfile.value.password,
-    };
-    const result = await this.userService.addUser(data).toPromise();
-    this.onLogin(result);
-    this.router.navigate(['/home/user/details']);
-  }
-
-  loginCheck(username: string, password: string) {
-    return this.userService.checkUser(username, password).toPromise();
-  }
-
-   usernameAvailability(username: string) {
-    const data = { username: username };
-    return this.userService.searchUsername(data).toPromise();
-  }
-
-   userEmailAvailability(email: string) {
-    const data = { email: email };
-    return this.userService.searchEmail(data).toPromise();
-  }
 }

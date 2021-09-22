@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { TaskService } from '../../services/task.service';
+import { FoodService } from '../../services/food.service';
 
 @Component({
   selector: 'app-new-food',
@@ -11,7 +11,7 @@ import { TaskService } from '../../services/task.service';
 export class NewFoodComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
-    private taskService: TaskService,
+    private foodService: FoodService,
     private dialogRef: MatDialogRef<NewFoodComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
@@ -31,10 +31,13 @@ export class NewFoodComponent implements OnInit {
   id!: string;
 
   async ngOnInit() {
-    this.combo = await this.taskService.getAllCombo();
+    this.foodService.getAllCombo().subscribe((data) => {
+      this.combo = data;
+    });
     if (this.data.title == 'Edit Food') {
-      const result = await this.taskService.getFoodDetails(this.data.name);
-      this.showDetails(result);
+      this.foodService.getFoodDetails(this.data.name).subscribe((data) => {
+        this.showDetails(data);
+      });
     }
   }
 
@@ -70,19 +73,19 @@ export class NewFoodComponent implements OnInit {
     if (this.value.kind == 'side' || this.value.kind == 'part') {
       combo.push(this.value.combo);
     }
-    const result = await this.taskService.addNewFood(
-      this.value.itemName,
-      this.value.quantity,
-      this.value.unit,
-      type,
-      this.value.kind,
-      this.value.calorie,
-      combo
-    );
-    console.log(result);
-
-    this.newFood.reset();
-    this.dialogRef.close();
+    const data = {
+      itemName: this.value.itemName,
+      quantity: this.value.quantity,
+      unit: this.value.unit,
+      type: type,
+      kind: this.value.kind,
+      calorie: this.value.calorie,
+      combo: combo,
+    };
+    this.foodService.addNewFood(data).subscribe((result) => {
+      this.newFood.reset();
+      this.dialogRef.close();
+    });
   }
 
   addComboValidation() {
@@ -109,9 +112,10 @@ export class NewFoodComponent implements OnInit {
       combo: this.value.combo,
       kind: this.value.kind,
     };
-    const result = await this.taskService.updateFood(this.id, data);
-    this.newFood.reset();
-    this.dialogRef.close();
+    this.foodService.updateFood(this.id, data).subscribe((result) => {
+      this.newFood.reset();
+      this.dialogRef.close();
+    });
   }
 
   get control() {

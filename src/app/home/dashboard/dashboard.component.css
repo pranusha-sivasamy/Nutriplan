@@ -31,11 +31,6 @@ input[type="date"] {
   font-weight: bold;
   color: #0e790e;
 }
-.message {
-  margin-top: 337px;
-  margin-left: 280px;
-  color: #ff8100;
-}
 
 .noData {
   padding-left: 100px;
