@@ -24,12 +24,12 @@
           >
         </li>
 
-        <li *ngIf="adminloggedIn()" class="nav-item">
+        <li *ngIf="isAdmin" class="nav-item">
           <a class="nav-link" routerLinkActive="active" routerLink="admin/food"
             >Food</a
           >
         </li>
-        <li *ngIf="adminloggedIn()" class="nav-item">
+        <li *ngIf="isAdmin" class="nav-item">
           <a
             class="nav-link"
             routerLinkActive="active"

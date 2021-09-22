@@ -56,7 +56,7 @@ export class ValidatorService {
 
   // onLogout() {
   //   this.router.navigate(['/auth/login']);
-    // sessionStorage.removeItem('token');
+  //   sessionStorage.removeItem('token');
   // }
 
 }

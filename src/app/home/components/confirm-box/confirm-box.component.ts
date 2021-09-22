@@ -12,7 +12,10 @@ export class ConfirmBoxComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public question: any
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.question);
+    
+  }
 
   onAction(action: boolean) {
     this.dialogRef.close(action);

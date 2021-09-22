@@ -10,6 +10,6 @@ export class CommonService {
     if (typeof token == 'string') {
       data = JSON.parse(atob(token.split('.')[1]));
     }
-    return data.role;
+    return data ? data.role : null;
   }
 }
