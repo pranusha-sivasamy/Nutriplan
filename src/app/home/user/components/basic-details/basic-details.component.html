@@ -14,8 +14,7 @@
 
         <div
           *ngIf="
-            control.age.invalid &&
-            (control.age.touched || control.age.dirty)
+            control.age.invalid && (control.age.touched || control.age.dirty)
           "
         >
           <div *ngIf="control.age.errors?.required" class="invalid">
@@ -47,9 +46,15 @@
           <label for="age" class="col-5">Current Height</label>
           <input
             type="number"
-            class="form-control col-7"
+            class="form-control col-7 shrink"
             formControlName="height"
-          />
+            (focus)="changeBck('height')"
+            (blur)="regularBck()"
+          /><span
+            [ngStyle]="focusField === 'height' ? styleUnit : null"
+            class="unit"
+            >cm</span
+          >
         </div>
 
         <div
@@ -67,9 +72,15 @@
           <label for="age" class="col-5">Current Weight</label>
           <input
             type="number"
-            class="form-control col-7"
+            class="form-control col-7 shrink"
             formControlName="weight"
-          />
+            (focus)="changeBck('weight')"
+            (blur)="regularBck()"
+          /><span
+            [ngStyle]="focusField === 'weight' ? styleUnit : null"
+            class="unit"
+            >kg</span
+          >
         </div>
 
         <div
@@ -85,10 +96,7 @@
 
         <div class="row mt-2 mb-4">
           <label for="age" class="col-5">Activity state</label>
-          <select
-            class="form-select"
-            formControlName="activity"
-          >
+          <select class="form-select" formControlName="activity">
             <option selected disabled>How active are you?</option>
             <option value="No Activity">
               Little or No Activity<span class="example"

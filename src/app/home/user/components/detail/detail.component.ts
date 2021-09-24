@@ -19,6 +19,8 @@ export class DetailComponent implements OnInit {
   username: string = '';
   user: any;
   range: any;
+  styleUnit: any;
+  focusField = '';
 
   async ngOnInit() {
     this.userService.getUserDetails().subscribe((data) => {
@@ -112,5 +114,20 @@ export class DetailComponent implements OnInit {
 
   get control() {
     return this.userData.controls;
+  }
+
+  changeBck(field: string) {
+    this.focusField = field;
+    this.styleUnit = {
+      backgroundColor: 'white',
+      color: 'black',
+    };
+  }
+
+  regularBck() {
+    this.styleUnit = {
+      backgroundColor: '#6e985680',
+      color: 'white',
+    };
   }
 }

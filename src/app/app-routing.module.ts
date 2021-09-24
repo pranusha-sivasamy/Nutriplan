@@ -11,8 +11,9 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
+  { path: 'notFound', component: PageNotFoundComponent },
   { path: '', pathMatch: 'full', redirectTo: 'auth' },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '**', redirectTo: 'notFound' },
 ];
 
 @NgModule({

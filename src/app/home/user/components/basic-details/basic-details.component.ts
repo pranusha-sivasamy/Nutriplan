@@ -15,6 +15,8 @@ import { UserService } from '../../services/user.service';
 export class BasicDetailsComponent implements CanComponentLeave {
   displaySuccessRegistration = false;
   canNavigate = false;
+  styleUnit: any;
+  focusField = '';
   public details: FormGroup;
 
   constructor(
@@ -66,5 +68,19 @@ export class BasicDetailsComponent implements CanComponentLeave {
       const dialogRef = this.dialog.open(ConfirmBoxComponent, dialogConfig);
       return await dialogRef.afterClosed().toPromise();
     }
+  }
+
+  changeBck(field: string) {
+    this.focusField = field;
+    this.styleUnit = {
+      border: '1px solid white',
+      borderLeft: 'none',
+    };
+  }
+
+  regularBck() {
+    this.styleUnit = {
+      border: 'none',
+    };
   }
 }

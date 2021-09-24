@@ -98,3 +98,21 @@ input:read-only {
 .form-control.ng-invalid {
   border-color: red;
 }
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+.shrink {
+  width: 170px;
+}
+.shrink:focus {
+  border-bottom: 1px solid green;
+}
+.unit {
+  width: 37px;
+  padding: 6px;
+  border-bottom: 1px solid lightgray;
+}

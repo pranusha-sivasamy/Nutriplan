@@ -36,9 +36,15 @@
               <label class="col-4">Height</label>
               <input
                 type="number"
-                class="form-control col-8"
+                class="form-control col-8 shrink"
                 formControlName="height"
-              />
+                (focus)="changeBck('height')"
+                (blur)="regularBck()"
+              /><span
+                [ngStyle]="focusField === 'height' ? styleUnit : null"
+                class="unit"
+                >cm</span
+              >
             </div>
             <div>
               <div
@@ -68,10 +74,7 @@
                   (control.activity.touched || control.activity.dirty)
                 "
               >
-                <div
-                  *ngIf="control.activity.errors?.required"
-                  class="invalid"
-                >
+                <div *ngIf="control.activity.errors?.required" class="invalid">
                   *activity is required!
                 </div>
               </div>
@@ -88,9 +91,9 @@
               <label class="col-4">AptWeight</label>
               <input
                 readonly
-                class="form-control col-8"
+                class="form-control col-8 shrink"
                 formControlName="aptWeight"
-              />
+              /><span class="unit">kg</span>
             </div>
             <div class="row mb-2">
               <label class="col-4">Goal Per Week</label>
@@ -119,7 +122,11 @@
             </div>
             <div class="row mb-2">
               <label class="col-4">Age</label>
-              <input type="number" class="form-control col-8" formControlName="age" />
+              <input
+                type="number"
+                class="form-control col-8"
+                formControlName="age"
+              />
             </div>
             <div>
               <div
@@ -137,9 +144,15 @@
               <label class="col-4">Weight</label>
               <input
                 type="number"
-                class="form-control col-8"
+                class="form-control col-8 shrink"
                 formControlName="weight"
-              />
+                (focus)="changeBck('weight')"
+                (blur)="regularBck()"
+              /><span
+                [ngStyle]="focusField === 'weight' ? styleUnit : null"
+                class="unit"
+                >kg</span
+              >
             </div>
             <div>
               <div

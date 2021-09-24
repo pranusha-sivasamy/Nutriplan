@@ -18,6 +18,8 @@ export class UserComponent implements OnInit {
 
   user: any;
   username: any;
+  styleUnit: any;
+  focusField = '';
 
   userData = this.fb.group({
     username: [''],
@@ -69,22 +71,22 @@ export class UserComponent implements OnInit {
 
   async saveChanges() {
     const data = {
-      username:this.username,
+      username: this.username,
       age: this.value.age,
       gender: this.value.gender,
       height: this.value.height,
       weight: this.value.weight,
       activityState: this.value.activity,
     };
-    const firstUpdateResult = await this.adminService.updateUserDetails(
-      data
-    );
-    const secondUpdateResult = await this.adminService.updateGoal(
-      {username:this.username,goalPerWeek:this.userData.value.goalPerWeek}
-    );
-    const thirdUpdateResult = await this.adminService.updateRole(
-      {username:this.username,role:this.userData.value.role}
-    );
+    const firstUpdateResult = await this.adminService.updateUserDetails(data);
+    const secondUpdateResult = await this.adminService.updateGoal({
+      username: this.username,
+      goalPerWeek: this.userData.value.goalPerWeek,
+    });
+    const thirdUpdateResult = await this.adminService.updateRole({
+      username: this.username,
+      role: this.userData.value.role,
+    });
     this.userData.reset();
     this.dialogRef.close();
   }
@@ -100,5 +102,20 @@ export class UserComponent implements OnInit {
 
   get value() {
     return this.userData.value;
+  }
+
+  changeBck(field: string) {
+    this.focusField = field;
+    this.styleUnit = {
+      borderBottom: '1px solid green',
+      transition: 'border-color .15s ease-in-out,box-shadow .15s ease-in-out',
+    };
+  }
+
+  regularBck() {
+    this.styleUnit = {
+      borderBottom: '1px solid lightgray',
+      transition: ' border-color .15s ease-in-out,box-shadow .15s ease-in-out',
+    };
   }
 }

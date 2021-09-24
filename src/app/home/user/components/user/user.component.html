@@ -46,9 +46,19 @@
           />
           <label class="form-check-label">Female</label>
         </div>
-        <div class="row" style="height: 25px;">
+        <div class="row" style="height: 25px">
           <label class="col-4">Height</label>
-          <input type="number" class="form-control col-8" formControlName="height" />
+          <input
+            type="number"
+            class="form-control col-8 shrink"
+            formControlName="height"
+            (focus)="changeBck('height')"
+            (blur)="regularBck()"
+          /><span
+            [ngStyle]="focusField === 'height' ? styleUnit : null"
+            class="unit"
+            >cm</span
+          >
         </div>
 
         <div class="invalid">
@@ -68,7 +78,7 @@
           </ng-template>
         </div>
 
-        <div class="row"  style="height: 25px;">
+        <div class="row" style="height: 25px">
           <label class="col-4">Activity State</label>
           <select class="form-select col-8" formControlName="activity">
             <option value="No Activity">Little or No Activity</option>
@@ -103,9 +113,15 @@
           <label class="col-4">AptWeight</label>
           <input
             readonly
-            class="form-control col-8"
+            class="form-control col-8 shrink"
             formControlName="aptWeight"
-          />
+            (focus)="changeBck('height')"
+            (blur)="regularBck()"
+          /><span
+            [ngStyle]="focusField === 'height' ? styleUnit : null"
+            class="unit"
+            >kg</span
+          >
         </div>
         <div class="row mb-2">
           <label class="col-4">Goal Per Week</label>
@@ -129,34 +145,44 @@
           <label class="col-4">Email</label>
           <input readonly class="form-control col-8" formControlName="email" />
         </div>
-        <div class="row"  style="height: 25px;">
+        <div class="row" style="height: 25px">
           <label class="col-4">Age</label>
-          <input type="number" class="form-control col-8" formControlName="age" />
+          <input
+            type="number"
+            class="form-control col-8"
+            formControlName="age"
+          />
         </div>
-
 
         <div class="invalid">
           <ng-container
             *ngIf="
-              control.age.invalid &&
-                (control.age.touched || control.age.dirty);
+              control.age.invalid && (control.age.touched || control.age.dirty);
               else elseblk
             "
           >
-            <span *ngIf="control.age.errors?.required"
-              >*Age required!</span
-            >
+            <span *ngIf="control.age.errors?.required">*Age required!</span>
           </ng-container>
           <ng-template #elseblk>
             <span>&nbsp;</span>
           </ng-template>
         </div>
 
-        <div class="row"  style="height: 25px;">
+        <div class="row" style="height: 25px">
           <label class="col-4">Weight</label>
-          <input type="number" class="form-control col-8" formControlName="weight" />
+          <input
+            type="number"
+            class="form-control col-8 shrink"
+            formControlName="weight"
+            (focus)="changeBck('weight')"
+            (blur)="regularBck()"
+          />
+          <span
+            [ngStyle]="focusField === 'weight' ? styleUnit : null"
+            class="unit"
+            >kg</span
+          >
         </div>
-
 
         <div class="invalid">
           <ng-container
