@@ -8,7 +8,7 @@
   border-radius: 0%;
   height: 40px;
   width: 300px;
-  background-color: #a4c36080;
+  background-color: #8dc36080;
   color: white;
 }
 
@@ -31,7 +31,7 @@
   border-radius: 0%;
   border: none;
   width: 300px;
-  background-color: #a4c36080;
+  background-color: #8dc36080;
   color: white;
 }
 option {
@@ -54,7 +54,7 @@ option {
 }
 
 .save-button:disabled {
-  background: rgb(67, 153, 67);
+  background: rgb(88 183 88);
   box-shadow: none;
   border: none;
   color: white;
@@ -93,9 +93,9 @@ label {
   width: 45%;
   padding: 10px;
   padding-bottom: 20px;
-  background-color: #0c0c0cb5;
-  margin-top: 65px;
-  margin-left: 400px;
+  background-color: #0a0a0acf;
+  margin-top: 97px;
+  margin-left: 370px;
   position: absolute;
 }
 
@@ -106,7 +106,9 @@ p {
 .content {
   height: 553px;
   width: 100%;
-  background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0");
+  background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  filter: saturate(110%);
+  /* background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0"); */
   background-attachment: fixed;
   background-size: cover;
 }
@@ -128,6 +130,6 @@ input[type="number"]::-webkit-outer-spin-button {
   width: 37px;
   border-right: none;
   color: white;
-  background-color: #a4c36080;
+  background-color: #8dc36080;
   padding: 6px;
 }

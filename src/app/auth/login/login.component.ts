@@ -9,7 +9,7 @@ import { ValidatorService } from '../services/validator.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginResultFailed = false;
 
   constructor(
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit{
     private userService: UserService
   ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     sessionStorage.removeItem('token');
   }
 
@@ -33,26 +33,30 @@ export class LoginComponent implements OnInit{
   }
 
   onLogin() {
-    this.userService
-      .login(this.userlogin.value.username, this.userlogin.value.password)
-      .subscribe((result: any) => {
-        if (
-          result.result == 'No user found' ||
-          result.result == 'Incorrect password'
-        ) {
-          this.loginResultFailed = true;
-        } else {
-          this.loginResultFailed = false;
-          this.validatorService.onLogin(result.result);
-          if (result.hasDetail) {
-            if (!result.hasGoal) {
-              this.router.navigate(['/home/user/goal']);
-            } else this.router.navigate(['/home']);
+    if (this.userlogin.valid) {
+      this.userService
+        .login(this.userlogin.value.username, this.userlogin.value.password)
+        .subscribe((result: any) => {
+          if (
+            result.result == 'No user found' ||
+            result.result == 'Incorrect password'
+          ) {
+            this.loginResultFailed = true;
           } else {
-            this.router.navigate(['/home/user/details']);
+            this.loginResultFailed = false;
+            this.validatorService.onLogin(result.result);
+            if (result.hasDetail) {
+              if (!result.hasGoal) {
+                this.router.navigate(['/home/user/goal']);
+              } else this.router.navigate(['/home']);
+            } else {
+              this.router.navigate(['/home/user/details']);
+            }
           }
-        }
-      });
+        });
+    } else {
+      this.userlogin.markAllAsTouched();
+    }
   }
 
   confirmPasswordDirty() {

@@ -29,6 +29,7 @@ export class GoalComponent implements OnInit {
   status: string = '';
   weeks: number = 0;
   submitted: any;
+  myStyle: any;
 
   async ngOnInit(): Promise<void> {
     this.userService.getAptWeight().subscribe((data) => {
@@ -37,6 +38,11 @@ export class GoalComponent implements OnInit {
       this.weight = value[1];
       this.BMI = value[2];
       this.status = value[3];
+      if (this.status == 'normal') {
+        this.myStyle = {
+          marginTop: '185px',
+        };
+      }
       this.onChange();
     });
   }

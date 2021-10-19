@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -32,26 +31,33 @@ export class ValidatorService {
 
   usernameValidator() {
     return (control: AbstractControl) => {
-      return this.userService.searchUsername({ username: control.value }).pipe(
-        map((res) => {
-          return res.usernameTaken ? { usernameTaken: true } : null;
-        })
-      );
+      return this.userService
+        .searchUsername({ username: control.value })
+        .pipe(
+          map((res) => {
+            if (control.value.match(/^[A-Za-z]+$/) == null)
+              return { otherCaharactersPresent: true };
+            else return res.usernameTaken ? { usernameTaken: true } : null;
+          })
+        )
+        .pipe(delay(500));
     };
   }
 
   emailValidator() {
     return (control: AbstractControl) => {
-      return this.userService.searchEmail({ email: control.value }).pipe(
-        map((res) => {
-          return res.emailTaken ? { emailTaken: true } : null;
-        })
-      );
+      return this.userService
+        .searchEmail({ email: control.value })
+        .pipe(
+          map((res) => {
+            return res.emailTaken ? { emailTaken: true } : null;
+          })
+        )
+        .pipe(delay(500));
     };
   }
 
   onLogin(token: any) {
     sessionStorage.setItem('token', token);
   }
-
 }

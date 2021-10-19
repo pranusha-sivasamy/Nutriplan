@@ -48,7 +48,6 @@ export class UserListComponent implements OnInit {
 
   async onTableDataChange(event: any) {
     this.page = event;
-    this.fetchUser();
   }
 
   async fetchUser() {

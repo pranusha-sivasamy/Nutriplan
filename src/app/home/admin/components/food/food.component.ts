@@ -9,10 +9,7 @@ import { FoodService } from 'src/app/home/diet/services/food.service';
   styleUrls: ['./food.component.css'],
 })
 export class FoodComponent implements OnInit {
-  constructor(
-    private dialog: MatDialog,
-    private foodService: FoodService
-  ) {}
+  constructor(private dialog: MatDialog, private foodService: FoodService) {}
   food: any;
   page = 1;
   tableSize = 8;
@@ -60,7 +57,6 @@ export class FoodComponent implements OnInit {
 
   async onTableDataChange(event: any) {
     this.page = event;
-    this.fetchFood();
   }
 
   async fetchFood() {

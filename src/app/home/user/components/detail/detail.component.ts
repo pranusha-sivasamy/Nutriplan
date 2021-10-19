@@ -25,6 +25,7 @@ export class DetailComponent implements OnInit {
   async ngOnInit() {
     this.userService.getUserDetails().subscribe((data) => {
       this.user = data;
+      this.range = this.user.goalPerWeek;
       this.showDetails();
     });
   }

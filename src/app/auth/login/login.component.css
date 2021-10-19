@@ -10,10 +10,10 @@
   background-image: url("https://c0.wallpaperflare.com/preview/906/427/616/meal-healthy-eating-health-minimal.jpg");
 }
 .inner-content {
-  padding-top: 78px;
+  padding-top: 92px;
   padding-bottom: 78px;
-  padding-left: 185px;
-  padding-right: 185px;
+  padding-left: 160px;
+  padding-right: 160px;
 }
 .form-control:focus {
   box-shadow: none;
@@ -49,6 +49,7 @@ input:read-only {
   font-family: sans-serif;
   height: 50px;
   padding-top: 15px;
+  border-bottom: 1px solid green;
 }
 .form-select {
   border-top: none;
@@ -87,16 +88,33 @@ input:read-only {
   box-shadow: none;
 }
 
-.save-button:active {
-  background: rgb(26, 136, 26);
-  border: 1px solid white;
-  box-shadow: none;
+.quote {
+  position: absolute;
+  font-size: 16px;
+  font-style: italic;
+  font-family: auto;
+  color: floralwhite;
+}
+
+#line1 {
+  padding-top: 310px;
+  padding-left: 483px;
+}
+#line2 {
+  padding-top: 340px;
+  padding-left: 505px;
+}
+#line3 {
+  padding-top: 370px;
+  padding-left: 478px;
 }
 .invalid {
   color: red;
-  margin-left: 12px;
   font-size: 12px;
   margin-top: 3px;
+}
+.form-control.ng-invalid.ng-touched {
+  border-color: red;
 }
 label {
   padding-top: 10px;

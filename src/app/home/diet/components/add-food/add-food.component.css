@@ -81,8 +81,3 @@ h6 {
   box-shadow: none;
 }
 
-.save-button:active {
-  background: green;
-  border: 1px solid white;
-  box-shadow: none;
-}

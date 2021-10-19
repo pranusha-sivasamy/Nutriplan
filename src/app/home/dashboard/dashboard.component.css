@@ -1,9 +1,13 @@
 .content {
   height: 570px;
   width: 100%;
-  background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0");
+  background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  filter: saturate(110%);
+  /* background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0"); */
   background-attachment: fixed;
   background-size: cover;
+  background-color: rgb(15 13 13 / 23%);
+  background-blend-mode: darken;
 }
 .row {
   background-color: white;

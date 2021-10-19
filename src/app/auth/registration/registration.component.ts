@@ -11,6 +11,8 @@ import { ValidatorService } from '../services/validator.service';
 })
 export class RegistrationComponent {
   canNavigate = false;
+  showPassword = false;
+  iconStyle: any;
 
   constructor(
     private fb: FormBuilder,
@@ -18,26 +20,42 @@ export class RegistrationComponent {
     private userService: UserService,
     private router: Router
   ) {}
-
   userProfile = this.fb.group(
     {
       username: [
         '',
         {
-          validators: [Validators.required, Validators.minLength(8)],
+          validators: [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(/(\b(?:([A-Za-z0-9])(?!\2{2}))+\b)/),
+          ],
           asyncValidators: [this.validatorService.usernameValidator()],
-          updateOn: 'blur',
+          // updateOn: 'blur',
         },
       ],
       email: [
         '',
         {
-          validators: [Validators.email, Validators.required],
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.pattern(
+              /(\b^[a-z]{1}(?:([A-Za-z0-9._])(?!\2{2})){3,}@(?:([a-z])(?!\3{2})){5,}(\.[a-z]{3}|\.[a-z]{2,3}\.[a-z]{2})$\b)/
+            ),
+          ],
           asyncValidators: [this.validatorService.emailValidator()],
-          updateOn: 'blur',
+          // updateOn: 'blur',
         },
       ],
-      password: ['', [Validators.required, Validators.minLength(8)]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/),
+        ],
+      ],
       confirmPassword: ['', [Validators.required]],
     },
     {
@@ -59,6 +77,34 @@ export class RegistrationComponent {
       this.validatorService.onLogin(result.result);
       this.router.navigate(['/home/user/details']);
     });
+  }
+
+  showPasswordToggle() {
+    this.showPassword = this.showPassword ? false : true;
+  }
+
+  changeColor() {
+    if (this.control.password.invalid && this.control.password.touched) {
+      this.iconStyle = {
+        borderBottom: '1px solid red',
+      };
+    } else {
+      this.iconStyle = {
+        borderBottom: '1px solid green',
+      };
+    }
+  }
+
+  regularColor() {
+    if (this.control.password.invalid) {
+      this.iconStyle = {
+        borderBottom: '1px solid red',
+      };
+    } else {
+      this.iconStyle = {
+        borderBottom: '1px solid lightgray',
+      };
+    }
   }
 
   get control() {

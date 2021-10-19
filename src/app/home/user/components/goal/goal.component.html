@@ -1,9 +1,13 @@
 <div class="content">
-  <div class="container text-center">
+  <div class="container text-center" [ngStyle]="myStyle">
     <div class="mt-5">
       <div class="card text-center normal" *ngIf="status == 'normal'">
         <h5 class="card-title">Your BMI is normal</h5>
-        <button type="button" class="btn save-button mt-2 mb-3" (click)="updateGoal()">
+        <button
+          type="button"
+          class="btn save-button mt-2 mb-3"
+          (click)="updateGoal()"
+        >
           proceed
         </button>
       </div>
