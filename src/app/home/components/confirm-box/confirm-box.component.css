@@ -1,0 +1,33 @@
+.save-button {
+  background: orange;
+  margin: 20px 10px 0px;
+  width: 100px;
+  font-weight: bold;
+  height: 40px;
+  box-shadow: none;
+  border: none;
+  color: white;
+}
+.save-button:hover {
+  background-color: rgb(243, 181, 49);
+}
+.card {
+  border: none;
+}
+.head {
+  background-color: orange;
+  height: 22%;
+  width: 100%;
+  padding: 11px 148px;
+}
+.icon {
+  color: white;
+  font-size: 20px;
+}
+.button-grp {
+  padding: 18px 25px 0px;
+}
+p {
+  font-family: "Roboto";
+  color: gray;
+}

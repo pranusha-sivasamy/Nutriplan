@@ -1,0 +1,252 @@
+<div class="content">
+  <div class="inner-content">
+    <div class="row">
+      <div class="col-7 side-crop">
+        <!-- src="https://imagenmore.ae/images/food-photography-coffee-.jpg" -->
+        <!-- https://images.pexels.com/photos/1502286/pexels-photo-1502286.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2 -->
+        <img
+          src="https://images.unsplash.com/photo-1548943487-a2e4e43b4853?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+          width="100%"
+          height="100%"
+          style="filter: contrast(120%); position: absolute"
+        />
+        <h6 class="quote" id="line1">Health</h6>
+        <h6 class="quote" id="line2">a care that</h6>
+        <h6 class="quote" id="line3">never quits...</h6>
+      </div>
+      <div class="col-5" style="background-color: white">
+        <div
+          style="
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-top: 17px;
+            margin-bottom: 37px;
+          "
+        >
+          <div class="card-header text-center">
+            <img
+              src="https://icons.iconarchive.com/icons/aha-soft/desktop-buffet/256/Cocktail-icon.png"
+              height="25px"
+              width="25px"
+              style="margin-right: 5px; filter: saturate(140%);margin-bottom: 5px;"
+            />NUTRIPLAN
+          </div>
+
+          <form [formGroup]="userProfile" (ngSubmit)="onRegister()">
+            <div style="height: 23px" class="row mt-3">
+              <label class="col-5">
+                Username<span class="reqField">*</span></label
+              >
+              <input
+                type="text"
+                class="form-control col-7"
+                formControlName="username"
+                name="username"
+              />
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  control.username.invalid &&
+                    (control.username.touched || control.username.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="control.username.errors?.required"
+                  >Username required!</span
+                >
+                <span *ngIf="control.username.errors?.minlength">
+                  Username must be atleast 8 characters long! </span
+                ><span *ngIf="control.username.errors?.usernameTaken">
+                  Username {{ userProfile.value.username }} is already taken!! </span
+                ><span *ngIf="control.username.errors?.otherCaharactersPresent">
+                  Username must contain only alphabets!
+                </span>
+                <span *ngIf="control.username.errors?.pattern">
+                  Please provide a valid username!
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div style="height: 23px" class="row">
+              <label class="col-5"> Email<span class="reqField">*</span></label>
+              <input
+                type="email"
+                class="form-control col-7"
+                formControlName="email"
+                name="email"
+              />
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  control.email.invalid &&
+                    (control.email.touched || control.email.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="control.email.errors?.required"
+                  >email required!</span
+                >
+                <span
+                  *ngIf="
+                    control.email.errors?.pattern || control.email.errors?.email
+                  "
+                >
+                  Please provide a valid email ID </span
+                ><span *ngIf="control.email.errors?.emailTaken">
+                  email already exists!!
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div style="height: 23px" class="row">
+              <label class="col-5">
+                Password<span class="reqField">*</span></label
+              >
+              <div class="col-6">
+                <input
+                  type="{{ showPassword ? 'text' : 'password' }}"
+                  class="passwordField"
+                  formControlName="password"
+                  (focus)="changeColor()"
+                  (blur)="regularColor()"
+                /><span *ngIf="showPassword">
+                  <button
+                    type="button"
+                    class="iconbtn"
+                    (click)="showPasswordToggle()"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-eye-fill eyeIcon"
+                      viewBox="0 0 16 16"
+                      [ngStyle]="iconStyle"
+                    >
+                      <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                      <path
+                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"
+                      />
+                    </svg>
+                  </button>
+                </span>
+                <span *ngIf="!showPassword">
+                  <button
+                    type="button"
+                    class="iconbtn"
+                    (click)="showPasswordToggle()"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-eye-slash-fill eyeIcon"
+                      viewBox="0 0 16 16"
+                      click="showPasswordToggle()"
+                      [ngStyle]="iconStyle"
+                    >
+                      <path
+                        d="m10.79 12.912-1.614-1.615a3.5 3.5 0 0 1-4.474-4.474l-2.06-2.06C.938 6.278 0 8 0 8s3 5.5 8 5.5a7.029 7.029 0 0 0 2.79-.588zM5.21 3.088A7.028 7.028 0 0 1 8 2.5c5 0 8 5.5 8 5.5s-.939 1.721-2.641 3.238l-2.062-2.062a3.5 3.5 0 0 0-4.474-4.474L5.21 3.089z"
+                      />
+                      <path
+                        d="M5.525 7.646a2.5 2.5 0 0 0 2.829 2.829l-2.83-2.829zm4.95.708-2.829-2.83a2.5 2.5 0 0 1 2.829 2.829zm3.171 6-12-12 .708-.708 12 12-.708.708z"
+                      />
+                    </svg>
+                  </button>
+                </span>
+              </div>
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  control.password.invalid &&
+                    (control.password.touched || control.password.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="control.password.errors?.required"
+                  >password required!</span
+                >
+                <span *ngIf="control.password.errors?.minlength">
+                  password must be atleast 8 characters long!
+                </span>
+                <span
+                  *ngIf="
+                    control.password.errors?.pattern &&
+                    control.password.errors?.minlength == null
+                  "
+                >
+                  password must contain an uppercase, a lowercase, a special
+                  character and a numberic value!
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div style="height: 23px" class="row">
+              <label for="confirmPassword" class="col-5">
+                Confirm Password<span class="reqField">*</span></label
+              >
+              <input
+                type="password"
+                class="form-control col-7"
+                formControlName="confirmPassword"
+              />
+            </div>
+
+            <div class="invalid">
+              <ng-container
+                *ngIf="
+                  control.confirmPassword.invalid &&
+                    (control.confirmPassword.touched ||
+                      control.confirmPassword.dirty);
+                  else elseblk
+                "
+              >
+                <span *ngIf="control.confirmPassword.errors?.required"
+                  >Confirm password required!</span
+                >
+                <span *ngIf="control.confirmPassword.errors?.passwordMisMatch">
+                  Password doesn't match!
+                </span>
+              </ng-container>
+              <ng-template #elseblk>
+                <span>&nbsp;</span>
+              </ng-template>
+            </div>
+
+            <div class="row mt-4">
+              <button
+                type="submit"
+                class="btn save-button"
+                [disabled]="!userProfile.valid"
+              >
+                Register
+              </button>
+            </div>
+            <div style="text-align: center">
+              <p>
+                Already have an account? <a routerLink="/auth/login">Login</a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

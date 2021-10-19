@@ -1,0 +1,38 @@
+.container {
+  max-width: 850px;
+}
+.outer-content {
+  background-color: cadetblue;
+  width: 100%;
+  height: 100%;
+}
+img {
+  width: 300px;
+  height: 300px;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+button {
+  margin-top: 5px;
+  color: white;
+  font-weight: bold;
+  font-family: emoji;
+}
+button:hover {
+  color: white;
+}
+button:focus {
+  color: white;
+}
+h2 {
+  font-family: serif;
+  color: coral;
+}
+h6 {
+  color: lightslategray;
+  font-family: emoji;
+}
+.outer-content {
+  height: 100%;
+  background-color: aliceblue;
+}

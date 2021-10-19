@@ -1,0 +1,83 @@
+.action {
+  margin: 10px;
+  border-radius: 15%;
+}
+h6 {
+  color: rgb(5, 102, 5);
+}
+.outer {
+  background-color: white;
+  border-radius: 2%;
+  padding: 20px;
+  box-shadow: 2px 2px 2px 2px rgb(96, 165, 96);
+}
+.button-icon {
+  border: 2px solid green;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+}
+.button-icon:hover {
+  background-color: green;
+}
+.button-icon:hover .add-icon {
+  color: white;
+}
+.add-icon {
+  color: green;
+}
+.add-icon:hover {
+  background-color: green;
+  color: white;
+}
+.remove-button-icon {
+  border: 2px solid orangered;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+}
+.remove-button-icon:hover {
+  background-color: orangered;
+}
+.remove-button-icon:hover .remove-icon {
+  color: white;
+}
+.remove-icon {
+  color: orangered;
+}
+.remove-icon:hover {
+  background-color: orangered;
+  color: white;
+}
+.form-control {
+  border-left: none;
+  border-top: none;
+  border-right: none;
+  border-radius: 0%;
+  width: 50px;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: green;
+}
+.search-style {
+  margin-left: 50px;
+  padding: 3px;
+}
+.save-button {
+  background: green;
+  box-shadow: none;
+  border: none;
+  color: white;
+  margin-right: 20px;
+}
+
+.save-button:hover {
+  background: rgb(54, 145, 54);
+}
+
+.save-button:focus {
+  background: green;
+  box-shadow: none;
+}
+

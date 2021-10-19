@@ -1,0 +1,102 @@
+.edit-button-icon {
+  border: 1px solid green;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+  margin-right: 10px;
+}
+.edit-button-icon:hover {
+  background-color: green;
+}
+.edit-button-icon:hover .edit-icon {
+  color: white;
+}
+.edit-icon {
+  color: green;
+}
+.edit-icon:hover {
+  background-color: green;
+  color: white;
+}
+.remove-button-icon {
+  border: 1px solid rgb(180, 5, 5);
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+}
+.remove-button-icon:hover {
+  background-color: rgb(180, 5, 5);
+}
+.remove-button-icon:hover .remove-icon {
+  color: white;
+}
+.remove-icon {
+  color: rgb(180, 5, 5);
+}
+.remove-icon:hover {
+  background-color: rgb(180, 5, 5);
+  color: white;
+}
+h5 {
+  font-size: 19px;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding-left: 60px;
+  padding-top: 10px;
+}
+.btn-outline-success:active {
+  box-shadow: none;
+}
+.btn-outline-success:focus {
+  box-shadow: none;
+}
+.content {
+  height: 553px;
+  width: 100%;
+  background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  filter: saturate(110%);
+  /* background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0"); */
+  background-attachment: fixed;
+  background-size: cover;
+}
+.container {
+  position: absolute;
+  margin-left: 103px;
+  width: 80%;
+}
+table {
+  background-color: #0a0a0acf;
+  color: white;
+}
+thead {
+  background-color: white;
+  color: #137113;
+  border: 1px solid black;
+}
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-color: #f8f9fa;
+  --bs-table-striped-bg: rgb(88 154 66 / 43%);
+  --bs-table-active-color: #f8f9fa;
+  --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+  --bs-table-hover-color: #212529;
+  --bs-table-hover-bg: #f8f9faba;
+}
+.mystyle {
+  text-decoration: none;
+  color: white;
+  background-color: #0a0a0acf;
+  height: 40px;
+  padding-top: 5px;
+  padding-right: 20px;
+  margin-top: 495px;
+}
+.mystyle /deep/ .ngx-pagination a {
+  color: white;
+  text-decoration: none;
+}
+.mystyle /deep/ .ngx-pagination a:hover {
+  color: black;
+  text-decoration: none;
+}

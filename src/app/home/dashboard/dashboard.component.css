@@ -1,0 +1,50 @@
+.content {
+  height: 570px;
+  width: 100%;
+  background-image: url("https://images.pexels.com/photos/952353/pexels-photo-952353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  filter: saturate(110%);
+  /* background-image: url("https://th.bing.com/th/id/R.7689c5513084cd3ae199cec4f9b84af3?rik=epCX11FOp%2bUvgQ&riu=http%3a%2f%2fsfwallpaper.com%2fimages%2fbackground-food-7.jpg&ehk=OyOpA7JOvJ5kSZoKblkX96cNQ3uiu%2fHJUTOzI7b3j6o%3d&risl=&pid=ImgRaw&r=0"); */
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: rgb(15 13 13 / 23%);
+  background-blend-mode: darken;
+}
+.row {
+  background-color: white;
+  position: absolute;
+  width: 75%;
+  margin-top: 60px;
+  margin-left: 150px;
+  height: 450px;
+}
+.leftContent {
+  background-image: url("https://th.bing.com/th/id/R.c26e9baa26b7aeef385b709c548a42d8?rik=9MgIrzlJR7mZlg&riu=http%3a%2f%2fnutritionalme.com%2fwp-content%2fuploads%2f2019%2f11%2fSports-Nutrition.jpg&ehk=j59RjUWz4PuayASbsV5ejdTdk0DoLTD3fzqRV60KcCY%3d&risl=&pid=ImgRaw&r=0");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+input[type="date"] {
+  margin-top: 10px;
+  margin-left: 280px;
+  font-size: 15px;
+  border: 1px solid orange;
+}
+.title {
+  padding-top: 40px;
+  padding-left: 50px;
+  font-family: "fangsong";
+  font-weight: bold;
+  color: #0e790e;
+}
+
+.noData {
+  padding-left: 100px;
+  padding-top: 100px;
+}
+
+p {
+  font-size: 20px;
+}
+
+.hide {
+  display: none;
+}

@@ -1,0 +1,83 @@
+.invalid {
+  color: red;
+  font-size: 14px;
+  padding: 0px;
+}
+label {
+  color: grey;
+  padding-top: 10px;
+}
+.form-control:focus {
+  box-shadow: none;
+  border-color: rgb(42, 151, 42);
+}
+.form-control.ng-touched.ng-invalid {
+  border-color: red;
+}
+.form-check-input[type=checkbox] {
+  margin-top: 14px;
+}
+.form-check-input[type=radio] {
+  margin-top: 14px;
+}
+.card-header {
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+.form-control {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0%;
+  height: 30px;
+  width: max-content;
+}
+.close-button-icon {
+  border: 1px solid green;
+  background-color: white;
+  border-radius: 5px;
+  padding-top: 0%;
+  float: right;
+}
+.close-button-icon:hover {
+  background-color: green;
+  border: 1px solid white;
+}
+.close-button-icon:hover .close-icon {
+  color: white;
+}
+.close-icon {
+  color: green;
+}
+.close-icon:hover {
+  color: white;
+}
+.save-button {
+  background: green;
+  box-shadow: none;
+  border: none;
+  color: white;
+}
+
+.save-button:hover {
+  background: rgb(42, 148, 42);
+}
+
+.save-button:focus {
+  background: green;
+  box-shadow: none;
+}
+.save-button:disabled {
+  background: rgb(33, 134, 33);
+  box-shadow: none;
+}
+.save-button:active {
+  background: green;
+  border: 1px solid white;
+  box-shadow: none;
+}
+.row{
+  height: 25px;
+}

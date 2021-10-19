@@ -1,0 +1,29 @@
+<div class="content">
+  <div class="row">
+    <div class="col-6 leftContent">
+      <h5 class="title">CALORIE ANALYSIS</h5>
+    </div>
+    <div class="col-6">
+      <div style="width: 95%; height: 60vh; margin-top: 20px">
+        <canvas [ngStyle]="myStyles" id="canvas"></canvas>
+        <div *ngIf="!valueExist" class="noData">
+          <img
+            src="https://th.bing.com/th/id/R.acf818150e3ed9c2f0409882ed79bc84?rik=4DKXvNz6o63eAQ&riu=http%3a%2f%2fsiliconangle.com%2ffiles%2f2013%2f02%2fno-data.png&ehk=YqeUCnLlpD7KZnqRXCYrjh%2bq3KRiuJAO%2fyFiQ%2fuuyMg%3d&risl=&pid=ImgRaw&r=0"
+            width="200px"
+            height="200px"
+          />
+        </div>
+      </div>
+      <div>
+        <form [formGroup]="inputDate">
+          <input
+            formControlName="date"
+            type="date"
+            (input)="setDate()"
+            max="{{ today }}"
+          />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

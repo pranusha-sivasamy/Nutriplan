@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark dark">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><img
+        src="https://icons.iconarchive.com/icons/aha-soft/desktop-buffet/256/Cocktail-icon.png"
+        height="25px"
+        width="25px"
+        style="margin-right: 5px;filter:saturate(120%);margin-bottom: 5px;"
+      />NutriPlan</a
+    >
+    <div class="navbarRight">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="dashboard"
+            >Dashboard</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="diet/calorie-counter"
+            >Planner</a
+          >
+        </li>
+
+        <li *ngIf="isAdmin" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="admin/food"
+            >Food</a
+          >
+        </li>
+        <li *ngIf="isAdmin" class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="admin/user-list"
+            >User</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="user/profile"
+            >Profile</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="onLogout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

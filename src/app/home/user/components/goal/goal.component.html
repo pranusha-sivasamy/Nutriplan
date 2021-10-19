@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="container text-center" [ngStyle]="myStyle">
+    <div class="mt-5">
+      <div class="card text-center normal" *ngIf="status == 'normal'">
+        <h5 class="card-title">Your BMI is normal</h5>
+        <button
+          type="button"
+          class="btn save-button mt-2 mb-3"
+          (click)="updateGoal()"
+        >
+          proceed
+        </button>
+      </div>
+      <div class="card text-center under" *ngIf="status == 'underweight'">
+        <div class="card-body">
+          <h5 class="card-title">You are underweight</h5>
+          <h6 class="card-subtitle mb-1">
+            You have to gain {{ aptWeight - weight }} Kg
+          </h6>
+        </div>
+      </div>
+      <div class="card text-center over" *ngIf="status == 'overweight'">
+        <h5 class="card-title">You are overweight</h5>
+        <h6 class="card-subtitle mb-1">
+          You have to lose {{ weight - aptWeight }} Kg
+        </h6>
+      </div>
+    </div>
+    <div *ngIf="status != 'normal'">
+      <h5 style="padding-bottom: 10px; padding-top: 10px">
+        How fast do you want to reach your goal ?
+      </h5>
+
+      <form [formGroup]="userGoal" (ngSubmit)="updateGoal()">
+        <div class="range">
+          <input
+            type="range"
+            class="form-range"
+            min="0.25"
+            max="1"
+            step="0.25"
+            formControlName="goalPerWeek"
+            (input)="onChange()"
+          />
+        </div>
+        <div class="card text-center">
+          <h4 class="card-title">{{ userGoal.value.goalPerWeek }} Kg</h4>
+          <h5 class="card-subtitle">per week</h5>
+        </div>
+        <div class="mt-4 text-center">
+          <button class="btn save-button" type="submit">Set Goal</button>
+        </div>
+      </form>
+      <div
+        *ngIf="weeks != 0"
+        class="text-center"
+        style="
+          margin-top: 20px;
+          color: white;
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+          font-weight: 700;
+        "
+      >
+        You will reach your goal in about {{ weeks }} weeks
+      </div>
+    </div>
+  </div>
+</div>

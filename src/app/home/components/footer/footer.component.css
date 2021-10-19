@@ -1,0 +1,20 @@
+.footer {
+  padding: 7px;
+  position: relative;
+  background-color: #0e400e;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding-left: 75%;
+  height: 50px;
+}
+.stickRight {
+  float: right;
+  padding-right: 2rem;
+  font-family: "cursive";
+  font-weight: bold;
+  font-size: larger;
+}
+span {
+  color: white;
+}

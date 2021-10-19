@@ -1,0 +1,152 @@
+<div class="content">
+  <div class="container">
+    <div class="col mt-3">
+      <div class="card-header">Details</div>
+      <form [formGroup]="details" (ngSubmit)="onSubmit()">
+        <div class="row mt-2">
+          <label for="age" class="col-5">Present Age</label>
+          <input
+            type="number"
+            class="form-control col-7"
+            formControlName="age"
+          />
+        </div>
+
+        <div
+          *ngIf="
+            control.age.invalid && (control.age.touched || control.age.dirty)
+          "
+        >
+          <div *ngIf="control.age.errors?.required" class="invalid">
+            age is required!
+          </div>
+        </div>
+
+        <div class="mt-1">
+          <label class="col-5">Gender</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="gender"
+            value="male"
+            formControlName="gender"
+          />
+          <label class="form-check-label">Male</label>
+          <input
+            class="check-input"
+            type="radio"
+            name="gender"
+            value="female"
+            formControlName="gender"
+          />
+          <label class="form-check-label">Female</label>
+        </div>
+
+        <div class="row mt-2">
+          <label for="age" class="col-5">Current Height</label>
+          <input
+            type="number"
+            class="form-control col-7 shrink"
+            formControlName="height"
+            (focus)="changeBck('height')"
+            (blur)="regularBck()"
+          /><span
+            [ngStyle]="focusField === 'height' ? styleUnit : null"
+            class="unit"
+            >cm</span
+          >
+        </div>
+
+        <div
+          *ngIf="
+            control.height.invalid &&
+            (control.height.touched || control.height.dirty)
+          "
+        >
+          <div *ngIf="control.height.errors?.required" class="invalid">
+            height is required!
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <label for="age" class="col-5">Current Weight</label>
+          <input
+            type="number"
+            class="form-control col-7 shrink"
+            formControlName="weight"
+            (focus)="changeBck('weight')"
+            (blur)="regularBck()"
+          /><span
+            [ngStyle]="focusField === 'weight' ? styleUnit : null"
+            class="unit"
+            >kg</span
+          >
+        </div>
+
+        <div
+          *ngIf="
+            control.weight.invalid &&
+            (control.weight.touched || control.weight.dirty)
+          "
+        >
+          <div *ngIf="control.weight.errors?.required" class="invalid">
+            weight is required!
+          </div>
+        </div>
+
+        <div class="row mt-2 mb-4">
+          <label for="age" class="col-5">Activity state</label>
+          <select class="form-select" formControlName="activity">
+            <option selected disabled>How active are you?</option>
+            <option value="No Activity">
+              Little or No Activity<span class="example"
+                >(eg. Desktop job, Bank Teller)</span
+              >
+            </option>
+            <option value="Lightly active">
+              Lightly active<span class="example"
+                >(eg. Teacher, Sales Associate)</span
+              >
+            </option>
+            <option value="Moderately active">
+              Moderately active<span class="example"
+                >(eg. Weighter, Tour Guide)</span
+              >
+            </option>
+            <option value="Very Active">
+              Very Active<span class="example"
+                >(eg. Construction Worker, Gym instructor)</span
+              >
+            </option>
+          </select>
+
+          <div
+            *ngIf="
+              control.activity.invalid &&
+              (control.activity.touched || control.activity.dirty)
+            "
+          >
+            <div *ngIf="control.activity.errors?.required" class="invalid">
+              activity is required!
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn save-button"
+          [disabled]="!details.valid"
+        >
+          Submit
+        </button>
+        <div
+          *ngIf="displaySuccessRegistration"
+          class="alert alert-success"
+          role="alert"
+        >
+          Successfully updated
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
