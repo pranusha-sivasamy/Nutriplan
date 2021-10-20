@@ -7,6 +7,7 @@ import { FoodService } from '../../services/food.service';
   templateUrl: './add-food.component.html',
   styleUrls: ['./add-food.component.css'],
 })
+
 export class AddFoodComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
